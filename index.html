@@ -25,7 +25,7 @@
             --tarot-bg: rgba(26, 30, 43, 0.9);
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
-            --accent: #d97706; /* 採用象徵古老盧恩與神祕學的琥珀金/古銅色系 */
+            --accent: #d97706;
             --accent-hover: #f59e0b;
             --upright: #2ecc71;
             --reversed: #f43f5e;
@@ -340,10 +340,10 @@
         .orientation-badge { font-size: 12px; font-weight: bold; color: #fff; padding: 4px 12px; border-radius: 4px; }
         .bg-up { background-color: var(--upright); }
         .bg-rev { background-color: var(--reversed); }
+        .bg-symmetric { background-color: #0284c7; } /* 專門標示對稱無逆位符文的藍色標籤 */
 
         .branch-row { display: flex; width: 100%; justify-content: center; gap: 16px; flex-wrap: wrap; }
         .branch-col { display: flex; flex-direction: column; gap: 12px; align-items: center; flex: 1; min-width: 395px; }
-        .branch-title { font-size: 15px; font-weight: bold; color: #fbbf24; margin-bottom: 4px; text-align: center; }
 
         /* 手機版牌陣縮圖專屬排版樣式 */
         .mobile-preview-section {
@@ -399,8 +399,6 @@
             color: #fff;
         }
 
-        /* 三符文/十字法手機縮圖幾何 */
-        .grid-3-mobile { display: flex; gap: 10px; justify-content: center; }
         .grid-5-mobile {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -661,33 +659,33 @@
             else if (spreadVal === "free") drawFreeSpread();
         }
 
-        // 完整 25 盧恩符文庫（含奧丁空白符）
+        // 完整 25 盧恩符文庫（已依要求將無正逆位的 8 枚符文標記 hasReversed: false）
         const RUNE_DECK = [
-            {name: "費胡 (Fehu)", symbol: "ᚠ", element: "財富與流動", upright: "物質豐盛、財富獲取、能量流動、新機會", reversed: "財務損失、貪婪、停滯、資源匱乏"},
-            {name: "烏魯茲 (Uruz)", symbol: "ᚢ", element: "力量與健康", upright: "強大體魄、原始生命力、突破困境、勇氣", reversed: "體力透支、錯失良機、軟弱無力、方向錯誤"},
-            {name: "瑟里薩茲 (Thurisaz)", symbol: "ᚦ", element: "防禦與考驗", upright: "果斷防禦、突破障礙、清理門戶、智慧警惕", reversed: "衝動惹禍、遭人陷害、防衛過當、內耗"},
-            {name: "安蘇茲 (Ansuz)", symbol: "ᚬ", element: "智慧與溝通", upright: "神聖啟示、溝通順暢、智慧指引、長輩貴人", reversed: "謊言欺騙、溝通不良、誤解、惡意耳語"},
-            {name: "賴多 (Raido)", symbol: "ᚱ", element: "旅程與節奏", upright: "踏上旅途、人生轉折、順應節奏、交通平安", reversed: "行程延誤、迷失方向、溝通阻礙、意外波折"},
-            {name: "肯納茲 (Kaunan)", symbol: "ᚲ", element: "啟發與熱情", upright: "靈感爆發、技術突破、熱情點燃、光明指引", reversed: "創造力枯竭、熱情冷卻、疾病、誤解真相"},
-            {name: "傑布歐 (Gebo)", symbol: "ᚷ", element: "合作與贈予", upright: "夥伴結盟、無私餽贈、情感平衡、幸運契機", reversed: "不對等付出、債務壓力、吝嗇、合作破裂"},
-            {name: "溫優 (Wunjo)", symbol: "ᚹ", element: "喜悅與和諧", upright: "心想事成、歡慶時刻、身心和諧、願望達成", reversed: "失落、悲傷、短暫歡愉後空虛、意見分歧"},
-            {name: "哈格拉茲 (Hagalaz)", symbol: "ᚺ", element: "劇變與洗禮", upright: "不可抗力的改變、破舊立新、淨化考驗", reversed: "災難降臨、抗拒改變、困在混亂中、受創"},
-            {name: "娜奧帝茲 (Nauthiz)", symbol: "ᚾ", element: "耐心與困境", upright: "克制忍耐、壓力考驗、學會獨立、絕處逢生", reversed: "過度焦慮、強制剝奪、擺爛、無謂受苦"},
-            {name: "伊薩 (Isa)", symbol: "ᛁ", element: "冰封與沉澱", upright: "暫時停滯、冷靜觀察、內心冰封、保留實力", reversed: "長期僵局、冷漠疏離、計畫停擺、危機潛伏"},
-            {name: "耶拉 (Jera)", symbol: "ᛃ", element: "收穫與循環", upright: "辛勞終有收穫、善有善報、自然循環、成果展現", reversed: "收成延遲、白費心機、付出與回報不成正比"},
-            {name: "艾奧斯 (Eihwaz)", symbol: "ᛇ", element: "轉化與防護", upright: "堅韌毅力、靈魂轉化、突破僵局、神聖保護", reversed: "逃避現實、恐懼改變、陷入困境、方向偏離"},
-            {name: "佩特羅 (Perthro)", symbol: "ᛈ", element: "命運與神祕", upright: "命運轉機、意外之財、直覺靈感、探索祕密", reversed: "賭徒心態、運勢低落、秘密曝光、幻滅"},
-            {name: "艾吉茲 (Algiz)", symbol: "ᛉ", element: "守護與庇佑", upright: "神聖守護、逢凶化吉、直覺預警、貴人相助", reversed: "遭人背叛、失去防護、盲目信任、陷入危機"},
-            {name: "索威羅 (Sowilo)", symbol: "ᛋ", element: "勝利與光明", upright: "絕對勝利、充沛活力、榮耀達成、健康復甦", reversed: "過度自信、盲目自大、短暫光芒、精力耗竭"},
-            {name: "提爾 (Tiwaz)", symbol: "ᛏ", element: "公義與勇氣", upright: "正義勝利、勇敢擔當、專業領導、理性決斷", reversed: "遭遇不公、失去動力、懦弱退縮、衝突戰敗"},
-            {name: "貝歐卡 (Berkanan)", symbol: "ᛒ", element: "孕育與生長", upright: "新生命誕生、家庭和諧、事業萌芽、療癒包容", reversed: "家庭紛爭、生長停滯、焦慮保護、培育失敗"},
-            {name: "艾瓦茲 (Ehwaz)", symbol: "ᛖ", element: "信任與合作", upright: "團隊合作、順暢移動、互相信任、進步轉機", reversed: "不信任、合作破裂、原地打轉、溝通中斷"},
-            {name: "曼那茲 (Mannaz)", symbol: "ᛗ", element: "人類與自我", upright: "自我認知、群體合作、心智覺醒、貴人支持", reversed: "孤立無援、自私自利、偏見、遭群體排擠"},
-            {name: "拉古茲 (Laguz)", symbol: "ᛚ", element: "直覺與潛意識", upright: "情感流動、強大直覺、藝術靈感、順勢而為", reversed: "情緒氾濫、迷失方向、幻覺恐懼、情感內耗"},
-            {name: "英格瓦 (Ingwaz)", symbol: "ᛝ", element: "內在孵化", upright: "能量圓滿、孕育成果、關鍵突破、休息充電", reversed: "能量渙散、虎頭蛇尾、無法收尾、焦慮難安"},
-            {name: "達格斯 (Dagaz)", symbol: "ᛞ", element: "黎明與覺醒", upright: "破曉曙光、重大突破、思維轉換、迎來新生", reversed: "黎明前黑暗、抗拒光明、短暫安逸、錯失良機"},
-            {name: "歐瑟拉 (Othala)", symbol: "ᛟ", element: "根基與傳承", upright: "家族資產、祖傳智慧、房產安定、精神歸屬", reversed: "家庭糾紛、傳統束縛、破產、失去根基"},
-            {name: "奧丁空白符 (Wrd)", symbol: "🜸", element: "未知與天命", upright: "命運不可預知、奧丁的意志、全新起點、順其自然", reversed: "恐懼未知、抗拒命運安排、迷惘無助"}
+            {name: "費胡 (Fehu)", symbol: "ᚠ", element: "財富與流動", upright: "物質豐盛、財富獲取、能量流動、新機會", reversed: "財務損失、貪婪、停滯、資源匱乏", hasReversed: true},
+            {name: "烏魯茲 (Uruz)", symbol: "ᚢ", element: "力量與健康", upright: "強大體魄、原始生命力、突破困境、勇氣", reversed: "體力透支、錯失良機、軟弱無力、方向錯誤", hasReversed: true},
+            {name: "瑟里薩茲 (Thurisaz)", symbol: "ᚦ", element: "防禦與考驗", upright: "果斷防禦、突破障礙、清理門戶、智慧警惕", reversed: "衝動惹禍、遭人陷害、防衛過當、內耗", hasReversed: true},
+            {name: "安蘇茲 (Ansuz)", symbol: "ᚬ", element: "智慧與溝通", upright: "神聖啟示、溝通順暢、智慧指引、長輩貴人", reversed: "謊言欺騙、溝通不良、誤解、惡意耳語", hasReversed: true},
+            {name: "賴多 (Raido)", symbol: "ᚱ", element: "旅程與節奏", upright: "踏上旅途、人生轉折、順應節奏、交通平安", reversed: "行程延誤、迷失方向、溝通阻礙、意外波折", hasReversed: true},
+            {name: "肯納茲 (Kaunan)", symbol: "ᚲ", element: "啟發與熱情", upright: "靈感爆發、技術突破、熱情點燃、光明指引", reversed: "創造力枯竭、熱情冷卻、疾病、誤解真相", hasReversed: true},
+            {name: "傑布歐 (Gebo)", symbol: "ᚷ", element: "禮物與合作", upright: "禮物、合作、交換、愛情與夥伴關係", reversed: "", hasReversed: false}, // 無正逆位
+            {name: "溫優 (Wunjo)", symbol: "ᚹ", element: "喜悅與和諧", upright: "心想事成、歡慶時刻、身心和諧、願望達成", reversed: "失落、悲傷、短暫歡愉後空虛、意見分歧", hasReversed: true},
+            {name: "哈格拉茲 (Hagalaz)", symbol: "ᚺ", element: "破壞與改變", upright: "冰雹、突如其來的破壞、劇烈改變與天災考驗", reversed: "", hasReversed: false}, // 無正逆位
+            {name: "娜奧帝茲 (Nauthiz)", symbol: "ᚾ", element: "耐心與困境", upright: "克制忍耐、壓力考驗、學會獨立、絕處逢生", reversed: "過度焦慮、強制剝奪、擺爛、無謂受苦", hasReversed: true},
+            {name: "伊薩 (Isa)", symbol: "ᛁ", element: "冰封與沉澱", upright: "冰、停滯、寒冷、自我保護與沉澱冷靜", reversed: "", hasReversed: false}, // 無正逆位
+            {name: "耶拉 (Jera)", symbol: "ᛃ", element: "收穫與循環", upright: "收穫、循環、因果報應與時間的累積", reversed: "", hasReversed: false}, // 無正逆位
+            {name: "艾奧斯 (Eihwaz)", symbol: "ᛇ", element: "防禦與轉化", upright: "紫杉、防禦、韌性、耐力與轉化", reversed: "", hasReversed: false}, // 無正逆位
+            {name: "佩特羅 (Perthro)", symbol: "ᛈ", element: "命運與神祕", upright: "命運轉機、意外之財、直覺靈感、探索祕密", reversed: "賭徒心態、運勢低落、秘密曝光、幻滅", hasReversed: true},
+            {name: "艾吉茲 (Algiz)", symbol: "ᛉ", element: "守護與庇佑", upright: "神聖守護、逢凶化吉、直覺預警、貴人相助", reversed: "遭人背叛、失去防護、盲目信任、陷入危機", hasReversed: true},
+            {name: "索威羅 (Sowilo)", symbol: "ᛋ", element: "太陽與勝利", upright: "太陽、勝利、光明、能量與成功", reversed: "", hasReversed: false}, // 無正逆位
+            {name: "提爾 (Tiwaz)", symbol: "ᛏ", element: "公義與勇氣", upright: "正義勝利、勇敢擔當、專業領導、理性決斷", reversed: "遭遇不公、失去動力、懦弱退縮、衝突戰敗", hasReversed: true},
+            {name: "貝歐卡 (Berkanan)", symbol: "ᛒ", element: "孕育與生長", upright: "新生命誕生、家庭和諧、事業萌芽、療癒包容", reversed: "家庭紛爭、生長停滯、焦慮保護、培育失敗", hasReversed: true},
+            {name: "艾瓦茲 (Ehwaz)", symbol: "ᛖ", element: "信任與合作", upright: "團隊合作、順暢移動、互相信任、進步轉機", reversed: "不信任、合作破裂、原地打轉、溝通中斷", hasReversed: true},
+            {name: "曼那茲 (Mannaz)", symbol: "ᛗ", element: "人類與自我", upright: "自我認知、群體合作、心智覺醒、貴人支持", reversed: "孤立無援、自私自利、偏見、遭群體排擠", hasReversed: true},
+            {name: "拉古茲 (Laguz)", symbol: "ᛚ", element: "直覺與潛意識", upright: "情感流動、強大直覺、藝術靈感、順勢而為", reversed: "情緒氾濫、迷失方向、幻覺恐懼、情感內耗", hasReversed: true},
+            {name: "英格瓦 (Ingwaz)", symbol: "ᛝ", element: "豐饒與新始", upright: "豐饒、內在成長、完成與新的開始", reversed: "", hasReversed: false}, // 無正逆位
+            {name: "達格斯 (Dagaz)", symbol: "ᛞ", element: "黎明與希望", upright: "黎明、白天、希望、重大覺醒與光明轉變", reversed: "", hasReversed: false}, // 無正逆位
+            {name: "歐瑟拉 (Othala)", symbol: "ᛟ", element: "根基與傳承", upright: "家族資產、祖傳智慧、房產安定、精神歸屬", reversed: "家庭糾紛、傳統束縛、破產、失去根基", hasReversed: true},
+            {name: "奧丁空白符 (Wrd)", symbol: "🜸", element: "未知與天命", upright: "命運不可預知、奧丁的意志、全新起點、順其自然", reversed: "", hasReversed: false} // 無正逆位
         ];
 
         function shuffle(array) {
@@ -704,16 +702,28 @@
             let result = [];
             for(let i=0; i<count; i++) {
                 let rune = {...shuffled[i]};
-                rune.isReversed = Math.random() < 0.4; // 40% 機會逆位
-                rune.orientation = rune.isReversed ? "逆位 (Reversed)" : "正位 (Upright)";
-                rune.interpretation = rune.isReversed ? rune.reversed : rune.upright;
+                // 嚴格遵循：只有支援正逆位的符文才隨機決定正逆位，無正逆位的 8 枚強制純正位
+                if (rune.hasReversed) {
+                    rune.isReversed = Math.random() < 0.4;
+                    rune.orientation = rune.isReversed ? "逆位 (Reversed)" : "正位 (Upright)";
+                    rune.interpretation = rune.isReversed ? rune.reversed : rune.upright;
+                } else {
+                    rune.isReversed = false;
+                    rune.orientation = "正位 (Symmetric)";
+                    rune.interpretation = rune.upright;
+                }
                 result.push(rune);
             }
             return result;
         }
 
         function createRuneBoxHtml(rune, posTitle) {
-            let badgeClass = rune.isReversed ? "bg-rev" : "bg-up";
+            let badgeClass;
+            if (!rune.hasReversed) {
+                badgeClass = "bg-symmetric";
+            } else {
+                badgeClass = rune.isReversed ? "bg-rev" : "bg-up";
+            }
             let symbolClass = rune.isReversed ? "rune-symbol-box reversed-rune" : "rune-symbol-box";
             
             let html = '<div class="card-box">';
@@ -812,6 +822,15 @@
                 </div>
             `;
             document.querySelector(".workspace").scrollTop = 0;
+        }
+
+        function executeDraw() {
+            let spreadVal = document.getElementById("spreadSelect").value;
+            if (spreadVal === "single") drawSingle();
+            else if (spreadVal === "triple") drawTriple();
+            else if (spreadVal === "cross5") drawCross5();
+            else if (spreadVal === "norns") drawNorns();
+            else if (spreadVal === "free") drawFreeSpread();
         }
 
         function drawSingle() {
@@ -933,7 +952,7 @@
             html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;">';
             runes.forEach((r, idx) => {
                 html += '<div class="branch-col" style="min-width: 395px;">';
-                html += createRuneBoxHtml(r, `第 ${idx+1} 枚符文`);
+                html += createRuneBoxHtml(r, `第 ${idx+1} 符`);
                 html += '</div>';
             });
             html += '</div>';
