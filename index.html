@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>醉酒塔羅 - 偉特塔羅 x 雷諾曼占卜系統</title>
+    <title>醉酒塔羅 - 盧恩符文占卜系統</title>
     <!-- 網頁分頁圖標 (Favicon) 設定 -->
     <link rel="icon" type="image/jpeg" href="tarot_drunk.jpg">
 
     <!-- 社群分享預覽標籤 -->
-    <meta property="og:title" content="醉酒塔羅 - 偉特塔羅 x 雷諾曼占卜系統">
-    <meta property="og:description" content="偉特塔羅 × 雷諾曼 占卜系統，解析你的迷惘。">
+    <meta property="og:title" content="醉酒塔羅 - 盧恩符文占卜系統">
+    <meta property="og:description" content="古北歐盧恩符文 25 符智慧系統，解析命運軌跡與心靈指引。">
     <meta property="og:image" content="https://tarotdrunktw-png.github.io/tarot_app/tarot_drunk.jpg">
     <meta property="og:url" content="https://tarotdrunktw-png.github.io/tarot_app/">
     <meta property="og:type" content="website">
@@ -25,8 +25,8 @@
             --tarot-bg: rgba(26, 30, 43, 0.9);
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
-            --accent: #4338ca;
-            --accent-hover: #6366f1;
+            --accent: #d97706; /* 採用象徵古老盧恩與神祕學的琥珀金/古銅色系 */
+            --accent-hover: #f59e0b;
             --upright: #2ecc71;
             --reversed: #f43f5e;
         }
@@ -161,7 +161,7 @@
             justify-content: center; 
             gap: 4px; 
             font-size: 11px; 
-            color: #38bdf8; 
+            color: #fbbf24; 
             white-space: nowrap;
             -ms-flex-negative: 1;
             flex-shrink: 1;
@@ -195,6 +195,10 @@
             flex-direction: column; 
             align-items: center; 
             gap: 16px; 
+            position: relative;
+            overflow: hidden;
+            height: auto;
+            padding-bottom: 20px;
         }
         .spread-container.is-wide {
             max-width: 1250px;
@@ -237,15 +241,15 @@
             font-weight: bold;
             margin-bottom: 11.5px;
             font-size: 12px;
-            color: #38bdf8;
+            color: #fbbf24;
             text-align: center;
         }
 
-        /* 塔羅詳細卡片樣式：寬度 395px、高度 238px */
+        /* 盧恩詳細卡片樣式：寬度 395px */
         .card-box {
             width: 100%;
             max-width: 395px;
-            min-height: 238px;
+            min-height: 220px;
             background-color: var(--card-bg);
             border: 1px solid #2d3343;
             border-radius: 6px;
@@ -262,7 +266,7 @@
         }
         .banner {
             background-color: #232736;
-            color: #38bdf8;
+            color: #fbbf24;
             font-size: 13px;
             font-weight: bold;
             padding: 6px 10px;
@@ -285,7 +289,7 @@
             -ms-flex-pack: justify;
             justify-content: space-between;
         }
-        .tarot-frame {
+        .rune-frame {
             background-color: var(--tarot-bg);
             border: 1px solid #252b3d;
             border-radius: 4px;
@@ -301,22 +305,28 @@
             -ms-flex: 1;
             flex: 1;
         }
-        .t-head { font-size: 12px; font-weight: bold; color: #a5b4fc; margin-bottom: 6px; }
+        .t-head { font-size: 12px; font-weight: bold; color: #fde68a; margin-bottom: 6px; }
         .t-body { display: -webkit-box; display: -ms-flexbox; display: flex; gap: 10px; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
         
-        .card-img { 
+        .rune-symbol-box { 
             width: 70px; 
-            height: 115px; 
-            object-fit: cover; 
-            border: 1px solid #000; 
+            height: 105px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #475569; 
             background: #1e2230; 
             border-radius: 4px; 
             -ms-flex-negative: 0;
             flex-shrink: 0; 
+            font-size: 38px;
+            color: #fbbf24;
+            font-weight: bold;
             -webkit-transition: -webkit-transform 0.3s ease;
             transition: transform 0.3s ease;
         }
-        .card-img.reversed-img {
+        .rune-symbol-box.reversed-rune {
             -webkit-transform: rotate(180deg);
             transform: rotate(180deg);
         }
@@ -331,13 +341,9 @@
         .bg-up { background-color: var(--upright); }
         .bg-rev { background-color: var(--reversed); }
 
-        .leno-bar { background: #161922; border: 1px solid #22293d; border-radius: 4px; padding: 4px; text-align: center; margin-top: 4px; }
-        .leno-btn { background: #1e293b; color: #38bdf8; border: none; width: 100%; padding: 6px; font-size: 12px; font-weight: bold; border-radius: 3px; cursor: pointer; }
-        .leno-btn:hover { background: #334155; color: #fff; }
-
         .branch-row { display: flex; width: 100%; justify-content: center; gap: 16px; flex-wrap: wrap; }
         .branch-col { display: flex; flex-direction: column; gap: 12px; align-items: center; flex: 1; min-width: 395px; }
-        .branch-title { font-size: 15px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; text-align: center; }
+        .branch-title { font-size: 15px; font-weight: bold; color: #fbbf24; margin-bottom: 4px; text-align: center; }
 
         /* 手機版牌陣縮圖專屬排版樣式 */
         .mobile-preview-section {
@@ -366,20 +372,25 @@
             gap: 4px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
-        .mini-img {
-            width: 55px;
-            height: 90px;
-            object-fit: cover;
-            border: 1px solid #000;
+        .mini-symbol {
+            width: 45px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #475569;
             border-radius: 4px;
             background: #000;
+            font-size: 24px;
+            color: #fbbf24;
+            font-weight: bold;
         }
-        .mini-img.reversed-mini {
+        .mini-symbol.reversed-mini {
             transform: rotate(180deg);
         }
         .mini-title {
             font-size: 9px;
-            color: #38bdf8;
+            color: #fbbf24;
             font-weight: bold;
         }
         .mini-name {
@@ -388,73 +399,35 @@
             color: #fff;
         }
 
-        /* 聖三角手機版縮圖幾何 */
-        .triangle-visual-mobile {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-        }
-        .triangle-row-bottom-mobile {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        /* 十字法手機版縮圖幾何：十字架陣型網格 */
-        .celtic-cross-visual-mobile {
+        /* 三符文/十字法手機縮圖幾何 */
+        .grid-3-mobile { display: flex; gap: 10px; justify-content: center; }
+        .grid-5-mobile {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(3, auto);
-            gap: 8px;
-            width: 260px;
-            margin: 5px auto;
+            gap: 6px;
+            width: 240px;
+            margin: 0 auto;
             justify-items: center;
-            align-items: center;
         }
-        .celtic-m-pos-3 { grid-column: 2; grid-row: 1; }
-        .celtic-m-pos-1 { grid-column: 1; grid-row: 2; }
-        .celtic-m-pos-0 { grid-column: 2; grid-row: 2; }
-        .celtic-m-pos-2 { grid-column: 3; grid-row: 2; }
-        .celtic-m-pos-4 { grid-column: 2; grid-row: 3; }
-
-        /* 二擇一手機版縮圖幾何 */
-        .two-choices-visual-mobile {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-        }
-        .two-choices-top-mobile {
-            display: flex;
-            justify-content: center;
-        }
-        .two-choices-branches-mobile {
-            display: flex;
-            width: 100%;
-            justify-content: space-around;
-            gap: 10px;
-        }
-        .two-choices-col-mobile {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            align-items: center;
-        }
+        .c-m-1 { grid-column: 2; grid-row: 1; }
+        .c-m-2 { grid-column: 1; grid-row: 2; }
+        .c-m-3 { grid-column: 2; grid-row: 2; }
+        .c-m-4 { grid-column: 3; grid-row: 2; }
+        .c-m-5 { grid-column: 2; grid-row: 3; }
 
         .action-btn-group {
             display: flex;
             gap: 10px;
             width: 100%;
             max-width: 450px;
-            margin: 10px auto 20px auto;
+            margin: 15px auto 10px auto;
             justify-content: center;
+            z-index: 100;
         }
 
         .action-btn {
-            background: linear-gradient(135deg, #4338ca, #6366f1);
+            background: linear-gradient(135deg, #d97706, #f59e0b);
             color: #fff;
             border: none;
             padding: 12px 16px;
@@ -462,14 +435,14 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(67, 56, 202, 0.4);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
             transition: all 0.2s;
             flex: 1;
             text-align: center;
         }
         .action-btn.secondary {
             background: rgba(30, 34, 48, 0.9);
-            color: #38bdf8;
+            color: #fbbf24;
             border: 1px solid #334155;
             flex: unset !important;
             width: auto !important;
@@ -479,6 +452,29 @@
         }
         .action-btn:hover {
             transform: translateY(-2px);
+        }
+
+        /* 密集交錯斜向浮水印網格層 */
+        .screenshot-watermark-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 99;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 150px;
+            align-items: center;
+            justify-items: center;
+            opacity: 0.10;
+        }
+        .watermark-item {
+            font-size: 15px;
+            color: #fbbf24;
+            font-weight: bold;
+            transform: rotate(-30deg);
+            white-space: nowrap;
+            user-select: none;
         }
 
         /* 手機截圖彈窗預覽樣式 */
@@ -498,27 +494,20 @@
             max-width: 100%;
             max-height: 65vh;
             border-radius: 6px;
-            border: 2px solid #38bdf8;
+            border: 2px solid #fbbf24;
             box-shadow: 0 4px 20px rgba(0,0,0,0.8);
             object-fit: contain;
         }
         .screenshot-tip {
             font-size: 13px;
-            color: #38bdf8;
+            color: #fbbf24;
             font-weight: bold;
             text-align: center;
             background: rgba(13, 15, 20, 0.8);
             padding: 6px 12px;
             border-radius: 6px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(251, 191, 36, 0.3);
         }
-
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; z-index: 1000; padding: 16px; }
-        .modal-content { background: #1a1c24; width: 100%; max-width: 500px; max-height: 85vh; border-radius: 8px; border: 1px solid #333a4f; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; overflow: hidden; padding: 16px; }
-        .modal-header { font-size: 16px; font-weight: bold; color: #38bdf8; margin-bottom: 12px; text-align: center; }
-        .modal-body { overflow-y: auto; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; gap: 12px; padding-right: 4px; }
-        .modal-card-item { background: #232736; border: 1px solid #2f364b; padding: 10px; border-radius: 6px; display: -webkit-box; display: -ms-flexbox; display: flex; gap: 12px; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; }
-        .modal-close-btn { margin-top: 12px; background: var(--accent); color: #fff; padding: 10px; border-radius: 4px; border: none; font-weight: bold; cursor: pointer; text-align: center; font-size: 14px; }
 
         .brand-footer {
             position: fixed;
@@ -531,20 +520,13 @@
             font-size: 13px;
             z-index: 999;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
             flex-direction: column;
-            -webkit-box-align: end;
-            -ms-flex-align: end;
             align-items: flex-end;
             gap: 2px;
         }
-        .brand-name { font-weight: bold; color: #38bdf8; letter-spacing: 0.5px; }
-        .brand-threads { color: #94a3b8; text-decoration: none; -webkit-transition: color 0.2s; transition: color 0.2s; }
+        .brand-name { font-weight: bold; color: #fbbf24; letter-spacing: 0.5px; }
+        .brand-threads { color: #94a3b8; text-decoration: none; transition: color 0.2s; }
         .brand-threads:hover { color: #f8fafc; text-decoration: underline; }
 
         .visitor-counter-bar {
@@ -562,14 +544,8 @@
             font-size: 12px;
             color: #94a3b8;
             z-index: 998;
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
             justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
             align-items: center;
         }
     </style>
@@ -578,16 +554,16 @@
 
     <div class="app-layout">
         <div class="control-panel">
-            <div class="title">醉酒塔羅 🔮 偉特塔羅 × 雷諾曼 占卜系統</div>
+            <div class="title">🍸 醉酒塔羅 🔮 盧恩符文占卜系統</div>
             <div class="control-row">
                 <div class="config-box">
                     <span>選擇牌陣:</span>
                     <select id="spreadSelect" onchange="toggleSpreadConfig()">
-                        <option value="diary">🃏 塔羅日記 (單張)</option>
-                        <option value="two">⚖️ 二擇一</option>
-                        <option value="triangle">🔺 聖三角</option>
-                        <option value="celtic5">✝️ 十字法 (五張)</option>
-                        <option value="free">🎲 無牌陣</option>
+                        <option value="single">🔮 單符文每日指引</option>
+                        <option value="triple">⚖️ 三符文過去現在未來</option>
+                        <option value="cross5">✝️ 五符文十字交叉法</option>
+                        <option value="norns">📜 諾倫三女神命運流轉</option>
+                        <option value="free">🎲 自由抽牌張數</option>
                     </select>
                 </div>
 
@@ -596,37 +572,27 @@
                     <span id="freeCountDisplay" style="color: #fff; font-weight: bold;">3</span>
                 </div>
 
-                <div class="config-box">
-                    <span>雷諾曼:</span>
-                    <select id="lenoCount">
-                        <option value="0" selected>0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-
-                <button onclick="executeDraw()">✨ 抽牌</button>
+                <button onclick="executeDraw()">✨ 開始占卜</button>
             </div>
         </div>
 
         <div class="workspace">
             <div id="spreadArea" class="spread-container">
                 <div class="welcome-box">
-                    <div class="welcome-title">✨ 歡迎來到 偉特塔羅 × 雷諾曼 占卜系統 ✨</div>
+                    <div class="welcome-title">✨ 歡迎來到 醉酒塔羅 - 盧恩符文系統 ✨</div>
                     <div class="welcome-subtitle">✨ 請點擊上方選單與按鈕開始進行占卜 ✨</div>
                     <div class="welcome-instructions">
                         <div class="welcome-instructions-title">使用方式：</div>
-                        <div>1. 深呼吸三次，讓情緒平穩</div>
-                        <div>2. 閉上眼，在心中想好問題</div>
-                        <div>3. 於上方選單挑選牌陣與雷諾曼張數，按下「抽牌」</div>
+                        <div>1. 深呼吸三次，讓心靈沉澱</div>
+                        <div>2. 閉上雙眼，在心中默念您的問題</div>
+                        <div>3. 於上方選單挑選占卜法，按下「開始占卜」</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 手機長按儲存截圖彈窗 (提示固定在圖片上方) -->
+    <!-- 手機長按儲存截圖彈窗 -->
     <div id="screenshotModal" class="screenshot-modal" onclick="this.style.display='none'">
         <div class="screenshot-tip">👆 請長按下方圖片選擇「加入照片」或「儲存影像」</div>
         <img id="screenshotResultImg" alt="占卜結果截圖" onclick="event.stopPropagation()">
@@ -642,36 +608,28 @@
         🍸 載入訪客數中...
     </div>
 
-    <div id="lenoModal" class="modal-overlay" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="modal-header">✨ 雷諾曼現實細節展開 ✨</div>
-            <div id="modalBody" class="modal-body"></div>
-            <button class="modal-close-btn" onclick="document.getElementById('lenoModal').style.display='none'">關閉視窗</button>
-        </div>
-    </div>
-
     <script>
         let customCount = 3;
 
         function promptFreeCount() {
-            let input = prompt("請輸入自訂抽牌張數 (1 - 10)：", customCount);
+            let input = prompt("請輸入自訂抽牌張數 (1 - 9)：", customCount);
             if (input !== null) {
                 let val = parseInt(input);
-                if (!isNaN(val) && val >= 1 && val <= 10) {
+                if (!isNaN(val) && val >= 1 && val <= 9) {
                     customCount = val;
                     document.getElementById("freeCountDisplay").textContent = customCount;
                 } else {
-                    alert("請輸入有效的數字 (1 到 10 之間)");
+                    alert("請輸入有效的數字 (1 到 9 之間)");
                 }
             }
         }
 
         async function initCounter() {
             try {
-                let endpoint = 'https://abacus.jasoncameron.dev/get/tarotdrunktw-png.github.io/tarot-visits';
-                if (!sessionStorage.getItem('counted')) {
-                    endpoint = 'https://abacus.jasoncameron.dev/hit/tarotdrunktw-png.github.io/tarot-visits';
-                    sessionStorage.setItem('counted', 'true');
+                let endpoint = 'https://abacus.jasoncameron.dev/get/tarotdrunktw-png.github.io/rune-visits';
+                if (!sessionStorage.getItem('rune_counted')) {
+                    endpoint = 'https://abacus.jasoncameron.dev/hit/tarotdrunktw-png.github.io/rune-visits';
+                    sessionStorage.setItem('rune_counted', 'true');
                 }
                 let response = await fetch(endpoint);
                 let data = await response.json();
@@ -694,95 +652,42 @@
             }
         }
 
-        function resetToHome() {
-            let container = document.getElementById("spreadArea");
-            container.classList.remove("is-wide");
-            container.innerHTML = `
-                <div class="welcome-box">
-                    <div class="welcome-title">✨ 歡迎來到 偉特塔羅 × 雷諾曼 占卜系統 ✨</div>
-                    <div class="welcome-subtitle">✨ 請點擊上方選單與按鈕開始進行占卜 ✨</div>
-                    <div class="welcome-instructions">
-                        <div class="welcome-instructions-title">使用方式：</div>
-                        <div>1. 深呼吸三次，讓情緒平穩</div>
-                        <div>2. 閉上眼，在心中想好問題</div>
-                        <div>3. 於上方選單挑選牌陣與雷諾曼張數，按下「抽牌」</div>
-                    </div>
-                </div>
-            `;
-            document.querySelector(".workspace").scrollTop = 0;
-        }
-
         function executeDraw() {
             let spreadVal = document.getElementById("spreadSelect").value;
-            if (spreadVal === "diary") drawDailyDiary();
-            else if (spreadVal === "two") drawTwoChoices();
-            else if (spreadVal === "triangle") drawHolyTriangle();
-            else if (spreadVal === "celtic5") drawCeltic5();
+            if (spreadVal === "single") drawSingle();
+            else if (spreadVal === "triple") drawTriple();
+            else if (spreadVal === "cross5") drawCross5();
+            else if (spreadVal === "norns") drawNorns();
             else if (spreadVal === "free") drawFreeSpread();
         }
 
-        const MAJOR_ARCANA = [
-            {no: 0, name: "愚者", en: "The Fool", theme: "靈性核心與大局走勢", upright: "新的開始、冒險、純真、自發性", reversed: "魯莽、冒險過度、盲目、不負責任", file: "RWS1909_-_00_Fool.jpeg"},
-            {no: 1, name: "魔術師", en: "The Magician", theme: "靈性核心與大局走勢", upright: "創造力、技能、資源整合、主動顯化", reversed: "欺瞞、能力未發揮、心懷不軌、受挫", file: "RWS1909_-_01_Magician.jpeg"},
-            {no: 2, name: "女祭司", en: "The High Priestess", theme: "靈性核心與大局走勢", upright: "直覺、潛意識、靜止觀察、神秘智慧", reversed: "壓抑情感、秘密洩漏、膚淺、忽視直覺", file: "RWS1909_-_02_High_Priestess.jpeg"},
-            {no: 3, name: "皇后", en: "The Empress", theme: "靈性核心與大局走勢", upright: "豐盛、母性孕育、感官享受、自然創造", reversed: "過度保護、創造力停滯、依賴、浪費", file: "RWS1909_-_03_Empress.jpeg"},
-            {no: 4, name: "皇帝", en: "The Emperor", theme: "靈性核心與大局走勢", upright: "權威, 結構秩序, 領導力、穩定控制", reversed: "專制暴政、缺乏紀律、固執僵化、失控", file: "RWS1909_-_04_Emperor.jpeg"},
-            {no: 5, name: "教皇", en: "The Hierophant", theme: "靈性核心與大局走勢", upright: "傳統體制、精神導師、道德信念、尋求共識", reversed: "盲從體制、反叛叛逆、教條主義、虛偽", file: "RWS1909_-_05_Hierophant.jpeg"},
-            {no: 6, name: "戀人", en: "The Lovers", theme: "靈性核心與大局走勢", upright: "愛與結合、價值觀抉擇、人際和諧", reversed: "關係裂痕、價值觀衝突、錯誤決定、誘惑", file: "RWS1909_-_06_Lovers.jpeg"},
-            {no: 7, name: "戰車", en: "The Chariot", theme: "靈性核心與大局走勢", upright: "意志力、克服障礙、掌控方向、決心前進", reversed: "失控暴衝、方向迷失、挫敗、攻擊性過強", file: "RWS1909_-_07_Chariot.jpeg"},
-            {no: 8, name: "力量", en: "The Strength", theme: "靈性核心與大局走勢", upright: "內在勇氣、耐心包容、以柔克剛、自信", reversed: "自我懷疑、軟弱無力、情緒失控、暴力", file: "RWS1909_-_08_Strength.jpeg"},
-            {no: 9, name: "隱士", en: "The Hermit", theme: "靈性核心與大局走勢", upright: "內省探索、獨處沉澱/尋求真理、心靈指引", reversed: "孤立疏離、逃避現實、偏執盲目、寂寞", file: "RWS1909_-_09_Hermit.jpeg"},
-            {no: 10, name: "命運之輪", en: "Wheel of Fortune", theme: "靈性核心與大局走勢", upright: "命運轉折、週期循環、幸運契機、不可抗力", reversed: "厄運連連、抗拒改變、週期停滯、意外挫折", file: "RWS1909_-_10_Wheel_of_Fortune.jpeg"},
-            {no: 11, name: "正義", en: "Justice", theme: "靈性核心與大局走勢", upright: "公平正義、因果法則、客觀真相、明智裁決", reversed: "不公不義、偏見偏袒、逃避責任、法律糾紛", file: "RWS1909_-_11_Justice.jpeg"},
-            {no: 12, name: "倒吊人", en: "The Hanged Man", theme: "靈性核心與大局走勢", upright: "換位思考、暫停放下、自我犧牲、獲得新視角", reversed: "無謂犧牲、停滯不前、抗拒放手、自怨自艾", file: "RWS1909_-_12_Hanged_Man.jpeg"},
-            {no: 13, name: "死神", en: "Death", theme: "靈性核心與大局走勢", upright: "重大結束、必然轉化、掃除舊物、新階段開始", reversed: "抗拒改變、恐懼結束、痛苦拖延、停滯腐敗", file: "RWS1909_-_13_Death.jpeg"},
-            {no: 14, name: "節制", en: "Temperance", theme: "靈性核心與大局走勢", upright: "平衡調和、耐心融合、適度自律、心靈療癒", reversed: "失衡失調、極端衝突、過度缺乏節制、急躁", file: "RWS1909_-_14_Temperance.jpeg"},
-            {no: 15, name: "惡魔", en: "The Devil", theme: "靈性核心與大局走勢", upright: "物質束縛、執念誘惑、成癮依賴、陰暗面", reversed: "擺脫枷鎖、重獲自由、覺醒突破、認清陷阱", file: "RWS1909_-_15_Devil.jpeg"},
-            {no: 16, name: "高塔", en: "The Tower", theme: "靈性核心與大局走勢", upright: "突發劇變、體系崩塌、幻象破滅、震撼啟蒙", reversed: "恐懼改變、避免災難、勉強支撐、餘震未平", file: "RWS1909_-_16_Tower.jpeg"},
-            {no: 17, name: "星星", en: "The Star", theme: "靈性核心與大局走勢", upright: "希望指引、靈感湧現、寧靜信心、心靈療癒", reversed: "絕望灰心、失去信念、悲觀消極、靈感枯竭", file: "RWS1909_-_17_Star.jpeg"},
-            {no: 18, name: "月亮", en: "The Moon", theme: "靈性核心與大局走勢", upright: "潛在恐懼、幻象焦慮/直覺波動、模糊不明", reversed: "迷霧消散、看清真相、釋放恐懼、情緒平復", file: "RWS1909_-_18_Moon.jpeg"},
-            {no: 19, name: "太陽", en: "The Sun", theme: "靈性核心與大局走勢", upright: "成功喜悅、活力充沛、真理顯明、自信光明", reversed: "暫時低落、過度樂觀、虛榮自滿、延遲成功", file: "RWS1909_-_19_Sun.jpeg"},
-            {no: 20, name: "審判", en: "The Judgement", theme: "靈性核心與大局走勢", upright: "生命召喚、重大覺醒、清算重獲新生、明智抉擇", reversed: "自我懷疑、逃避召喚、重複犯錯、悔恨內疚", file: "RWS1909_-_20_Judgement.jpeg"},
-            {no: 21, name: "世界", en: "The World", theme: "靈性核心與大局走勢", upright: "圓滿達成、階段完成、完整合一、展翅高飛", reversed: "未竟之志、延宕拖延、缺乏收尾、受限束縛", file: "RWS1909_-_21_World.jpeg"}
-        ];
-
-        const LENORMAND_DECK = [
-            {no: 1, name: "騎士", en: "Rider", file: "rider.avif", suit: "9♥", polarity: "正面", theme: "消息與行動", keywords: ["快速到來的消息", "新訪客", "行動力"]},
-            {no: 2, name: "幸運草", en: "Clover", file: "clover.avif", suit: "6♦", polarity: "正面", theme: "短暫的幸運", keywords: ["小確幸", "意外轉機", "樂觀"]},
-            {no: 3, name: "船", en: "Ship", file: "ship.avif", suit: "10♠", polarity: "正面", theme: "旅行與遠方", keywords: ["長途旅行", "海外發展", "轉變"]},
-            {no: 4, name: "房子", en: "House", file: "house.avif", suit: "K♥", polarity: "正面", theme: "家庭與安定", keywords: ["家庭生活", "安全感", "不動產"]},
-            {no: 5, name: "樹", en: "Tree", file: "tree.avif", suit: "7♥", polarity: "中性", theme: "健康與根基", keywords: ["身心健康", "長期成長", "耐力"]},
-            {no: 6, name: "雲", en: "Clouds", file: "clouds.avif", suit: "K♣", polarity: "負面", theme: "迷茫與陰霾", keywords: ["不明朗", "暫時困擾", "不安"]},
-            {no: 7, name: "蛇", en: "Snake", file: "snake.avif", suit: "Q♣", polarity: "負面", theme: "複雜與心機", keywords: ["轉彎抹角", "嫉妒心", "潛在威脅"]},
-            {no: 8, name: "棺材", en: "Coffin", file: "coffin.avif", suit: "9♦", polarity: "負面", theme: "結束與病痛", keywords: ["重大轉折", "停止", "耗損"]},
-            {no: 9, name: "花束", en: "Bouquet", file: "bouquet.avif", suit: "Q♠", polarity: "正面", theme: "愉悅與禮物", keywords: ["美好驚喜", "人緣", "祝福"]},
-            {no: 10, name: "鐮刀", en: "Scythe", file: "scythe.avif", suit: "J♦", polarity: "負面", theme: "突發與切斷", keywords: ["決定性切割", "意外", "危險"]},
-            {no: 11, name: "鞭子", en: "Whip", file: "whip.avif", suit: "J♣", polarity: "負面", theme: "爭執與重複", keywords: ["摩擦", "爭辯", "重複動作"]},
-            {no: 12, name: "鳥", en: "Birds", file: "birds.avif", suit: "7♦", polarity: "中性", theme: "溝通與焦慮", keywords: ["談話", "電話聯繫", "神經質"]},
-            {no: 13, name: "小孩", en: "Child", file: "child.avif", suit: "J♠", polarity: "正面", theme: "新開始與純真", keywords: ["小巧的事物", "新計畫", "單純"]},
-            {no: 14, name: "狐狸", en: "Fox", file: "fox.avif", suit: "9♣", polarity: "負面", theme: "謀生與心機", keywords: ["工作職場", "小聰明", "防備心"]},
-            {no: 15, name: "熊", en: "Bear", file: "bear.avif", suit: "10♣", polarity: "中性", theme: "力量與財務", keywords: ["主管長輩", "資金", "保護與控制"]},
-            {no: 16, name: "星星", en: "Stars", file: "stars.avif", suit: "6♥", polarity: "正面", theme: "希望與靈感", keywords: ["願望成真", "方向指引", "名氣"]},
-            {no: 17, name: "送子鳥", en: "Stork", file: "stork.avif", suit: "Q♥", polarity: "正面", theme: "改變與搬遷", keywords: ["調整", "改善", "新環境"]},
-            {no: 18, name: "狗", en: "Dog", file: "dog.avif", suit: "10♥", polarity: "正面", theme: "忠誠與友情", keywords: ["可靠夥伴", "信任", "長期陪伴"]},
-            {no: 19, name: "塔", en: "Tower", file: "tower.avif", suit: "6♠", polarity: "中性", theme: "體制與孤立", keywords: ["大型機構", "獨處", "權威格局"]},
-            {no: 20, name: "花園", en: "Garden", file: "garden.avif", suit: "8♠", polarity: "正面", theme: "社交與公眾", keywords: ["公眾場合", "聚會", "網路社群"]},
-            {no: 21, name: "山", en: "Mountain", file: "mountain.avif", suit: "8♣", polarity: "負面", theme: "阻礙與僵局", keywords: ["跨不過的檻", "延遲", "冷漠對立"]},
-            {no: 22, name: "十字路口", en: "Crossroad", file: "crossroad.avif", suit: "D♦", polarity: "中性", theme: "抉擇與分岔", keywords: ["多重選項", "分歧點", "自主決定"]},
-            {no: 23, name: "老鼠", en: "Mice", file: "mice.avif", suit: "7♣", polarity: "負面", theme: "壓力與消耗", keywords: ["壓力累積", "遺失損耗", "焦慮侵蝕"]},
-            {no: 24, name: "心", en: "Heart", file: "heart.avif", suit: "J♥", polarity: "正面", theme: "情感與熱情", keywords: ["真愛", "熱忱", "心之所向"]},
-            {no: 25, name: "戒指", en: "Ring", file: "ring.avif", suit: "A♣", polarity: "正面", theme: "承諾與合約", keywords: ["合作契約", "婚姻關係", "循環往復"]},
-            {no: 26, name: "書", en: "Book", file: "book.avif", suit: "10♦", polarity: "中性", theme: "秘密與知識", keywords: ["未公開資訊", "學習研究", "專業證照"]},
-            {no: 27, name: "信", en: "Letter", file: "letter.avif", suit: "7♠", polarity: "中性", theme: "文件與通知", keywords: ["正式通知", "訊息檔案", "合約書面"]},
-            {no: 28, name: "紳士", en: "Gentleman", file: "gentleman.avif", suit: "A♠", polarity: "中性", theme: "男性當事人", keywords: ["男性友人", "伴侶", "理性思維"]},
-            {no: 29, name: "女士", en: "Lady", file: "lady.avif", suit: "A♥", polarity: "中性", theme: "女性當事人", keywords: ["女性友人", "求問者自身", "感性直覺"]},
-            {no: 30, name: "百合", en: "Lily", file: "lily.avif", suit: "K♠", polarity: "正面", theme: "成熟與平靜", keywords: ["資深經驗", "內心平靜", "性靈收穫"]},
-            {no: 31, name: "太陽", en: "Sun", file: "sun.avif", suit: "A♦", polarity: "正面", theme: "成功與能量", keywords: ["極佳活力", "榮耀勝利", "絕對光明"]},
-            {no: 32, name: "月亮", en: "Moon", file: "moon.avif", suit: "8♥", polarity: "中性", theme: "情感與名聲", keywords: ["情緒波動", "潛意識", "形象名望"]},
-            {no: 33, name: "鑰匙", en: "Key", file: "key.avif", suit: "8♦", polarity: "正面", theme: "解答與關鍵", keywords: ["突破口", "絕對重要", "必然發生"]},
-            {no: 34, name: "魚", en: "Fish", file: "fish.avif", suit: "K♦", polarity: "正面", theme: "財富與流動", keywords: ["金錢收益", "商業貿易", "資源豐沛"]},
-            {no: 35, name: "錨", en: "Anchor", file: "anchor.avif", suit: "9♠", polarity: "正面", theme: "穩定與深耕", keywords: ["長期定局", "職場穩定", "堅持信念"]},
-            {no: 36, name: "十字架", en: "Cross", file: "cross.avif", suit: "6♣", polarity: "負面", theme: "宿命與考驗", keywords: ["不可避免的負擔", "精神洗禮", "信仰考驗"]}
+        // 完整 25 盧恩符文庫（含奧丁空白符）
+        const RUNE_DECK = [
+            {name: "費胡 (Fehu)", symbol: "ᚠ", element: "財富與流動", upright: "物質豐盛、財富獲取、能量流動、新機會", reversed: "財務損失、貪婪、停滯、資源匱乏"},
+            {name: "烏魯茲 (Uruz)", symbol: "ᚢ", element: "力量與健康", upright: "強大體魄、原始生命力、突破困境、勇氣", reversed: "體力透支、錯失良機、軟弱無力、方向錯誤"},
+            {name: "瑟里薩茲 (Thurisaz)", symbol: "ᚦ", element: "防禦與考驗", upright: "果斷防禦、突破障礙、清理門戶、智慧警惕", reversed: "衝動惹禍、遭人陷害、防衛過當、內耗"},
+            {name: "安蘇茲 (Ansuz)", symbol: "ᚬ", element: "智慧與溝通", upright: "神聖啟示、溝通順暢、智慧指引、長輩貴人", reversed: "謊言欺騙、溝通不良、誤解、惡意耳語"},
+            {name: "賴多 (Raido)", symbol: "ᚱ", element: "旅程與節奏", upright: "踏上旅途、人生轉折、順應節奏、交通平安", reversed: "行程延誤、迷失方向、溝通阻礙、意外波折"},
+            {name: "肯納茲 (Kaunan)", symbol: "ᚲ", element: "啟發與熱情", upright: "靈感爆發、技術突破、熱情點燃、光明指引", reversed: "創造力枯竭、熱情冷卻、疾病、誤解真相"},
+            {name: "傑布歐 (Gebo)", symbol: "ᚷ", element: "合作與贈予", upright: "夥伴結盟、無私餽贈、情感平衡、幸運契機", reversed: "不對等付出、債務壓力、吝嗇、合作破裂"},
+            {name: "溫優 (Wunjo)", symbol: "ᚹ", element: "喜悅與和諧", upright: "心想事成、歡慶時刻、身心和諧、願望達成", reversed: "失落、悲傷、短暫歡愉後空虛、意見分歧"},
+            {name: "哈格拉茲 (Hagalaz)", symbol: "ᚺ", element: "劇變與洗禮", upright: "不可抗力的改變、破舊立新、淨化考驗", reversed: "災難降臨、抗拒改變、困在混亂中、受創"},
+            {name: "娜奧帝茲 (Nauthiz)", symbol: "ᚾ", element: "耐心與困境", upright: "克制忍耐、壓力考驗、學會獨立、絕處逢生", reversed: "過度焦慮、強制剝奪、擺爛、無謂受苦"},
+            {name: "伊薩 (Isa)", symbol: "ᛁ", element: "冰封與沉澱", upright: "暫時停滯、冷靜觀察、內心冰封、保留實力", reversed: "長期僵局、冷漠疏離、計畫停擺、危機潛伏"},
+            {name: "耶拉 (Jera)", symbol: "ᛃ", element: "收穫與循環", upright: "辛勞終有收穫、善有善報、自然循環、成果展現", reversed: "收成延遲、白費心機、付出與回報不成正比"},
+            {name: "艾奧斯 (Eihwaz)", symbol: "ᛇ", element: "轉化與防護", upright: "堅韌毅力、靈魂轉化、突破僵局、神聖保護", reversed: "逃避現實、恐懼改變、陷入困境、方向偏離"},
+            {name: "佩特羅 (Perthro)", symbol: "ᛈ", element: "命運與神祕", upright: "命運轉機、意外之財、直覺靈感、探索祕密", reversed: "賭徒心態、運勢低落、秘密曝光、幻滅"},
+            {name: "艾吉茲 (Algiz)", symbol: "ᛉ", element: "守護與庇佑", upright: "神聖守護、逢凶化吉、直覺預警、貴人相助", reversed: "遭人背叛、失去防護、盲目信任、陷入危機"},
+            {name: "索威羅 (Sowilo)", symbol: "ᛋ", element: "勝利與光明", upright: "絕對勝利、充沛活力、榮耀達成、健康復甦", reversed: "過度自信、盲目自大、短暫光芒、精力耗竭"},
+            {name: "提爾 (Tiwaz)", symbol: "ᛏ", element: "公義與勇氣", upright: "正義勝利、勇敢擔當、專業領導、理性決斷", reversed: "遭遇不公、失去動力、懦弱退縮、衝突戰敗"},
+            {name: "貝歐卡 (Berkanan)", symbol: "ᛒ", element: "孕育與生長", upright: "新生命誕生、家庭和諧、事業萌芽、療癒包容", reversed: "家庭紛爭、生長停滯、焦慮保護、培育失敗"},
+            {name: "艾瓦茲 (Ehwaz)", symbol: "ᛖ", element: "信任與合作", upright: "團隊合作、順暢移動、互相信任、進步轉機", reversed: "不信任、合作破裂、原地打轉、溝通中斷"},
+            {name: "曼那茲 (Mannaz)", symbol: "ᛗ", element: "人類與自我", upright: "自我認知、群體合作、心智覺醒、貴人支持", reversed: "孤立無援、自私自利、偏見、遭群體排擠"},
+            {name: "拉古茲 (Laguz)", symbol: "ᛚ", element: "直覺與潛意識", upright: "情感流動、強大直覺、藝術靈感、順勢而為", reversed: "情緒氾濫、迷失方向、幻覺恐懼、情感內耗"},
+            {name: "英格瓦 (Ingwaz)", symbol: "ᛝ", element: "內在孵化", upright: "能量圓滿、孕育成果、關鍵突破、休息充電", reversed: "能量渙散、虎頭蛇尾、無法收尾、焦慮難安"},
+            {name: "達格斯 (Dagaz)", symbol: "ᛞ", element: "黎明與覺醒", upright: "破曉曙光、重大突破、思維轉換、迎來新生", reversed: "黎明前黑暗、抗拒光明、短暫安逸、錯失良機"},
+            {name: "歐瑟拉 (Othala)", symbol: "ᛟ", element: "根基與傳承", upright: "家族資產、祖傳智慧、房產安定、精神歸屬", reversed: "家庭糾紛、傳統束縛、破產、失去根基"},
+            {name: "奧丁空白符 (Wrd)", symbol: "🜸", element: "未知與天命", upright: "命運不可預知、奧丁的意志、全新起點、順其自然", reversed: "恐懼未知、抗拒命運安排、迷惘無助"}
         ];
 
         function shuffle(array) {
@@ -794,129 +699,83 @@
             return arr;
         }
 
-        function getRandomTarot(count) {
-            let shuffled = shuffle(MAJOR_ARCANA);
+        function getRandomRunes(count) {
+            let shuffled = shuffle(RUNE_DECK);
             let result = [];
             for(let i=0; i<count; i++) {
-                let card = {...shuffled[i]};
-                card.isReversed = Math.random() < 0.5;
-                card.orientation = card.isReversed ? "逆位 (Reversed)" : "正位 (Upright)";
-                card.interpretation = card.isReversed ? card.reversed : card.upright;
-                result.push(card);
+                let rune = {...shuffled[i]};
+                rune.isReversed = Math.random() < 0.4; // 40% 機會逆位
+                rune.orientation = rune.isReversed ? "逆位 (Reversed)" : "正位 (Upright)";
+                rune.interpretation = rune.isReversed ? rune.reversed : rune.upright;
+                result.push(rune);
             }
             return result;
         }
 
-        function getLenoBatch(shuffledLenoPool, count) {
-            let batch = [];
-            for(let i=0; i<count; i++) {
-                if(shuffledLenoPool.length > 0) {
-                    batch.push(shuffledLenoPool.pop());
-                }
-            }
-            return batch;
-        }
-
-        function getBasePath() {
-            let loc = window.location;
-            if (loc.hostname.includes("github.io")) {
-                let pathSegments = loc.pathname.split("/").filter(Boolean);
-                if (pathSegments.length > 0) {
-                    return "/" + pathSegments[0] + "/";
-                }
-            }
-            return "./";
-        }
-
-        function createCardBoxHtml(card, lenoCards, posTitle) {
-            let base = getBasePath();
-            let imgPath = base + "rws1909/" + card.file;
-            let badgeClass = card.isReversed ? "bg-rev" : "bg-up";
-            let imgClass = card.isReversed ? "card-img reversed-img" : "card-img";
+        function createRuneBoxHtml(rune, posTitle) {
+            let badgeClass = rune.isReversed ? "bg-rev" : "bg-up";
+            let symbolClass = rune.isReversed ? "rune-symbol-box reversed-rune" : "rune-symbol-box";
             
-            let lenoHtml = "";
-            if(lenoCards && lenoCards.length > 0) {
-                let lenoDataStr = encodeURIComponent(JSON.stringify(lenoCards));
-                lenoHtml = '<div class="leno-bar"><button class="leno-btn" onclick="openLenoModal(\'' + lenoDataStr + '\')">🔍 查看雷諾曼訊息 (共 ' + lenoCards.length + ' 張)</button></div>';
-            }
-
             let html = '<div class="card-box">';
             if (posTitle) {
                 html += '<div class="banner">' + posTitle + '</div>';
             }
             html += '<div class="content">';
-            html += '<div class="tarot-frame">';
-            html += '<div class="t-head">【塔羅主牌·大局/潛意識】</div>';
+            html += '<div class="rune-frame">';
+            html += '<div class="t-head">【盧恩符文·能量解讀】</div>';
             html += '<div class="t-body">';
-            html += '<img src="' + imgPath + '" class="' + imgClass + '" onerror="this.style.display=\'none\'">';
+            html += '<div class="' + symbolClass + '">' + rune.symbol + '</div>';
             html += '<div class="t-info">';
-            html += '<div class="card-name">' + card.name + ' (' + card.en + ')</div>';
-            html += '<div class="card-theme">▸ 領域：' + card.theme + '</div>';
-            html += '<div class="interp-box">▸ 意涵：' + card.interpretation + '</div>';
+            html += '<div class="card-name">' + rune.name + '</div>';
+            html += '<div class="card-theme">▸ 核心元素：' + rune.element + '</div>';
+            html += '<div class="interp-box">▸ 意涵：' + rune.interpretation + '</div>';
             html += '</div></div></div>';
-            html += '<div class="footer-frame"><span class="orientation-badge ' + badgeClass + '">' + card.orientation + '</span></div>';
-            html += lenoHtml;
+            html += '<div class="footer-frame"><span class="orientation-badge ' + badgeClass + '">' + rune.orientation + '</span></div>';
             html += '</div></div>';
             return html;
         }
 
-        function openLenoModal(encodedStr) {
-            let cards = JSON.parse(decodeURIComponent(encodedStr));
-            let base = getBasePath();
-            let bodyHtml = "";
-            let polColors = {"正面": "#2ecc71", "中性": "#f1c40f", "負面": "#e74c3c"};
-
-            cards.forEach(function(c, idx) {
-                let lImgPath = base + "lenormand/" + c.file;
-                bodyHtml += '<div class="modal-card-item">';
-                bodyHtml += '<div style="background:#000; padding:2px; border:1px solid #444; flex-shrink:0;">';
-                bodyHtml += '<img src="' + lImgPath + '" style="width:60px; height:90px; object-fit:cover;" onerror="this.style.display=\'none\'">';
-                bodyHtml += '</div>';
-                bodyHtml += '<div style="flex:1; display:flex; flex-direction:column; gap:4px; font-size:12px;">';
-                bodyHtml += '<div style="display:flex; justify-content:space-between; font-weight:bold; flex-wrap:wrap; gap:4px;">';
-                bodyHtml += '<span>延伸牌 #' + (idx+1) + '：[' + String(c.no).padStart(2,'0') + '] ' + c.name + ' (' + c.en + ')</span>';
-                bodyHtml += '<span style="background:' + polColors[c.polarity] + '; color:#000; padding:2px 6px; border-radius:3px; white-space:nowrap;">' + c.polarity + '</span>';
-                bodyHtml += '</div>';
-                bodyHtml += '<div style="color:#38bdf8;">▸ 撲克牌對應：' + c.suit + '</div>';
-                bodyHtml += '<div style="color:#cbd5e1;">▸ 核心主題：' + c.theme + '</div>';
-                bodyHtml += '<div style="color:#94a3b8;">▸ 現實顯化關鍵：' + c.keywords.join('、') + '</div>';
-                bodyHtml += '</div></div>';
-            });
-
-            document.getElementById("modalBody").innerHTML = bodyHtml;
-            document.getElementById("lenoModal").style.display = "flex";
-        }
-
-        function closeModal(e) {
-            document.getElementById("lenoModal").style.display = "none";
-        }
-
-        function createMiniCardHtml(card, titleText) {
-            let base = getBasePath();
-            let imgPath = base + "rws1909/" + card.file;
-            let revClass = card.isReversed ? "reversed-mini" : "";
+        function createMiniRuneHtml(rune, titleText) {
+            let revClass = rune.isReversed ? "reversed-mini" : "";
             return `
                 <div class="mini-card">
                     <div class="mini-title">${titleText}</div>
-                    <img src="${imgPath}" class="mini-img ${revClass}" onerror="this.style.display='none'">
-                    <div class="mini-name">${card.name}</div>
+                    <div class="mini-symbol ${revClass}">${rune.symbol}</div>
+                    <div class="mini-name">${rune.name.split(' ')[0]}</div>
                 </div>
             `;
         }
 
-        // 截圖並下載或彈出預覽
+        // 截圖功能：動態加入全版面密集斜向交錯浮水印
         function captureSpread() {
             let target = document.getElementById("spreadArea");
             let btnGroup = document.querySelector(".action-btn-group");
             if(btnGroup) btnGroup.style.display = "none";
 
+            let totalHeight = Math.max(target.scrollHeight, 500);
+            let watermarkContainer = document.createElement("div");
+            watermarkContainer.className = "screenshot-watermark-container";
+            watermarkContainer.style.height = totalHeight + "px";
+
+            let count = Math.ceil(totalHeight / 100) * 3;
+            for(let i = 0; i < count; i++) {
+                let item = document.createElement("div");
+                item.className = "watermark-item";
+                item.textContent = "🍸 醉酒塔羅 - 李特 @tarot.drunk";
+                watermarkContainer.appendChild(item);
+            }
+            target.appendChild(watermarkContainer);
+
             html2canvas(target, {
                 backgroundColor: "#0d0f14",
                 scale: window.innerWidth < 768 ? 2.5 : 2, 
                 useCORS: true,
-                logging: false
+                logging: false,
+                windowHeight: totalHeight
             }).then(canvas => {
+                target.removeChild(watermarkContainer);
                 if(btnGroup) btnGroup.style.display = "flex";
+
                 let dataUrl = canvas.toDataURL("image/png");
                 let isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
                 
@@ -925,27 +784,44 @@
                     document.getElementById("screenshotModal").style.display = "flex";
                 } else {
                     let link = document.createElement("a");
-                    link.download = "醉酒塔羅-雷諾曼占卜結果.png";
+                    link.download = "醉酒塔羅-盧恩占卜結果.png";
                     link.href = dataUrl;
                     link.click();
                 }
             }).catch(err => {
+                if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
                 if(btnGroup) btnGroup.style.display = "flex";
                 console.error("截圖失敗", err);
                 alert("截圖產生失敗，請稍後再試");
             });
         }
 
-        function drawDailyDiary() {
-            let extCount = parseInt(document.getElementById("lenoCount").value) || 0;
-            let tCard = getRandomTarot(1)[0];
-            let lenoPool = shuffle(LENORMAND_DECK);
+        function resetToHome() {
+            let container = document.getElementById("spreadArea");
+            container.classList.remove("is-wide");
+            container.innerHTML = `
+                <div class="welcome-box">
+                    <div class="welcome-title">✨ 歡迎來到 醉酒塔羅 - 盧恩符文系統 ✨</div>
+                    <div class="welcome-subtitle">✨ 請點擊上方選單與按鈕開始進行占卜 ✨</div>
+                    <div class="welcome-instructions">
+                        <div class="welcome-instructions-title">使用方式：</div>
+                        <div>1. 深呼吸三次，讓心靈沉澱</div>
+                        <div>2. 閉上雙眼，在心中默念您的問題</div>
+                        <div>3. 於上方選單挑選占卜法，按下「開始占卜」</div>
+                    </div>
+                </div>
+            `;
+            document.querySelector(".workspace").scrollTop = 0;
+        }
+
+        function drawSingle() {
+            let rune = getRandomRunes(1)[0];
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
 
-            let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 🃏 單 張 塔 羅 日 記 】</h2>';
+            let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 🔮 單 符 文 每 日 指 引 】</h2>';
             html += '<div style="width:100%; max-width:395px;">';
-            html += createCardBoxHtml(tCard, getLenoBatch(lenoPool, extCount), "【今日能量指引】 每日心靈核心與提醒");
+            html += createRuneBoxHtml(rune, "【今日能量核心】");
             html += '</div>';
             html += '<div class="action-btn-group">';
             html += '<button class="action-btn" onclick="captureSpread()">📸 儲存占卜截圖</button>';
@@ -955,161 +831,90 @@
             container.innerHTML = html;
         }
 
-        function drawTwoChoices() {
-            let extCount = parseInt(document.getElementById("lenoCount").value) || 0;
-            let tCards = getRandomTarot(5);
-            let lenoPool = shuffle(LENORMAND_DECK);
+        function drawTriple() {
+            let runes = getRandomRunes(3);
             let container = document.getElementById("spreadArea");
-            container.classList.add("is-wide");
+            container.classList.remove("is-wide");
 
-            let titles = ["【現狀核心】", "【選擇 A · 過程】", "【選擇 A · 結果】", "【選擇 B · 過程】", "【選擇 B · 結果】"];
-            
-            let html = '<h2 style="color:#f8fafc; margin-bottom:4px; text-align:center; width:100%;">【 ⚖️ 二 擇 一 抉 擇 牌 陣 】</h2>';
-            html += '<div style="display:flex; flex-direction:column; gap:16px; width:100%; align-items:center;">';
-            
-            /* 手機版專屬牌面總覽：二擇一幾何排版 */
-            html += '<div class="mobile-preview-section">';
-            html += '<div style="font-size:12px; color:#38bdf8; font-weight:bold;">── 牌面總覽 ──</div>';
-            html += '<div class="two-choices-visual-mobile">';
-            html += '<div class="two-choices-top-mobile">' + createMiniCardHtml(tCards[0], "1.現狀") + '</div>';
-            html += '<div class="two-choices-branches-mobile">';
-            html += '<div class="two-choices-col-mobile">' + createMiniCardHtml(tCards[1], "2.A過程") + createMiniCardHtml(tCards[2], "3.A結果") + '</div>';
-            html += '<div class="two-choices-col-mobile">' + createMiniCardHtml(tCards[3], "4.B過程") + createMiniCardHtml(tCards[4], "5.B結果") + '</div>';
-            html += '</div></div></div>';
-
-            html += '<div style="font-size:13px; color:#38bdf8; font-weight:bold; margin-top:6px;">── 詳細牌意與解析 ──</div>';
-            html += '<div style="width:100%; max-width:395px; margin-bottom:12px;">';
-            html += createCardBoxHtml(tCards[0], getLenoBatch(lenoPool, extCount), titles[0]);
+            let titles = ["【第一符·過去根源】", "【第二符·現在狀態】", "【第三符·未來趨勢】"];
+            let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 ⚖️ 三 符 文 時 空 占 卜 】</h2>';
+            html += '<div style="display:flex; flex-direction:column; align-items:center; gap:14px; width:100%;">';
+            runes.forEach((r, idx) => {
+                html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>';
+            });
             html += '</div>';
-
-            html += '<div class="branch-row" style="width:100%; max-width:900px;">';
-            html += '<div class="branch-col"><div class="branch-title">── 選擇 A 路線 ──</div>';
-            html += createCardBoxHtml(tCards[1], getLenoBatch(lenoPool, extCount), titles[1]);
-            html += createCardBoxHtml(tCards[2], getLenoBatch(lenoPool, extCount), titles[2]);
-            html += '</div>';
-
-            html += '<div class="branch-col"><div class="branch-title">── 選擇 B 路線 ──</div>';
-            html += createCardBoxHtml(tCards[3], getLenoBatch(lenoPool, extCount), titles[3]);
-            html += createCardBoxHtml(tCards[4], getLenoBatch(lenoPool, extCount), titles[4]);
-            html += '</div></div>';
-
             html += '<div class="action-btn-group">';
             html += '<button class="action-btn" onclick="captureSpread()">📸 儲存占卜截圖</button>';
             html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button>';
-            html += '</div>';
             html += '</div>';
 
             container.innerHTML = html;
         }
 
-        function drawHolyTriangle() {
-            let extCount = parseInt(document.getElementById("lenoCount").value) || 0;
-            let tCards = getRandomTarot(3);
-            let lenoPool = shuffle(LENORMAND_DECK);
-            let container = document.getElementById("spreadArea");
-            container.classList.add("is-wide");
-
-            let titles = ["【第一張·過去起因】", "【第二張·現在焦點】", "【第三張·未來趨勢】"];
-
-            let html = '<h2 style="color:#f8fafc; margin-bottom:4px; text-align:center; width:100%;">【 🔺 聖 三 角 牌 陣 】</h2>';
-            html += '<div style="display:flex; flex-direction:column; gap:16px; width:100%; align-items:center;">';
-
-            /* 手機版專屬牌面總覽：聖三角幾何排版 */
-            html += '<div class="mobile-preview-section">';
-            html += '<div style="font-size:12px; color:#38bdf8; font-weight:bold;">── 牌面總覽 ──</div>';
-            html += '<div class="triangle-visual-mobile">';
-            html += createMiniCardHtml(tCards[0], "1.過去");
-            html += '<div class="triangle-row-bottom-mobile">';
-            html += createMiniCardHtml(tCards[1], "2.現在");
-            html += createMiniCardHtml(tCards[2], "3.未來");
-            html += '</div></div></div>';
-
-            html += '<div style="font-size:13px; color:#38bdf8; font-weight:bold; margin-top:6px;">── 詳細牌意與解析 ──</div>';
-            
-            // 第一行：過去起因置頂
-            html += '<div style="width:100%; max-width:395px; margin-bottom:12px;">';
-            html += createCardBoxHtml(tCards[0], getLenoBatch(lenoPool, extCount), titles[0]);
-            html += '</div>';
-
-            // 第二行：現在焦點與未來趨勢並排
-            html += '<div class="branch-row" style="width:100%; max-width:900px;">';
-            html += '<div class="branch-col">';
-            html += createCardBoxHtml(tCards[1], getLenoBatch(lenoPool, extCount), titles[1]);
-            html += '</div>';
-
-            html += '<div class="branch-col">';
-            html += createCardBoxHtml(tCards[2], getLenoBatch(lenoPool, extCount), titles[2]);
-            html += '</div></div>';
-
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="captureSpread()">📸 儲存占卜截圖</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button>';
-            html += '</div>';
-            html += '</div>';
-
-            container.innerHTML = html;
-        }
-
-        function drawCeltic5() {
-            let extCount = parseInt(document.getElementById("lenoCount").value) || 0;
-            let tCards = getRandomTarot(5);
-            let lenoPool = shuffle(LENORMAND_DECK);
+        function drawCross5() {
+            let runes = getRandomRunes(5);
             let container = document.getElementById("spreadArea");
             container.classList.add("is-wide");
 
             let titles = [
-                "【第一張·現狀核心】",
-                "【第二張·過去影響】",
-                "【第三張·未來走向】",
-                "【第四張·理想目標】",
-                "【第五張·根源阻礙】"
+                "【1.中心·當前核心】",
+                "【2.左側·過去影響】",
+                "【3.右側·未來發展】",
+                "【4.上方·精神指引】",
+                "【5.下方·潛在根源】"
             ];
 
-            let html = '<h2 style="color:#f8fafc; margin-bottom:4px; text-align:center; width:100%;">【 ✝️ 十 字 法 牌 陣 (五張) 】</h2>';
+            let html = '<h2 style="color:#f8fafc; margin-bottom:4px; text-align:center; width:100%;">【 ✝️ 五 符 文 十 字 交 叉 法 】</h2>';
             html += '<div style="display:flex; flex-direction:column; gap:16px; width:100%; align-items:center;">';
 
-            /* 手機版專屬牌面總覽：十字法幾何排版（網格十字陣型） */
+            /* 手機版縮圖幾何預覽 */
             html += '<div class="mobile-preview-section">';
-            html += '<div style="font-size:12px; color:#38bdf8; font-weight:bold;">── 牌面總覽 ──</div>';
-            html += '<div class="celtic-cross-visual-mobile">';
-            html += `<div class="celtic-m-pos-3">${createMiniCardHtml(tCards[3], "4.理想")}</div>`;
-            html += `<div class="celtic-m-pos-1">${createMiniCardHtml(tCards[1], "2.過去")}</div>`;
-            html += `<div class="celtic-m-pos-0">${createMiniCardHtml(tCards[0], "1.現狀")}</div>`;
-            html += `<div class="celtic-m-pos-2">${createMiniCardHtml(tCards[2], "3.未來")}</div>`;
-            html += `<div class="celtic-m-pos-4">${createMiniCardHtml(tCards[4], "5.根源")}</div>`;
+            html += '<div style="font-size:12px; color:#fbbf24; font-weight:bold;">── 符文總覽 ──</div>';
+            html += '<div class="grid-5-mobile">';
+            html += `<div class="c-m-1">${createMiniRuneHtml(runes[3], "4.指引")}</div>`;
+            html += `<div class="c-m-2">${createMiniRuneHtml(runes[1], "2.過去")}</div>`;
+            html += `<div class="c-m-3">${createMiniRuneHtml(runes[0], "1.核心")}</div>`;
+            html += `<div class="c-m-4">${createMiniRuneHtml(runes[2], "3.未來")}</div>`;
+            html += `<div class="c-m-5">${createMiniRuneHtml(runes[4], "5.根源")}</div>`;
             html += '</div></div>';
 
-            html += '<div style="font-size:13px; color:#38bdf8; font-weight:bold; margin-top:6px;">── 詳細牌意與解析 ──</div>';
+            html += '<div style="font-size:13px; color:#fbbf24; font-weight:bold; margin-top:6px;">── 詳細符文解析 ──</div>';
 
-            // 上方：理想目標 (第4張) 置頂
-            html += '<div style="width:100%; max-width:395px; margin-bottom:4px;">';
-            html += createCardBoxHtml(tCards[3], getLenoBatch(lenoPool, extCount), titles[3]);
-            html += '</div>';
-
-            // 中間層：左邊過去影響 (第2張)、中間現狀核心 (第1張)、右邊未來走向 (第3張) 並排
+            // 上方指引
+            html += '<div style="width:100%; max-width:395px; margin-bottom:4px;">' + createRuneBoxHtml(runes[3], titles[3]) + '</div>';
+            // 中間三欄
             html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;">';
-            html += '<div class="branch-col" style="min-width: 395px;">';
-            html += createCardBoxHtml(tCards[1], getLenoBatch(lenoPool, extCount), titles[1]);
+            html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[1], titles[1]) + '</div>';
+            html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[0], titles[0]) + '</div>';
+            html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[2], titles[2]) + '</div>';
             html += '</div>';
-
-            html += '<div class="branch-col" style="min-width: 395px;">';
-            html += createCardBoxHtml(tCards[0], getLenoBatch(lenoPool, extCount), titles[0]);
-            html += '</div>';
-
-            html += '<div class="branch-col" style="min-width: 395px;">';
-            html += createCardBoxHtml(tCards[2], getLenoBatch(lenoPool, extCount), titles[2]);
-            html += '</div>';
-            html += '</div>';
-
-            // 下方：根源阻礙 (第5張) 置底
-            html += '<div style="width:100%; max-width:395px; margin-top:4px;">';
-            html += createCardBoxHtml(tCards[4], getLenoBatch(lenoPool, extCount), titles[4]);
-            html += '</div>';
+            // 下方根源
+            html += '<div style="width:100%; max-width:395px; margin-top:4px;">' + createRuneBoxHtml(runes[4], titles[4]) + '</div>';
 
             html += '<div class="action-btn-group">';
             html += '<button class="action-btn" onclick="captureSpread()">📸 儲存占卜截圖</button>';
             html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button>';
             html += '</div>';
+            html += '</div>';
+
+            container.innerHTML = html;
+        }
+
+        function drawNorns() {
+            let runes = getRandomRunes(3);
+            let container = document.getElementById("spreadArea");
+            container.classList.remove("is-wide");
+
+            let titles = ["【烏爾德·過去與業力】", "【薇兒丹蒂·現在與當下】", "【詩寇蒂·未來與潛能】"];
+            let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 📜 諾 倫 三 女 神 命 運 流 轉 】</h2>';
+            html += '<div style="display:flex; flex-direction:column; align-items:center; gap:14px; width:100%;">';
+            runes.forEach((r, idx) => {
+                html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>';
+            });
+            html += '</div>';
+            html += '<div class="action-btn-group">';
+            html += '<button class="action-btn" onclick="captureSpread()">📸 儲存占卜截圖</button>';
+            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button>';
             html += '</div>';
 
             container.innerHTML = html;
@@ -1117,20 +922,18 @@
 
         function drawFreeSpread() {
             let count = customCount;
-            let extCount = parseInt(document.getElementById("lenoCount").value) || 0;
-            let tCards = getRandomTarot(count);
-            let lenoPool = shuffle(LENORMAND_DECK);
+            let runes = getRandomRunes(count);
             let container = document.getElementById("spreadArea");
             container.classList.add("is-wide");
 
-            let html = `<h2 style="color:#f8fafc; margin-bottom:4px; text-align:center; width:100%;">【 🎲 無 牌 陣（ ${count} 張） 】</h2>`;
+            let html = `<h2 style="color:#f8fafc; margin-bottom:4px; text-align:center; width:100%;">【 🎲 自 由 符 文 陣（ ${count} 張） 】</h2>`;
             html += '<div style="display:flex; flex-direction:column; gap:16px; width:100%; align-items:center;">';
-            html += '<div style="font-size:13px; color:#38bdf8; font-weight:bold; margin-top:6px;">── 詳細牌意與解析 ──</div>';
+            html += '<div style="font-size:13px; color:#fbbf24; font-weight:bold; margin-top:6px;">── 詳細符文解析 ──</div>';
             
             html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;">';
-            tCards.forEach((card, idx) => {
+            runes.forEach((r, idx) => {
                 html += '<div class="branch-col" style="min-width: 395px;">';
-                html += createCardBoxHtml(card, getLenoBatch(lenoPool, extCount), `第 ${idx+1} 張牌`);
+                html += createRuneBoxHtml(r, `第 ${idx+1} 枚符文`);
                 html += '</div>';
             });
             html += '</div>';
