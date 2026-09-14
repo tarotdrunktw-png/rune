@@ -216,7 +216,7 @@
             text-align: center;
         }
 
-        /* 認證表單與選單卡片樣式 */
+        /* 認證表單卡片樣式 */
         .auth-card {
             background: rgba(21, 24, 33, 0.95);
             border: 1px solid #333a4f;
@@ -636,7 +636,7 @@
                         <div>1. 深呼吸三次，讓心靈沉澱</div>
                         <div>2. 閉上雙眼，在心中默念您的問題</div>
                         <div>3. 於上方選單挑選占卜法，按下「開始占卜」</div>
-                        <div style="color: #fbbf24; margin-top: 4px;">提醒：若要使用雲端紀錄與載入占卜圖面功能，請點擊右上角進行登入。</div>
+                        <div style="color: #fbbf24; margin-top: 4px;">4. 💡 提醒：若要使用雲端紀錄與載入占卜圖面功能，請點擊右上角進行登入。</div>
                     </div>
                 </div>
             </div>
@@ -659,7 +659,7 @@
     <!-- 歷史紀錄彈窗 -->
     <div id="historyModal" class="history-modal" onclick="closeHistoryModal(event)">
         <div class="history-content" onclick="event.stopPropagation()">
-            <div class="history-header" id="historyTitle">📂 個人占卜紀錄</div>
+            <div class="history-header" id="historyTitle">📂 個人雲端占卜圖面紀錄</div>
             <div id="historyBody" class="history-body"><div style="text-align:center; color:#94a3b8; padding:20px;">載入中...</div></div>
             <div style="display: flex; gap: 10px; margin-top: 12px;">
                 <button class="action-btn secondary" onclick="loadCloudHistory()">🔄 重新整理</button>
@@ -678,7 +678,7 @@
     </div>
 
     <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbzRlxUmlZjxKPVeWRlyiwd8agvArKnbj16U5R_2kWIAmXL4bs8u7V1pm7YQYJwNdr8B/exec";
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbzNoizlz_Hy9g2lRUIWRvb9htMHH-MYI9aKPtzwlT2FKatIU6u7kntIfHddCphKcyLN/exec";
 
         let customCount = 3;
         let currentEmail = localStorage.getItem('rune_email') || "";
@@ -733,7 +733,7 @@
             return CryptoJS.SHA256(password).toString();
         }
 
-        // 2. 登入後點選右上角，跳出選單畫面：回顧占卜紀錄、登入
+        // 2. 登入後點選右上角，跳出新的頁面選單：回顧占卜紀錄、登出
         function handleUserClick() {
             if (currentEmail) {
                 let container = document.getElementById("spreadArea");
@@ -743,7 +743,7 @@
                         <div class="auth-header">🔮 用戶選單</div>
                         <div style="text-align:center; color:#94a3b8; font-size:13px; margin-bottom:10px;">目前登入：${currentEmail}</div>
                         <button class="action-btn" onclick="loadCloudHistory(); resetToHome();">📂 回顧占卜紀錄</button>
-                        <button class="action-btn secondary" onclick="logout()" style="width:100%;">🚪 登出帳號</button>
+                        <button class="action-btn secondary" onclick="logout()" style="width:100%;">🚪 登出</button>
                         <button class="action-btn secondary" onclick="resetToHome()" style="width:100%; margin-top:5px;">返回主頁</button>
                     </div>
                 `;
@@ -764,13 +764,13 @@
             resetToHome();
         }
 
-        // 1. 登入畫面 (輸入信箱及密碼，下方有註冊選項與忘記密碼選項)
+        // 1. 登入頁面 (輸入信箱及密碼，下方有註冊與忘記密碼選項)
         function showLoginPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
             container.innerHTML = `
                 <div class="auth-card">
-                    <div class="auth-header">🔮 使用者登入</div>
+                    <div class="auth-header">🔮 帳號登入</div>
                     
                     <div class="auth-field">
                         <label>電子信箱：</label>
@@ -789,7 +789,7 @@
 
                     <div class="auth-switch-text">
                         <span onclick="showRegisterPage()">點此前往註冊</span>
-                        <span onclick="forgotPasswordFlow()">忘記密碼？</span>
+                        <span onclick="showForgotPasswordPage()">忘記密碼？</span>
                     </div>
                 </div>
             `;
@@ -837,7 +837,7 @@
             }
         }
 
-        // 1. 註冊畫面 (使用者名稱、註冊信箱、設定密碼、確認密碼)
+        // 1. 註冊頁面
         function showRegisterPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
@@ -923,7 +923,6 @@
                     localStorage.setItem('rune_username', currentUsername);
                     updateUserDisplay();
 
-                    // 4. 顯示註冊完成訊息畫面，2秒後跳回主頁面
                     let container = document.getElementById("spreadArea");
                     container.innerHTML = `
                         <div class="welcome-box">
@@ -934,7 +933,7 @@
                     `;
                     setTimeout(() => {
                         resetToHome();
-                    }, 5000);
+                    }, 2000);
                 } else {
                     alert("❌ 註冊失敗：" + (result.message || "該信箱可能已被註冊！"));
                 }
@@ -944,13 +943,41 @@
             }
         }
 
-        // 忘記密碼流程
-        async function forgotPasswordFlow() {
-            let targetEmail = prompt("請輸入您當時註冊的電子信箱：", "");
-            if (!targetEmail || !targetEmail.includes("@")) return;
+        // 1. 忘記密碼改為新頁面顯示
+        function showForgotPasswordPage() {
+            let container = document.getElementById("spreadArea");
+            container.classList.remove("is-wide");
+            container.innerHTML = `
+                <div class="auth-card">
+                    <div class="auth-header">🔑 找回密碼</div>
+                    
+                    <div class="auth-field">
+                        <label>使用者名稱：</label>
+                        <input type="text" id="forgotUsername" placeholder="請輸入您的名稱">
+                    </div>
 
-            let targetName = prompt("請輸入您的使用者名稱：", "");
-            if (!targetName) return;
+                    <div class="auth-field">
+                        <label>註冊電子信箱：</label>
+                        <input type="email" id="forgotEmail" placeholder="example@gmail.com">
+                    </div>
+
+                    <div class="auth-btn-group">
+                        <button class="action-btn" onclick="submitRequestReset()">送出驗證碼</button>
+                        <button class="action-btn secondary" onclick="showLoginPage()">返回登入</button>
+                    </div>
+                </div>
+            `;
+            document.querySelector(".workspace").scrollTop = 0;
+        }
+
+        async function submitRequestReset() {
+            let nameInput = document.getElementById("forgotUsername").value.trim();
+            let emailInput = document.getElementById("forgotEmail").value.trim();
+
+            if (!nameInput || !emailInput || !emailInput.includes("@")) {
+                alert("請填寫正確的使用者名稱與信箱！");
+                return;
+            }
 
             alert("⏳ 正在驗證並寄送 6 位數驗證碼至您的信箱，請稍候...");
 
@@ -958,38 +985,94 @@
                 let response = await fetch(GAS_URL, {
                     method: "POST",
                     headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify({ action: "request_reset", username: targetName.trim(), email: targetEmail.trim() })
+                    body: JSON.stringify({ action: "request_reset", username: nameInput, email: emailInput })
                 });
                 let result = await response.json();
 
                 if (result.status === "success") {
-                    let inputCode = prompt("📧 驗證碼已寄出！請檢查您的信箱，並在此輸入收到的 6 位數驗證碼：");
-                    if (!inputCode) return;
-
-                    let brandNewPass = prompt("請輸入您的「新密碼」：", "");
-                    if (!brandNewPass || !brandNewPass.trim()) return;
-
-                    let newPasswordHash = hashPassword(brandNewPass.trim());
-
-                    let verifyResponse = await fetch(GAS_URL, {
-                        method: "POST",
-                        headers: { "Content-Type": "text/plain;charset=utf-8" },
-                        body: JSON.stringify({ action: "verify_and_reset", username: targetName.trim(), email: targetEmail.trim(), code: inputCode.trim(), passwordHash: newPasswordHash })
-                    });
-                    let verifyResult = await verifyResponse.json();
-
-                    if (verifyResult.status === "success") {
-                        alert("✨ 驗證成功！密碼已重設完畢，現在您可以正常使用新密碼登入了。");
-                        showLoginPage();
-                    } else {
-                        alert("❌ 驗證失敗：驗證碼錯誤或帳號信箱不符。");
-                    }
+                    // 2. 顯示新的輸入設定密碼、確認密碼及六位數數字欄位的頁面，並提醒使用者去信箱收件
+                    showResetVerifyPage(nameInput, emailInput);
                 } else {
                     alert("❌ 找回失敗：" + (result.message || "查無此帳號或信箱不符。"));
                 }
             } catch(e) {
                 console.error(e);
-                alert("重設流程發生連線錯誤。");
+                alert("連線發生錯誤。");
+            }
+        }
+
+        // 2. 顯示輸入 6 位數驗證碼與新密碼的頁面
+        function showResetVerifyPage(username, email) {
+            let container = document.getElementById("spreadArea");
+            container.classList.remove("is-wide");
+            container.innerHTML = `
+                <div class="auth-card">
+                    <div class="auth-header">✉️ 請檢查您的電子信箱</div>
+                    <div style="font-size: 12px; color: #fbbf24; text-align: center; line-height: 1.6;">
+                        我們已將 6 位數驗證碼寄至 <b>${email}</b>。<br>請前往信箱收件並填寫下方欄位完成重設。
+                    </div>
+
+                    <div class="auth-field" style="margin-top: 5px;">
+                        <label>6 位數驗證碼：</label>
+                        <input type="text" id="verifyCode" placeholder="請輸入 6 位數數字" maxlength="6">
+                    </div>
+
+                    <div class="auth-field">
+                        <label>設定新密碼：</label>
+                        <input type="password" id="newPassword" placeholder="請輸入新密碼">
+                    </div>
+
+                    <div class="auth-field">
+                        <label>確認新密碼：</label>
+                        <input type="password" id="newConfirmPassword" placeholder="請再次輸入新密碼">
+                    </div>
+
+                    <div class="auth-btn-group">
+                        <button class="action-btn" onclick="submitVerifyAndReset('${username}', '${email}')">確認重設</button>
+                        <button class="action-btn secondary" onclick="showLoginPage()">返回登入</button>
+                    </div>
+                </div>
+            `;
+            document.querySelector(".workspace").scrollTop = 0;
+        }
+
+        async function submitVerifyAndReset(username, email) {
+            let codeInput = document.getElementById("verifyCode").value.trim();
+            let passInput = document.getElementById("newPassword").value.trim();
+            let confirmPassInput = document.getElementById("newConfirmPassword").value.trim();
+
+            if (!codeInput || codeInput.length !== 6) {
+                alert("請輸入有效的 6 位數驗證碼！");
+                return;
+            }
+            if (!passInput) {
+                alert("請輸入新密碼！");
+                return;
+            }
+            if (passInput !== confirmPassInput) {
+                alert("❌ 兩次輸入的密碼不一致！");
+                return;
+            }
+
+            let newPasswordHash = hashPassword(passInput);
+
+            try {
+                let response = await fetch(GAS_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({ action: "verify_and_reset", username: username, email: email, code: codeInput, passwordHash: newPasswordHash })
+                });
+                let result = await response.json();
+
+                if (result.status === "success") {
+                    alert("✨ 密碼重設成功！現在您可以直接使用新密碼登入了。");
+                    showLoginPage();
+                } else {
+                    alert("❌ 驗證失敗：驗證碼錯誤或已過期。");
+                }
+            } catch(e) {
+                console.error(e);
+                alert("連線發生錯誤。");
             }
         }
 
@@ -1042,7 +1125,7 @@
             });
         }
 
-        // 1. 雲端加密存圖 (修正傳送 email 參數，讓 DB 能順利寫入)
+        // 雲端加密存圖
         async function saveSpreadAsImage() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
@@ -1108,10 +1191,10 @@
             }
         }
 
-        // 3. 載入個人雲端歷史紀錄
+        // 載入個人雲端歷史紀錄
         async function loadCloudHistory() {
             if (!currentEmail || !currentPassword) {
-                let wantLogin = confirm("💡 檢視紀錄需要先登入您的帳號。\n\n是否立即前往登入頁面？");
+                let wantLogin = confirm("💡 檢視雲端紀錄需要先登入您的帳號。\n\n是否立即前往登入頁面？");
                 if (wantLogin) {
                     showLoginPage();
                 }
@@ -1131,7 +1214,7 @@
                 let html = "";
                 
                 if (data.length === 0) {
-                    body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">尚無您的紀錄</div>';
+                    body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">尚無您的雲端紀錄</div>';
                     return;
                 }
 
