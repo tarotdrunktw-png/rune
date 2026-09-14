@@ -218,7 +218,7 @@
             text-align: center;
         }
 
-        /* 註冊 / 登入頁面表單樣式 */
+        /* 認證表單卡片樣式 */
         .auth-card {
             background: rgba(21, 24, 33, 0.95);
             border: 1px solid #333a4f;
@@ -265,6 +265,18 @@
             display: flex;
             gap: 10px;
             margin-top: 10px;
+        }
+        .auth-switch-text {
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+        .auth-switch-text span {
+            color: #fbbf24;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: underline;
         }
 
         /* 盧恩詳細卡片樣式：寬度 395px */
@@ -591,7 +603,7 @@
         <div class="control-panel">
             <div class="title">
                 <span>🍸 醉酒塔羅 🔮 盧恩符文占卜系統</span>
-                <span id="currentUserDisplay" style="font-size: 12px; color: #fbbf24; cursor: pointer;" onclick="handleUserClick()" title="點擊檢視帳號狀態或登出">👤 未登入 (點此註冊/登入)</span>
+                <span id="currentUserDisplay" style="font-size: 12px; color: #fbbf24; cursor: pointer;" onclick="handleUserClick()" title="點擊檢視帳號狀態或登出">👤 未登入 (點此登入)</span>
             </div>
             <div class="control-row">
                 <div class="config-box">
@@ -624,7 +636,7 @@
                         <div>1. 深呼吸三次，讓心靈沉澱</div>
                         <div>2. 閉上雙眼，在心中默念您的問題</div>
                         <div>3. 於上方選單挑選占卜法，按下「開始占卜」</div>
-                        <div style="color: #fbbf24; margin-top: 4px;">4. 💡 提醒：若要使用雲端紀錄與載入占卜圖面功能，請點擊右上角進行註冊與登入。</div>
+                        <div style="color: #fbbf24; margin-top: 4px;">4. 💡 提醒：若要使用雲端紀錄與載入占卜圖面功能，請點擊右上角進行登入。</div>
                     </div>
                 </div>
             </div>
@@ -666,11 +678,12 @@
     </div>
 
     <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbw3O8EgLf8aqV6JPFJf48G66P8xPmph5iBzuWX9ggU81OFC4-9kXIFXBThYBgb-zRku/exec";
+        const GAS_URL = "https://script.google.com/macros/s/請在此替換您的GAS網頁應用程式URL/exec";
 
         let customCount = 3;
-        let currentUsername = localStorage.getItem('rune_username') || "";
+        let currentEmail = localStorage.getItem('rune_email') || "";
         let currentPassword = localStorage.getItem('rune_password') || "";
+        let currentUsername = localStorage.getItem('rune_username') || "";
 
         window.onload = function() {
             initCounter();
@@ -708,10 +721,11 @@
 
         function updateUserDisplay() {
             let display = document.getElementById("currentUserDisplay");
-            if (currentUsername) {
-                display.textContent = `👤 [ ${currentUsername} ] (點擊登出)`;
+            if (currentEmail) {
+                let displayName = currentUsername ? currentUsername : currentEmail;
+                display.textContent = `👤 [ ${displayName} ] (點擊登出)`;
             } else {
-                display.textContent = `👤 未登入 (點此註冊/登入)`;
+                display.textContent = `👤 未登入 (點此登入)`;
             }
         }
 
@@ -721,70 +735,148 @@
 
         // 點擊右上角狀態欄處理
         function handleUserClick() {
-            if (currentUsername) {
-                let doLogout = confirm(`目前登入身分：【 ${currentUsername} 】\n是否要執行登出？`);
+            if (currentEmail) {
+                let doLogout = confirm(`目前登入帳號：【 ${currentEmail} 】\n是否要執行登出？`);
                 if (doLogout) {
                     logout();
                 }
             } else {
-                showAuthPage();
+                showLoginPage();
             }
         }
 
         // 登出功能
         function logout() {
-            currentUsername = "";
+            currentEmail = "";
             currentPassword = "";
-            localStorage.removeItem('rune_username');
+            currentUsername = "";
+            localStorage.removeItem('rune_email');
             localStorage.removeItem('rune_password');
+            localStorage.removeItem('rune_username');
             updateUserDisplay();
-            alert("✨ 您已成功登出。");
             resetToHome();
         }
 
-        // 呈現註冊/登入表單頁面（取代跳出視窗）
-        function showAuthPage() {
+        // 1. 顯示「登入」頁面（改用信箱與密碼登入，下方有註冊選項）
+        function showLoginPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
             container.innerHTML = `
                 <div class="auth-card">
-                    <div class="auth-header">🔮 雲端身分註冊 / 登入</div>
+                    <div class="auth-header">🔮 占卜師雲端登入</div>
                     
                     <div class="auth-field">
-                        <label>使用者名稱：</label>
-                        <input type="text" id="authUsername" placeholder="請輸入您的名稱" value="${currentUsername}">
+                        <label>電子信箱：</label>
+                        <input type="email" id="loginEmail" placeholder="example@gmail.com" value="${currentEmail}">
                     </div>
 
                     <div class="auth-field">
-                        <label>註冊信箱：</label>
-                        <input type="email" id="authEmail" placeholder="example@gmail.com">
-                    </div>
-
-                    <div class="auth-field">
-                        <label>設定密碼：</label>
-                        <input type="password" id="authPassword" placeholder="請輸入密碼（顯示為星號）">
-                    </div>
-
-                    <div class="auth-field">
-                        <label>確認密碼：</label>
-                        <input type="password" id="authConfirmPassword" placeholder="請再次輸入密碼">
+                        <label>密碼：</label>
+                        <input type="password" id="loginPassword" placeholder="請輸入密碼">
                     </div>
 
                     <div class="auth-btn-group">
-                        <button class="action-btn" onclick="submitAuth()">確認送出</button>
-                        <button class="action-btn secondary" onclick="resetToHome()">取消返回</button>
+                        <button class="action-btn" onclick="submitLogin()">登入</button>
+                        <button class="action-btn secondary" onclick="resetToHome()">取消</button>
+                    </div>
+
+                    <div class="auth-switch-text">
+                        還沒有帳號？ <span onclick="showRegisterPage()">點此前往註冊</span>
                     </div>
                 </div>
             `;
             document.querySelector(".workspace").scrollTop = 0;
         }
 
-        // 提交註冊/登入驗證
-        async function submitAuth() {
-            let nameInput = document.getElementById("authUsername").value.trim();
-            let emailInput = document.getElementById("authEmail").value.trim();
-            let passInput = document.getElementById("authPassword").value.trim();
-            let confirmPassInput = document.getElementById("authConfirmPassword").value.trim();
+        // 提交登入驗證
+        async function submitLogin() {
+            let emailInput = document.getElementById("loginEmail").value.trim();
+            let passInput = document.getElementById("loginPassword").value.trim();
+
+            if (!emailInput || !emailInput.includes("@")) {
+                alert("請輸入有效的電子信箱！");
+                return;
+            }
+            if (!passInput) {
+                alert("請輸入密碼！");
+                return;
+            }
+
+            let passwordHash = hashPassword(passInput);
+
+            try {
+                let response = await fetch(GAS_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({ action: "check_login", email: emailInput, passwordHash: passwordHash })
+                });
+                let result = await response.json();
+
+                if (result.status === "success") {
+                    currentEmail = emailInput;
+                    currentPassword = passInput;
+                    currentUsername = result.username || "";
+                    localStorage.setItem('rune_email', currentEmail);
+                    localStorage.setItem('rune_password', currentPassword);
+                    localStorage.setItem('rune_username', currentUsername);
+                    updateUserDisplay();
+                    resetToHome();
+                } else {
+                    alert("❌ 登入失敗：信箱不存在或密碼錯誤！");
+                }
+            } catch(e) {
+                console.error(e);
+                alert("連線發生錯誤，請檢查網路或 GAS 網址。");
+            }
+        }
+
+        // 1. 顯示「註冊」頁面（包含使用者名稱、註冊信箱、設定密碼、確認密碼）
+        function showRegisterPage() {
+            let container = document.getElementById("spreadArea");
+            container.classList.remove("is-wide");
+            container.innerHTML = `
+                <div class="auth-card">
+                    <div class="auth-header">🔮 占卜師雲端帳號註冊</div>
+                    
+                    <div class="auth-field">
+                        <label>使用者名稱：</label>
+                        <input type="text" id="regUsername" placeholder="請輸入您的暱稱或名稱">
+                    </div>
+
+                    <div class="auth-field">
+                        <label>註冊信箱：</label>
+                        <input type="email" id="regEmail" placeholder="example@gmail.com">
+                    </div>
+
+                    <div class="auth-field">
+                        <label>設定密碼：</label>
+                        <input type="password" id="regPassword" placeholder="請輸入密碼（顯示為星號）">
+                    </div>
+
+                    <div class="auth-field">
+                        <label>確認密碼：</label>
+                        <input type="password" id="regConfirmPassword" placeholder="請再次輸入密碼">
+                    </div>
+
+                    <div class="auth-btn-group">
+                        <button class="action-btn" onclick="submitRegister()">註冊並同步</button>
+                        <button class="action-btn secondary" onclick="showLoginPage()">返回登入</button>
+                    </div>
+
+                    <div class="auth-switch-text">
+                        已經有帳號了？ <span onclick="showLoginPage()">點此直接登入</span>
+                    </div>
+                </div>
+            `;
+            document.querySelector(".workspace").scrollTop = 0;
+        }
+
+        // 3 & 4. 提交註冊：強制同步寫入 DB，並顯示成功訊息與倒數跳轉回主畫面
+        async function submitRegister() {
+            let nameInput = document.getElementById("regUsername").value.trim();
+            let emailInput = document.getElementById("regEmail").value.trim();
+            let passInput = document.getElementById("regPassword").value.trim();
+            let confirmPassInput = document.getElementById("regConfirmPassword").value.trim();
 
             if (!nameInput) {
                 alert("請輸入使用者名稱！");
@@ -800,35 +892,45 @@
             }
             if (passInput !== confirmPassInput) {
                 alert("❌ 兩次輸入的密碼不一致，請重新檢查！");
-                document.getElementById("authPassword").value = "";
-                document.getElementById("authConfirmPassword").value = "";
+                document.getElementById("regPassword").value = "";
+                document.getElementById("regConfirmPassword").value = "";
                 return;
             }
 
             let passwordHash = hashPassword(passInput);
-            alert("🔍 正在向雲端驗證身分...");
 
             try {
+                // 強制同步寫入資料庫 (action: register)
                 let response = await fetch(GAS_URL, {
                     method: "POST",
                     headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify({ action: "check", username: nameInput, passwordHash: passwordHash, email: emailInput })
+                    body: JSON.stringify({ action: "register", username: nameInput, email: emailInput, passwordHash: passwordHash })
                 });
                 let result = await response.json();
 
                 if (result.status === "success") {
-                    if (result.exists && !result.passwordMatch) {
-                        alert(`❌ 名稱「${nameInput}」已被其他人註冊，且密碼錯誤！`);
-                        return;
-                    } else {
-                        currentUsername = nameInput;
-                        currentPassword = passInput;
-                        localStorage.setItem('rune_username', currentUsername);
-                        localStorage.setItem('rune_password', currentPassword);
-                        updateUserDisplay();
-                        alert(`✨ 成功！已成功登入/綁定「${currentUsername}」的個人檔案室。`);
+                    currentEmail = emailInput;
+                    currentPassword = passInput;
+                    currentUsername = nameInput;
+                    localStorage.setItem('rune_email', currentEmail);
+                    localStorage.setItem('rune_password', currentPassword);
+                    localStorage.setItem('rune_username', currentUsername);
+                    updateUserDisplay();
+
+                    // 4. 顯示註冊完成，即將跳回主頁面的訊息畫面
+                    let container = document.getElementById("spreadArea");
+                    container.innerHTML = `
+                        <div class="welcome-box">
+                            <div class="welcome-title" style="color: #2ecc71;">✨ 註冊完成！ ✨</div>
+                            <div class="welcome-subtitle">帳號與資料已成功同步至雲端資料庫。</div>
+                            <div style="font-size: 14px; color: #fbbf24;">即將跳回主頁面...</div>
+                        </div>
+                    `;
+                    setTimeout(() => {
                         resetToHome();
-                    }
+                    }, 2000);
+                } else {
+                    alert("❌ 註冊失敗：" + (result.message || "該信箱可能已被註冊！"));
                 }
             } catch(e) {
                 console.error(e);
@@ -886,12 +988,12 @@
             });
         }
 
-        // 2. 雲端加密存圖功能
+        // 2. 雲端加密存圖功能 (取消所有雲端確認的彈出訊息)
         async function saveSpreadAsImage() {
-            if (!currentUsername || !currentPassword) {
-                let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先註冊或登入身分才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入/註冊頁面？");
+            if (!currentEmail || !currentPassword) {
+                let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
                 if (wantLogin) {
-                    showAuthPage();
+                    showLoginPage();
                 }
                 return;
             }
@@ -934,50 +1036,48 @@
 
                 let payload = { 
                     action: "save", 
-                    username: currentUsername, 
+                    email: currentEmail, 
                     spreadName: spreadTitle, 
                     encryptedPayload: encryptedData,
                     passwordHash: passwordHash 
                 };
 
-                alert("⏳ 正在將占卜圖面加密同步至雲端...");
                 await fetch(GAS_URL, {
                     method: 'POST', 
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
                     body: JSON.stringify(payload)
                 });
-                alert("💾 占卜圖面已成功加密上傳至您的個人雲端檔案室！");
             } catch (err) {
                 if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
                 if(btnGroup) btnGroup.style.display = "flex";
                 console.error("雲端存圖失敗", err);
-                alert("雲端存圖失敗，請檢查網路連線或 GAS 網址");
             }
         }
 
-        // 3. 載入個人雲端歷史紀錄
+        // 3. 載入個人雲端歷史紀錄 (取消所有雲端確認彈窗)
         async function loadCloudHistory() {
-            if (!currentUsername || !currentPassword) {
-                let wantLogin = confirm("💡 檢視雲端紀錄需要先登入您的專屬身分。\n\n是否立即前往登入/註冊頁面？");
+            if (!currentEmail || !currentPassword) {
+                let wantLogin = confirm("💡 檢視雲端紀錄需要先登入您的帳號。\n\n是否立即前往登入頁面？");
                 if (wantLogin) {
-                    showAuthPage();
+                    showLoginPage();
                 }
                 return;
             }
 
             let body = document.getElementById("historyBody");
-            document.getElementById("historyTitle").textContent = `📂 [ ${currentUsername} ] 的雲端占卜圖面紀錄`;
-            body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">正在驗證並載入您的專屬紀錄...</div>';
+            let displayName = currentUsername ? currentUsername : currentEmail;
+            document.getElementById("historyTitle").textContent = `📂 [ ${displayName} ] 的雲端占卜圖面紀錄`;
+            body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">正在載入您的專屬紀錄...</div>';
             document.getElementById("historyModal").style.display = "flex";
 
             try {
                 let passwordHash = hashPassword(currentPassword);
-                let response = await fetch(`${GAS_URL}?user=${encodeURIComponent(currentUsername)}&passHash=${encodeURIComponent(passwordHash)}`);
+                let response = await fetch(`${GAS_URL}?email=${encodeURIComponent(currentEmail)}&passHash=${encodeURIComponent(passwordHash)}`);
                 let data = await response.json();
                 let html = "";
                 
                 if (data.length === 0) {
-                    body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">尚無您的雲端紀錄（或密碼不符）</div>';
+                    body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">尚無您的雲端紀錄</div>';
                     return;
                 }
 
@@ -1033,7 +1133,7 @@
                         <div>1. 深呼吸三次，讓心靈沉澱</div>
                         <div>2. 閉上雙眼，在心中默念您的問題</div>
                         <div>3. 於上方選單挑選占卜法，按下「開始占卜」</div>
-                        <div style="color: #fbbf24; margin-top: 4px;">4. 💡 提醒：若要使用雲端紀錄與載入占卜圖面功能，請點擊右上角進行註冊與登入。</div>
+                        <div style="color: #fbbf24; margin-top: 4px;">4. 💡 提醒：若要使用雲端紀錄與載入占卜圖面功能，請點擊右上角進行登入。</div>
                     </div>
                 </div>
             `;
@@ -1233,7 +1333,7 @@
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
 
-            let titles = ["【烏爾德·過去與業力】", "【薇兒丹蒂·現在與當下】", "【詩寇蒂·未來與潛能】"];
+            let titles = ["【烏爾德·過去與業力】", "【薇兒丹蒂·現在與當下】", "### 詩寇蒂·未來與潛能】"];
             let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 📜 諾 倫 三 女 神 命 運 流 轉 】</h2>';
             html += '<div style="display:flex; flex-direction:column; align-items:center; gap:14px; width:100%;">';
             runes.forEach((r, idx) => {
