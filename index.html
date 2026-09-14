@@ -733,7 +733,7 @@
             return CryptoJS.SHA256(password).toString();
         }
 
-        // 2. 登入後點選右上角，跳出新頁面：回顧占卜紀錄、登入(改為顯示狀態或直接登出選項)
+        // 登入後點選右上角，跳出新頁面選單：回顧占卜紀錄、登出
         function handleUserClick() {
             if (currentEmail) {
                 let container = document.getElementById("spreadArea");
@@ -764,7 +764,7 @@
             resetToHome();
         }
 
-        // 1. 登入畫面 (輸入信箱及密碼，下方有註冊與忘記密碼選項)
+        // 登入畫面 (輸入信箱及密碼，取消使用者名稱登入，下方新增註冊與忘記密碼選項)
         function showLoginPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
@@ -837,7 +837,7 @@
             }
         }
 
-        // 1. 註冊畫面 (使用者名稱、註冊信箱、設定密碼、確認密碼)
+        // 註冊畫面 (使用者名稱、註冊信箱、設定密碼、確認密碼)
         function showRegisterPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
@@ -878,7 +878,7 @@
             document.querySelector(".workspace").scrollTop = 0;
         }
 
-        // 3 & 4. 註冊並強制同步寫入 DB，顯示成功訊息並跳回主頁面
+        // 註冊並強制同步寫入 DB，顯示成功訊息並跳回主頁面
         async function submitRegister() {
             let nameInput = document.getElementById("regUsername").value.trim();
             let emailInput = document.getElementById("regEmail").value.trim();
@@ -923,7 +923,7 @@
                     localStorage.setItem('rune_username', currentUsername);
                     updateUserDisplay();
 
-                    // 4. 顯示註冊完成訊息畫面，2秒後跳回主頁面
+                    // 顯示註冊完成訊息畫面，2秒後跳回主頁面
                     let container = document.getElementById("spreadArea");
                     container.innerHTML = `
                         <div class="welcome-box">
@@ -944,7 +944,7 @@
             }
         }
 
-        // 忘記密碼流程
+        // 忘記密碼頁面
         function showForgotPasswordPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
@@ -1122,7 +1122,7 @@
             });
         }
 
-        // 1. 雲端加密存圖 (修正傳送 email 參數，讓 DB 能順利寫入)
+        // 雲端加密存圖 (無任何彈出視窗提示)
         async function saveSpreadAsImage() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
@@ -1183,7 +1183,7 @@
                 });
                 let jsonRes = await res.json();
                 if (jsonRes.status === "success") {
-                    // 無任何彈出訊息，背景安靜存檔成功
+                    // 背景靜默存檔成功，無彈窗
                 }
             } catch (err) {
                 if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
@@ -1192,7 +1192,7 @@
             }
         }
 
-        // 3. 載入個人雲端歷史紀錄
+        // 載入個人雲端歷史紀錄
         async function loadCloudHistory() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 檢視雲端紀錄需要先登入您的帳號。\n\n是否立即前往登入頁面？");
@@ -1302,7 +1302,7 @@
             {name: "伊薩 (Isa)", symbol: "ᛁ", element: "冰封與沉澱", upright: "冰、停滯、寒冷、自我保護與沉澱冷靜", reversed: "", hasReversed: false},
             {name: "耶拉 (Jera)", symbol: "ᛃ", element: "收穫與循環", upright: "收穫、循環、因果報應與時間的累積", reversed: "", hasReversed: false},
             {name: "艾奧斯 (Eihwaz)", symbol: "ᛇ", element: "防禦與轉化", upright: "紫杉、防禦、韌性、耐力與轉化", reversed: "", hasReversed: false},
-            {name: "佩特羅 (Perthro)", symbol: "ᛈ", element: "命運與神祕", upright: "命運轉機、意外之財、直覺靈感、探索祕密", reversed: "賭徒心態、運勢低落、秘密曝光、幻滅", hasReversed: true},
+            {name: "佩特羅 (Perthro)", symbol: "ᛈ", element: "命運與神祕", upright: "命運轉機、意外之財、直覺靈感,探索祕密", reversed: "賭徒心態、運勢低落、秘密曝光、幻滅", hasReversed: true},
             {name: "艾吉茲 (Algiz)", symbol: "ᛉ", element: "守護與庇佑", upright: "神聖守護、逢凶化吉、直覺預警、貴人相助", reversed: "遭人背叛、失去防護、盲目信任、陷入危機", hasReversed: true},
             {name: "索威羅 (Sowilo)", symbol: "ᛋ", element: "太陽與勝利", upright: "太陽、勝利、光明、能量與成功", reversed: "", hasReversed: false},
             {name: "提爾 (Tiwaz)", symbol: "ᛏ", element: "公義與勇氣", upright: "正義勝利、勇敢擔當、專業領導、理性決斷", reversed: "遭遇不公、失去動力、懦弱退縮、衝突戰敗", hasReversed: true},
