@@ -733,7 +733,7 @@
             return CryptoJS.SHA256(password).toString();
         }
 
-        // 2. 登入後點選右上角，跳出新的頁面選單：回顧占卜紀錄、登出
+        // 2. 登入後點選右上角，跳出新頁面：回顧占卜紀錄、登入(改為顯示狀態或直接登出選項)
         function handleUserClick() {
             if (currentEmail) {
                 let container = document.getElementById("spreadArea");
@@ -764,14 +764,14 @@
             resetToHome();
         }
 
-        // 1. 登入頁面 (輸入信箱及密碼，下方有註冊與忘記密碼選項)
+        // 1. 登入畫面 (輸入信箱及密碼，下方有註冊與忘記密碼選項)
         function showLoginPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
             container.innerHTML = `
                 <div class="auth-card">
                     <div class="auth-header">🔮 帳號登入</div>
-                    
+
                     <div class="auth-field">
                         <label>電子信箱：</label>
                         <input type="email" id="loginEmail" placeholder="example@gmail.com" value="${currentEmail}">
@@ -837,14 +837,14 @@
             }
         }
 
-        // 1. 註冊頁面
+        // 1. 註冊畫面 (使用者名稱、註冊信箱、設定密碼、確認密碼)
         function showRegisterPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
             container.innerHTML = `
                 <div class="auth-card">
                     <div class="auth-header">🔮 帳號註冊</div>
-                    
+
                     <div class="auth-field">
                         <label>使用者名稱：</label>
                         <input type="text" id="regUsername" placeholder="請輸入您的暱稱或名稱">
@@ -923,6 +923,7 @@
                     localStorage.setItem('rune_username', currentUsername);
                     updateUserDisplay();
 
+                    // 4. 顯示註冊完成訊息畫面，2秒後跳回主頁面
                     let container = document.getElementById("spreadArea");
                     container.innerHTML = `
                         <div class="welcome-box">
@@ -943,14 +944,14 @@
             }
         }
 
-        // 1. 忘記密碼改為新頁面顯示
+        // 忘記密碼流程
         function showForgotPasswordPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
             container.innerHTML = `
                 <div class="auth-card">
                     <div class="auth-header">🔑 找回密碼</div>
-                    
+
                     <div class="auth-field">
                         <label>使用者名稱：</label>
                         <input type="text" id="forgotUsername" placeholder="請輸入您的名稱">
@@ -979,8 +980,6 @@
                 return;
             }
 
-            alert("⏳ 正在驗證並寄送 6 位數驗證碼至您的信箱，請稍候...");
-
             try {
                 let response = await fetch(GAS_URL, {
                     method: "POST",
@@ -990,7 +989,6 @@
                 let result = await response.json();
 
                 if (result.status === "success") {
-                    // 2. 顯示新的輸入設定密碼、確認密碼及六位數數字欄位的頁面，並提醒使用者去信箱收件
                     showResetVerifyPage(nameInput, emailInput);
                 } else {
                     alert("❌ 找回失敗：" + (result.message || "查無此帳號或信箱不符。"));
@@ -1001,7 +999,6 @@
             }
         }
 
-        // 2. 顯示輸入 6 位數驗證碼與新密碼的頁面
         function showResetVerifyPage(username, email) {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
@@ -1108,7 +1105,7 @@
 
                 let dataUrl = canvas.toDataURL("image/png");
                 let isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
-                
+
                 if (isMobile) {
                     document.getElementById("screenshotResultImg").src = dataUrl;
                     document.getElementById("screenshotModal").style.display = "flex";
@@ -1125,7 +1122,7 @@
             });
         }
 
-        // 雲端加密存圖
+        // 1. 雲端加密存圖 (修正傳送 email 參數，讓 DB 能順利寫入)
         async function saveSpreadAsImage() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
@@ -1167,7 +1164,7 @@
                 let base64Image = canvas.toDataURL("image/jpeg", 0.7);
                 let spreadTitle = document.querySelector("#spreadArea h2") ? document.querySelector("#spreadArea h2").textContent.trim() : "盧恩占卜紀錄";
                 let rawData = JSON.stringify({ spreadName: spreadTitle, image: base64Image });
-                
+
                 let encryptedData = CryptoJS.AES.encrypt(rawData, currentPassword).toString();
                 let passwordHash = hashPassword(currentPassword);
 
@@ -1179,11 +1176,15 @@
                     passwordHash: passwordHash 
                 };
 
-                await fetch(GAS_URL, {
+                let res = await fetch(GAS_URL, {
                     method: 'POST', 
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
                     body: JSON.stringify(payload)
                 });
+                let jsonRes = await res.json();
+                if (jsonRes.status === "success") {
+                    // 無任何彈出訊息，背景安靜存檔成功
+                }
             } catch (err) {
                 if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
                 if(btnGroup) btnGroup.style.display = "flex";
@@ -1191,7 +1192,7 @@
             }
         }
 
-        // 載入個人雲端歷史紀錄
+        // 3. 載入個人雲端歷史紀錄
         async function loadCloudHistory() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 檢視雲端紀錄需要先登入您的帳號。\n\n是否立即前往登入頁面？");
@@ -1212,7 +1213,7 @@
                 let response = await fetch(`${GAS_URL}?email=${encodeURIComponent(currentEmail)}&passHash=${encodeURIComponent(passwordHash)}`);
                 let data = await response.json();
                 let html = "";
-                
+
                 if (data.length === 0) {
                     body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">尚無您的雲端紀錄</div>';
                     return;
@@ -1222,7 +1223,7 @@
                     try {
                         let bytes = CryptoJS.AES.decrypt(item.encryptedPayload, currentPassword);
                         let decrypted = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-                        
+
                         html += `
                             <div class="history-item" onclick="showPreviewImage('${decrypted.image}')">
                                 <div>
@@ -1346,7 +1347,7 @@
         function createRuneBoxHtml(rune, posTitle) {
             let badgeClass = !rune.hasReversed ? "bg-symmetric" : (rune.isReversed ? "bg-rev" : "bg-up");
             let symbolClass = rune.isReversed ? "rune-symbol-box reversed-rune" : "rune-symbol-box";
-            
+
             let html = '<div class="card-box">';
             if (posTitle) {
                 html += '<div class="banner">' + posTitle + '</div>';
@@ -1496,7 +1497,7 @@
             let html = `<h2 style="color:#f8fafc; margin-bottom:4px; text-align:center; width:100%;">【 🎲 自 由 符 文 陣（ ${count} 張） 】</h2>`;
             html += '<div style="display:flex; flex-direction:column; gap:16px; width:100%; align-items:center;">';
             html += '<div style="font-size:13px; color:#fbbf24; font-weight:bold; margin-top:6px;">── 詳細符文解析 ──</div>';
-            
+
             html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;">';
             runes.forEach((r, idx) => {
                 html += '<div class="branch-col" style="min-width: 395px;">';
