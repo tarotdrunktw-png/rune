@@ -655,7 +655,7 @@
     </div>
 
     <script>
-        // ⚠️ 請記得替換為您剛剛複製出來結尾為 /exec 的新網址！
+        // ⚠️ 請記得替換為您正確的 Google Apps Script 網頁應用程式 URL
         const GAS_URL = "https://script.google.com/macros/s/AKfycbzjbp5kysXhYb8SXWfrbdA75sc-GaVh1dcPE2cdO8ILvFG3fRNVpocwCHImVPWnj-nFhQ/exec";
 
         let customCount = 3;
@@ -668,21 +668,18 @@
             updateUserDisplay();
         };
 
-        // 核心突破：完美繞過 GAS 302 跳轉丟失資料的通訊幫手函式
+        // 核心突破 1：使用 text/plain 純文字傳送，避免 URL 編碼把超長字串搞壞
         async function sendGasRequest(payload) {
-            const formData = new URLSearchParams();
-            formData.append("payload", JSON.stringify(payload));
-            
             try {
                 let res = await fetch(GAS_URL, {
                     method: "POST",
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: formData.toString()
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload)
                 });
                 return await res.json();
             } catch (err) {
                 console.error("連線錯誤：", err);
-                return { status: "error", message: "網路連線異常，請稍後再試。" };
+                return { status: "error", message: "網路連線異常或資料量過大，請稍後再試。" };
             }
         }
 
@@ -1041,13 +1038,22 @@
             });
         }
 
-        // 背景雲端存圖 (無彈窗，成功寫入)
+        // 核心突破 2：為雲端存檔專屬「瘦身」，並加入「占卜問題」彈窗紀錄
         async function saveSpreadAsImage() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
                 if (wantLogin) { showLoginPage(); }
                 return;
             }
+
+            // 自動取得當下時間做為預設值
+            let now = new Date();
+            let defaultTimeStr = `${now.getFullYear()}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            // 跳出對話框讓使用者填寫問題
+            let userQuestion = prompt("📝 請輸入此次占卜的問題（選填）：\n(若不填寫將預設為當下時間)", defaultTimeStr);
+            if (userQuestion === null) return; // 按下取消則中斷
+            let finalQuestion = userQuestion.trim() === "" ? defaultTimeStr : userQuestion.trim();
 
             let target = document.getElementById("spreadArea");
             let btnGroup = document.querySelector(".action-btn-group");
@@ -1068,9 +1074,10 @@
             target.appendChild(watermarkContainer);
 
             try {
+                // 縮減雲端存檔解析度以符合資料庫極限
                 let canvas = await html2canvas(target, {
                     backgroundColor: "#0d0f14",
-                    scale: window.innerWidth < 768 ? 2.5 : 2, 
+                    scale: 0.8, 
                     useCORS: true,
                     logging: false,
                     windowHeight: totalHeight
@@ -1078,21 +1085,38 @@
                 target.removeChild(watermarkContainer);
                 if(btnGroup) btnGroup.style.display = "flex";
 
-                let base64Image = canvas.toDataURL("image/jpeg", 0.7);
+                // 壓縮畫質以進一步縮減字元數
+                let base64Image = canvas.toDataURL("image/jpeg", 0.5); 
                 let spreadTitle = document.querySelector("#spreadArea h2") ? document.querySelector("#spreadArea h2").textContent.trim() : "盧恩占卜紀錄";
-                let rawData = JSON.stringify({ spreadName: spreadTitle, image: base64Image });
+                
+                let rawData = JSON.stringify({ 
+                    spreadName: spreadTitle, 
+                    question: finalQuestion, // 將問題包裝進去
+                    image: base64Image 
+                });
 
                 let encryptedData = CryptoJS.AES.encrypt(rawData, currentPassword).toString();
                 let passwordHash = hashPassword(currentPassword);
 
-                let payload = { action: "save", email: currentEmail, spreadName: spreadTitle, encryptedPayload: encryptedData, passwordHash: passwordHash };
+                let payload = { 
+                    action: "save", 
+                    email: currentEmail, 
+                    spreadName: spreadTitle, 
+                    encryptedPayload: encryptedData, 
+                    passwordHash: passwordHash 
+                };
                 
-                await sendGasRequest(payload);
-                // 成功寫入不跳彈窗，保持流暢體驗
+                let result = await sendGasRequest(payload);
+                if (result.status === "success") {
+                    alert("💾 雲端存檔成功！");
+                } else {
+                    alert("❌ 雲端存檔失敗：" + (result.message || "發生未知錯誤"));
+                }
             } catch (err) {
                 if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
                 if(btnGroup) btnGroup.style.display = "flex";
                 console.error("雲端存圖失敗", err);
+                alert("❌ 截圖過程發生異常，無法存檔。");
             }
         }
 
@@ -1125,13 +1149,17 @@
                         let bytes = CryptoJS.AES.decrypt(item.encryptedPayload, currentPassword);
                         let decrypted = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
+                        // 判斷是否有紀錄問題，若有則顯示
+                        let questionHtml = decrypted.question ? `<div style="color:#e2e8f0; font-size:12px; margin-top:4px;">❓ 問題：${decrypted.question}</div>` : "";
+
                         html += `
                             <div class="history-item" onclick="showPreviewImage('${decrypted.image}')">
-                                <div>
+                                <div style="flex: 1; padding-right: 10px;">
                                     <div style="font-weight:bold; color:#fbbf24;">${decrypted.spreadName}</div>
-                                    <div style="color:#94a3b8; font-size:10px;">${new Date(item.date).toLocaleString()}</div>
+                                    ${questionHtml}
+                                    <div style="color:#94a3b8; font-size:10px; margin-top:4px;">🕒 ${new Date(item.date).toLocaleString()}</div>
                                 </div>
-                                <div style="color:#38bdf8;">👁️ 檢視圖面</div>
+                                <div style="color:#38bdf8; white-space:nowrap;">👁️ 檢視</div>
                             </div>
                         `;
                     } catch(e) { console.error("解密失敗", e); }
