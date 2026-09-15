@@ -678,7 +678,7 @@
     </div>
 
     <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbxSxojppSAAjc9fWMMo8gmSWvjFynMnu_I-nIGpfjhCG-zIqrJ-KlLadPFmB2edLyA-kg/exec";
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbw2fXxd0BQW04_VBvEpHuDpK8EQ6JhTnvAfaq8gg-ag0QOC0V4WRqqIUIUOWtyEhWpvuw/exec";
 
         let customCount = 3;
         let currentEmail = localStorage.getItem('rune_email') || "";
@@ -1051,7 +1051,6 @@
             }
         }
 
-        // 本機截圖
         function captureSpreadLocally() {
             let target = document.getElementById("spreadArea");
             let btnGroup = document.querySelector(".action-btn-group");
@@ -1100,7 +1099,7 @@
             });
         }
 
-        // 雲端加密存圖 (改用 GET 帶參數方式發送，完美避開 CORS 阻擋與資料寫入失敗)
+        // 雲端存圖 (透過 GET 帶參數方式發送，完美避開 CORS 預檢限制)
         async function saveSpreadAsImage() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
@@ -1146,7 +1145,6 @@
                 let encryptedData = CryptoJS.AES.encrypt(rawData, currentPassword).toString();
                 let passwordHash = hashPassword(currentPassword);
 
-                // 透過 GET 請求將資料送出，避開 CORS 預檢限制
                 let saveUrl = `${GAS_URL}?action=save&email=${encodeURIComponent(currentEmail)}&spreadName=${encodeURIComponent(spreadTitle)}&encryptedPayload=${encodeURIComponent(encryptedData)}&passwordHash=${encodeURIComponent(passwordHash)}`;
                 
                 await fetch(saveUrl, { method: 'GET', mode: 'no-cors' });
@@ -1157,7 +1155,6 @@
             }
         }
 
-        // 載入個人雲端歷史紀錄
         async function loadCloudHistory() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 檢視雲端紀錄需要先登入您的帳號。\n\n是否立即前往登入頁面？");
