@@ -2,7 +2,8 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- ⚠️ 關鍵修正：加入 maximum-scale=1.0, user-scalable=no 阻止手機版點擊輸入框時自動放大 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>醉酒塔羅 - 盧恩符文占卜系統</title>
     <link rel="icon" type="image/jpeg" href="tarot_drunk.jpg">
     <meta property="og:title" content="醉酒塔羅 - 盧恩符文占卜系統">
@@ -44,6 +45,8 @@
             color: var(--text-main);
             overflow: hidden;
             position: relative;
+            /* ⚠️ 防止 iOS 雙擊放大 */
+            touch-action: manipulation;
         }
 
         body::before {
@@ -200,7 +203,14 @@
         .auth-header { font-size: 16px; font-weight: bold; color: #fbbf24; text-align: center; margin-bottom: 4px; }
         .auth-field { display: flex; flex-direction: column; gap: 5px; text-align: left; }
         .auth-field label { font-size: 12px; color: #cbd5e1; font-weight: bold; }
-        .auth-field input { background: #0d0f14; border: 1px solid #475569; border-radius: 6px; padding: 10px; color: #fff; font-size: 14px; }
+        .auth-field input { 
+            background: #0d0f14; 
+            border: 1px solid #475569; 
+            border-radius: 6px; 
+            padding: 10px; 
+            color: #fff; 
+            font-size: 16px; /* ⚠️ 關鍵修正：iOS 規定 input 字體大小需 >= 16px 否則會強制放大 */
+        }
         .auth-field input:focus { border-color: #fbbf24; outline: none; }
         .auth-btn-group { display: flex; gap: 10px; margin-top: 10px; }
         .auth-switch-text { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 8px; display: flex; justify-content: space-between; }
@@ -609,7 +619,6 @@
             });
         }
 
-        // ⭐ 核心大升級：DOM 結構直存，徹底解決容量限制與圖片模糊問題 ⭐
         async function saveSpreadToCloud() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
@@ -624,45 +633,29 @@
             let finalQuestion = userQuestion.trim() === "" ? defaultTimeStr : userQuestion.trim();
 
             let target = document.getElementById("spreadArea");
-            
-            // 將底部按鈕暫時隱藏，因為我們不需要把按鈕也存起來
             let btnGroup = document.querySelector(".action-btn-group");
             if(btnGroup) btnGroup.style.display = "none";
 
-            // 直接擷取網頁的純 HTML 結構 (容量極小，完美解決 50000 字元限制)
             let htmlContent = target.innerHTML;
-
-            // 擷取完畢後馬上恢復顯示按鈕
             if(btnGroup) btnGroup.style.display = "flex";
 
             try {
                 let spreadTitle = document.querySelector("#spreadArea h2") ? document.querySelector("#spreadArea h2").textContent.trim() : "盧恩占卜紀錄";
-                
-                // 放棄肥大的 Base64 圖片，改存 HTML，體積縮小99%，而且回顧時 100% 清晰！
-                let rawData = JSON.stringify({ 
-                    spreadName: spreadTitle, 
-                    question: finalQuestion, 
-                    html: htmlContent // 原生網頁結構
-                });
-
+                let rawData = JSON.stringify({ spreadName: spreadTitle, question: finalQuestion, html: htmlContent });
                 let encryptedData = CryptoJS.AES.encrypt(rawData, currentPassword).toString();
                 let passwordHash = hashPassword(currentPassword);
 
                 let payload = { action: "save", email: currentEmail, spreadName: spreadTitle, encryptedPayload: encryptedData, passwordHash: passwordHash };
                 
                 let result = await sendGasRequest(payload);
-                if (result.status === "success") { 
-                    alert("💾 雲端存檔成功！"); 
-                } else { 
-                    alert("❌ 雲端存檔失敗：" + (result.message || "發生未知錯誤")); 
-                }
+                if (result.status === "success") { alert("💾 雲端存檔成功！"); } 
+                else { alert("❌ 雲端存檔失敗：" + (result.message || "發生未知錯誤")); }
             } catch (err) {
                 console.error("雲端存檔失敗", err);
                 alert("❌ 存檔發生異常。");
             }
         }
 
-        // 讀取紀錄並快取於前端
         async function loadCloudHistory() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 檢視雲端紀錄需要先登入您的帳號。\n\n是否立即前往登入頁面？");
@@ -682,7 +675,7 @@
                 let data = await response.json();
                 let html = "";
                 
-                window.cachedHistoryData = []; // 重置快取
+                window.cachedHistoryData = []; 
 
                 if (data.length === 0) {
                     body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">尚無您的雲端紀錄</div>';
@@ -694,16 +687,10 @@
                         let bytes = CryptoJS.AES.decrypt(item.encryptedPayload, currentPassword);
                         let decrypted = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
                         let questionHtml = decrypted.question ? `<div style="color:#e2e8f0; font-size:12px; margin-top:4px;">❓ 問題：${decrypted.question}</div>` : "";
-                        
                         let dateStr = new Date(item.date).toLocaleString();
 
-                        // 寫入全域快取陣列
                         window.cachedHistoryData.push({
-                            dateStr: dateStr,
-                            spreadName: decrypted.spreadName,
-                            question: decrypted.question,
-                            html: decrypted.html || "",
-                            image: decrypted.image || "" // 兼容舊版圖片
+                            dateStr: dateStr, spreadName: decrypted.spreadName, question: decrypted.question, html: decrypted.html || "", image: decrypted.image || ""
                         });
 
                         html += `
@@ -725,7 +712,6 @@
             }
         }
 
-        // 刪除多選紀錄
         async function deleteSelectedHistory() {
             let checkboxes = document.querySelectorAll(".history-checkbox:checked");
             if (checkboxes.length === 0) { alert("請先勾選要刪除的紀錄！"); return; }
@@ -741,21 +727,18 @@
             } else { alert("❌ 刪除失敗：" + (result.message || "發生未知錯誤")); }
         }
 
-        // ⭐ 完美還原：從 DOM 結構直接渲染出最高畫質的占卜結果 ⭐
         function showHistoryItem(index) {
             let item = window.cachedHistoryData[index];
-            document.getElementById("historyModal").style.display = "none"; // 關閉歷史清單
+            document.getElementById("historyModal").style.display = "none"; 
             
-            // 向下相容：如果是以前存的舊版「圖片紀錄」，還是用預覽彈窗顯示
             if (item.image && !item.html) {
                 document.getElementById("previewImg").src = item.image;
                 document.getElementById("previewModal").style.display = "flex";
                 return;
             }
 
-            // 新版直接在主畫面重建牌陣 DOM
             let container = document.getElementById("spreadArea");
-            container.classList.add("is-wide"); // 給予充足寬度排版
+            container.classList.add("is-wide"); 
             
             container.innerHTML = `
                 <div style="width:100%; text-align:center; margin-bottom: 20px; background: rgba(30, 34, 48, 0.8); padding: 15px; border-radius: 8px; border: 1px solid #33394d;">
