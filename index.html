@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>醉酒塔羅 - 盧恩符文占卜系統</title>
-    <!-- 網頁分頁圖標 (Favicon) 設定 -->
     <link rel="icon" type="image/jpeg" href="tarot_drunk.jpg">
-
-    <!-- 社群分享預覽標籤 -->
     <meta property="og:title" content="醉酒塔羅 - 盧恩符文占卜系統">
     <meta property="og:description" content="古北歐盧恩符文 25 符智慧系統，解析命運軌跡與心靈指引。">
     <meta property="og:image" content="https://tarotdrunktw-png.github.io/tarot_app/tarot_drunk.jpg">
     <meta property="og:url" content="https://tarotdrunktw-png.github.io/tarot_app/">
     <meta property="og:type" content="website">
 
-    <!-- 引入 html2canvas 截圖函式庫與 CryptoJS 加密函式庫 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
@@ -58,7 +54,6 @@
             width: 100vw;
             height: 100vh;
             background: rgba(13, 15, 20, 0.4);
-            -webkit-backdrop-filter: blur(4px);
             backdrop-filter: blur(4px);
             z-index: 0;
         }
@@ -66,12 +61,7 @@
         .app-layout {
             position: relative;
             z-index: 1;
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
             flex-direction: column;
             width: 100vw;
             height: 100vh;
@@ -81,18 +71,10 @@
 
         .control-panel {
             background-color: var(--panel-bg);
-            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             padding: 8px 6px;
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
             flex-direction: column;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             gap: 6px;
@@ -112,17 +94,10 @@
         }
         
         .control-row { 
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex; 
-            -webkit-box-align: center;
-            -ms-flex-align: center;
             align-items: center; 
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
             justify-content: center; 
             gap: 4px; 
-            -ms-flex-wrap: nowrap;
             flex-wrap: nowrap; 
             width: 100%;
             max-width: 100%;
@@ -137,7 +112,6 @@
             font-weight: bold;
             border-radius: 4px;
             cursor: pointer;
-            -webkit-transition: background 0.2s;
             transition: background 0.2s;
             white-space: nowrap;
         }
@@ -151,7 +125,6 @@
             font-size: 11px; 
             height: 26px;
             border-radius: 3px;
-            -ms-flex-negative: 1;
             flex-shrink: 1; 
         }
         
@@ -160,38 +133,23 @@
             padding: 2px 6px; 
             border-radius: 4px; 
             border: 1px solid #33394d; 
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex; 
-            -webkit-box-align: center;
-            -ms-flex-align: center;
             align-items: center; 
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
             justify-content: center; 
             gap: 4px; 
             font-size: 11px; 
             color: #fbbf24; 
             white-space: nowrap;
-            -ms-flex-negative: 1;
             flex-shrink: 1;
             min-height: 28px;
             cursor: pointer;
         }
 
         .workspace { 
-            -webkit-box-flex: 1;
-            -ms-flex: 1;
             flex: 1; 
             padding: 20px 16px 80px 16px; 
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex; 
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
             justify-content: center; 
-            -webkit-box-align: start;
-            -ms-flex-align: start;
             align-items: flex-start; 
             overflow-y: auto; 
             -webkit-overflow-scrolling: touch;
@@ -210,9 +168,7 @@
             height: auto;
             padding-bottom: 20px;
         }
-        .spread-container.is-wide {
-            max-width: 1250px;
-        }
+        .spread-container.is-wide { max-width: 1250px; }
 
         .welcome-box {
             text-align: center;
@@ -221,41 +177,35 @@
             max-width: 600px;
             background: rgba(13, 15, 20, 0.45);
             border-radius: 8px;
-            -webkit-backdrop-filter: blur(6px);
             backdrop-filter: blur(6px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .welcome-title {
-            font-size: 15.6px;
-            font-weight: bold;
-            line-height: 1.8;
-            margin-bottom: 15px;
-            color: #f8fafc;
-        }
-        .welcome-subtitle {
-            font-size: 15.6px;
-            font-weight: bold;
-            line-height: 1.8;
-            margin-bottom: 24px;
-            color: #f8fafc;
-        }
-        .welcome-instructions {
-            font-size: 14.8px;
-            line-height: 2.2;
-            color: #cbd5e1;
-            margin-top: 12px;
-            text-align: left;
-            display: inline-block;
-        }
-        .welcome-instructions-title {
-            font-weight: bold;
-            margin-bottom: 11.5px;
-            font-size: 12px;
-            color: #fbbf24;
-            text-align: center;
-        }
+        .welcome-title { font-size: 15.6px; font-weight: bold; line-height: 1.8; margin-bottom: 15px; color: #f8fafc; }
+        .welcome-subtitle { font-size: 15.6px; font-weight: bold; line-height: 1.8; margin-bottom: 24px; color: #f8fafc; }
+        .welcome-instructions { font-size: 14.8px; line-height: 2.2; color: #cbd5e1; margin-top: 12px; text-align: left; display: inline-block; }
+        .welcome-instructions-title { font-weight: bold; margin-bottom: 11.5px; font-size: 12px; color: #fbbf24; text-align: center; }
 
-        /* 盧恩詳細卡片樣式：寬度 395px */
+        .auth-card {
+            background: rgba(21, 24, 33, 0.95);
+            border: 1px solid #333a4f;
+            border-radius: 10px;
+            padding: 24px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .auth-header { font-size: 16px; font-weight: bold; color: #fbbf24; text-align: center; margin-bottom: 4px; }
+        .auth-field { display: flex; flex-direction: column; gap: 5px; text-align: left; }
+        .auth-field label { font-size: 12px; color: #cbd5e1; font-weight: bold; }
+        .auth-field input { background: #0d0f14; border: 1px solid #475569; border-radius: 6px; padding: 10px; color: #fff; font-size: 14px; }
+        .auth-field input:focus { border-color: #fbbf24; outline: none; }
+        .auth-btn-group { display: flex; gap: 10px; margin-top: 10px; }
+        .auth-switch-text { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 8px; display: flex; justify-content: space-between; }
+        .auth-switch-text span { color: #fbbf24; cursor: pointer; font-weight: bold; text-decoration: underline; }
+
         .card-box {
             width: 100%;
             max-width: 395px;
@@ -263,90 +213,31 @@
             background-color: var(--card-bg);
             border: 1px solid #2d3343;
             border-radius: 6px;
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
             flex-direction: column;
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             margin: 0 auto;
         }
-        .banner {
-            background-color: #232736;
-            color: #fbbf24;
-            font-size: 13px;
-            font-weight: bold;
-            padding: 6px 10px;
-            text-align: center;
-        }
-        .content {
-            background-color: var(--inner-bg);
-            padding: 8px;
-            -webkit-box-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-            justify-content: space-between;
-        }
-        .rune-frame {
-            background-color: var(--tarot-bg);
-            border: 1px solid #252b3d;
-            border-radius: 4px;
-            padding: 8px;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            -webkit-box-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
-        }
+        .banner { background-color: #232736; color: #fbbf24; font-size: 13px; font-weight: bold; padding: 6px 10px; text-align: center; }
+        .content { background-color: var(--inner-bg); padding: 8px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .rune-frame { background-color: var(--tarot-bg); border: 1px solid #252b3d; border-radius: 4px; padding: 8px; display: flex; flex-direction: column; flex: 1; }
         .t-head { font-size: 12px; font-weight: bold; color: #fde68a; margin-bottom: 6px; }
-        .t-body { display: -webkit-box; display: -ms-flexbox; display: flex; gap: 10px; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+        .t-body { display: flex; gap: 10px; flex: 1; align-items: center; }
         
         .rune-symbol-box { 
-            width: 70px; 
-            height: 105px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #475569; 
-            background: #1e2230; 
-            border-radius: 4px; 
-            -ms-flex-negative: 0;
-            flex-shrink: 0; 
-            font-size: 38px;
-            color: #fbbf24;
-            font-weight: bold;
-            -webkit-transition: -webkit-transform 0.3s ease;
-            transition: transform 0.3s ease;
+            width: 70px; height: 105px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 1px solid #475569; background: #1e2230; border-radius: 4px; flex-shrink: 0; 
+            font-size: 38px; color: #fbbf24; font-weight: bold; transition: transform 0.3s ease;
         }
-        .rune-symbol-box.reversed-rune {
-            -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
-        }
+        .rune-symbol-box.reversed-rune { transform: rotate(180deg); }
 
-        .t-info { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; gap: 4px; }
+        .t-info { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
         .card-name { font-size: 14px; font-weight: bold; color: var(--text-main); }
         .card-theme { font-size: 12px; color: var(--text-sub); }
         .interp-box { background: #242938; padding: 6px 8px; border-radius: 4px; font-size: 12px; color: #cbd5e1; margin-top: 2px; line-height: 1.4; }
 
-        .footer-frame { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; margin-top: 4px; }
+        .footer-frame { display: flex; justify-content: center; margin-top: 4px; }
         .orientation-badge { font-size: 12px; font-weight: bold; color: #fff; padding: 4px 12px; border-radius: 4px; }
         .bg-up { background-color: var(--upright); }
         .bg-rev { background-color: var(--reversed); }
@@ -355,236 +246,42 @@
         .branch-row { display: flex; width: 100%; justify-content: center; gap: 16px; flex-wrap: wrap; }
         .branch-col { display: flex; flex-direction: column; gap: 12px; align-items: center; flex: 1; min-width: 395px; }
 
-        /* 手機版牌陣縮圖專屬排版樣式 */
-        .mobile-preview-section {
-            display: none;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-        }
-        @media (max-width: 768px) {
-            .mobile-preview-section {
-                display: flex;
-            }
-        }
+        .mobile-preview-section { display: none; width: 100%; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 4px; }
+        @media (max-width: 768px) { .mobile-preview-section { display: flex; } }
 
-        .mini-card {
-            background: var(--card-bg);
-            border: 1px solid #2d3343;
-            border-radius: 6px;
-            padding: 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 4px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-        }
-        .mini-symbol {
-            width: 45px;
-            height: 65px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #475569;
-            border-radius: 4px;
-            background: #000;
-            font-size: 24px;
-            color: #fbbf24;
-            font-weight: bold;
-        }
-        .mini-symbol.reversed-mini {
-            transform: rotate(180deg);
-        }
-        .mini-title {
-            font-size: 9px;
-            color: #fbbf24;
-            font-weight: bold;
-        }
-        .mini-name {
-            font-size: 11px;
-            font-weight: bold;
-            color: #fff;
-        }
+        .mini-card { background: var(--card-bg); border: 1px solid #2d3343; border-radius: 6px; padding: 6px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        .mini-symbol { width: 45px; height: 65px; display: flex; align-items: center; justify-content: center; border: 1px solid #475569; border-radius: 4px; background: #000; font-size: 24px; color: #fbbf24; font-weight: bold; }
+        .mini-symbol.reversed-mini { transform: rotate(180deg); }
+        .mini-title { font-size: 9px; color: #fbbf24; font-weight: bold; }
+        .mini-name { font-size: 11px; font-weight: bold; color: #fff; }
 
-        .grid-5-mobile {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, auto);
-            gap: 6px;
-            width: 240px;
-            margin: 0 auto;
-            justify-items: center;
-        }
-        .c-m-1 { grid-column: 2; grid-row: 1; }
-        .c-m-2 { grid-column: 1; grid-row: 2; }
-        .c-m-3 { grid-column: 2; grid-row: 2; }
-        .c-m-4 { grid-column: 3; grid-row: 2; }
-        .c-m-5 { grid-column: 2; grid-row: 3; }
+        .grid-5-mobile { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, auto); gap: 6px; width: 240px; margin: 0 auto; justify-items: center; }
+        .c-m-1 { grid-column: 2; grid-row: 1; } .c-m-2 { grid-column: 1; grid-row: 2; } .c-m-3 { grid-column: 2; grid-row: 2; }
+        .c-m-4 { grid-column: 3; grid-row: 2; } .c-m-5 { grid-column: 2; grid-row: 3; }
 
-        .action-btn-group {
-            display: flex;
-            gap: 8px;
-            width: 100%;
-            max-width: 480px;
-            margin: 15px auto 10px auto;
-            justify-content: center;
-            z-index: 100;
-            flex-wrap: wrap;
-        }
+        .action-btn-group { display: flex; gap: 8px; width: 100%; max-width: 520px; margin: 15px auto 10px auto; justify-content: center; z-index: 100; flex-wrap: wrap; }
+        .action-btn { background: linear-gradient(135deg, #d97706, #f59e0b); color: #fff; border: none; padding: 10px 12px; font-size: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4); transition: all 0.2s; flex: 1; min-width: 110px; text-align: center; }
+        .action-btn.secondary { background: rgba(30, 34, 48, 0.9); color: #fbbf24; border: 1px solid #334155; flex: 1; min-width: 110px; }
+        .action-btn:hover { transform: translateY(-2px); }
 
-        .action-btn {
-            background: linear-gradient(135deg, #d97706, #f59e0b);
-            color: #fff;
-            border: none;
-            padding: 10px 14px;
-            font-size: 13px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
-            transition: all 0.2s;
-            flex: 1;
-            min-width: 100px;
-            text-align: center;
-        }
-        .action-btn.secondary {
-            background: rgba(30, 34, 48, 0.9);
-            color: #fbbf24;
-            border: 1px solid #334155;
-            flex: 1;
-            min-width: 100px;
-        }
-        .action-btn:hover {
-            transform: translateY(-2px);
-        }
+        .screenshot-watermark-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99; overflow: hidden; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 150px; align-items: center; justify-items: center; opacity: 0.10; }
+        .watermark-item { font-size: 15px; color: #fbbf24; font-weight: bold; transform: rotate(-30deg); white-space: nowrap; user-select: none; }
 
-        /* 密集交錯斜向浮水印網格層 */
-        .screenshot-watermark-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 99;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 150px;
-            align-items: center;
-            justify-items: center;
-            opacity: 0.10;
-        }
-        .watermark-item {
-            font-size: 15px;
-            color: #fbbf24;
-            font-weight: bold;
-            transform: rotate(-30deg);
-            white-space: nowrap;
-            user-select: none;
-        }
-
-        /* 彈窗樣式 */
-        .history-modal, .preview-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 16px;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .history-content {
-            background: #1a1c24;
-            width: 100%;
-            max-width: 500px;
-            max-height: 80vh;
-            border-radius: 8px;
-            border: 1px solid #333a4f;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            padding: 16px;
-        }
-        .history-header {
-            font-size: 16px;
-            font-weight: bold;
-            color: #fbbf24;
-            margin-bottom: 12px;
-            text-align: center;
-        }
-        .history-body {
-            overflow-y: auto;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-right: 4px;
-        }
-        .history-item {
-            background: #232736;
-            border: 1px solid #2f364b;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #cbd5e1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
+        .history-modal, .preview-modal, .screenshot-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 16px; flex-direction: column; gap: 10px; }
+        .history-content { background: #1a1c24; width: 100%; max-width: 500px; max-height: 80vh; border-radius: 8px; border: 1px solid #333a4f; display: flex; flex-direction: column; overflow: hidden; padding: 16px; }
+        .history-header { font-size: 16px; font-weight: bold; color: #fbbf24; margin-bottom: 12px; text-align: center; }
+        .history-body { overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; }
+        .history-item { background: #232736; border: 1px solid #2f364b; padding: 10px; border-radius: 6px; font-size: 12px; color: #cbd5e1; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
         .history-item:hover { background: #333b52; }
-        .preview-modal img {
-            max-width: 100%;
-            max-height: 70vh;
-            border-radius: 6px;
-            border: 2px solid #fbbf24;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
-        }
+        .preview-modal img, .screenshot-modal img { max-width: 100%; max-height: 65vh; border-radius: 6px; border: 2px solid #fbbf24; box-shadow: 0 4px 20px rgba(0,0,0,0.8); object-fit: contain; }
+        .screenshot-tip { font-size: 13px; color: #fbbf24; font-weight: bold; text-align: center; background: rgba(13, 15, 20, 0.8); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(251, 191, 36, 0.3); }
 
-        .brand-footer {
-            position: fixed;
-            bottom: 35px;
-            right: 16px;
-            background: rgba(21, 24, 33, 0.9);
-            border: 1px solid #2f364b;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            z-index: 999;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 2px;
-        }
+        .brand-footer { position: fixed; bottom: 35px; right: 16px; background: rgba(21, 24, 33, 0.9); border: 1px solid #2f364b; padding: 8px 14px; border-radius: 8px; font-size: 13px; z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
         .brand-name { font-weight: bold; color: #fbbf24; letter-spacing: 0.5px; }
         .brand-threads { color: #94a3b8; text-decoration: none; transition: color 0.2s; }
         .brand-threads:hover { color: #f8fafc; text-decoration: underline; }
 
-        .visitor-counter-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 32px;
-            background: rgba(13, 15, 20, 0.95);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            padding: 0 16px;
-            text-align: center;
-            font-size: 12px;
-            color: #94a3b8;
-            z-index: 998;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .visitor-counter-bar { position: fixed; bottom: 0; left: 0; width: 100%; height: 32px; background: rgba(13, 15, 20, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); padding: 0 16px; text-align: center; font-size: 12px; color: #94a3b8; z-index: 998; display: flex; justify-content: center; align-items: center; }
     </style>
 </head>
 <body>
@@ -593,7 +290,7 @@
         <div class="control-panel">
             <div class="title">
                 <span>🍸 醉酒塔羅 🔮 盧恩符文占卜系統</span>
-                <span id="currentUserDisplay" style="font-size: 12px; color: #fbbf24; cursor: pointer;" onclick="changeUsername()" title="點擊設定或切換身分">👤 未設定身分</span>
+                <span id="currentUserDisplay" style="font-size: 12px; color: #fbbf24; cursor: pointer;" onclick="handleUserClick()" title="點擊檢視選單">👤 未登入 (點此登入)</span>
             </div>
             <div class="control-row">
                 <div class="config-box">
@@ -620,14 +317,27 @@
             <div id="spreadArea" class="spread-container">
                 <div class="welcome-box">
                     <div class="welcome-title">✨ 歡迎來到 醉酒塔羅 - 盧恩符文系統 ✨</div>
-                    <div class="welcome-subtitle">✨ 請先設定您的專屬名稱與密碼，並點擊上方開始占卜 ✨</div>
-                    <button class="action-btn" onclick="changeUsername()" style="margin-top:10px;">設定專屬名稱與密碼</button>
+                    <div class="welcome-subtitle">✨ 請點擊上方選單與按鈕開始進行占卜 ✨</div>
+                    <div class="welcome-instructions">
+                        <div class="welcome-instructions-title">使用方式：</div>
+                        <div>1. 深呼吸三次，讓心靈沉澱</div>
+                        <div>2. 閉上雙眼，在心中默念您的問題</div>
+                        <div>3. 於上方選單挑選占卜法，按下「開始占卜」</div>
+                        <div style="color: #fbbf24; margin-top: 4px;">提醒：若要使用雲端紀錄與載入占卜圖面功能，請點擊右上角進行登入。</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 圖片預覽彈窗 -->
+    <!-- 本機截圖彈窗 -->
+    <div id="screenshotModal" class="screenshot-modal" onclick="this.style.display='none'">
+        <div class="screenshot-tip">👆 請長按下方圖片選擇「加入照片」或「儲存影像」</div>
+        <img id="screenshotResultImg" alt="占卜結果截圖" onclick="event.stopPropagation()">
+        <button class="action-btn secondary" onclick="document.getElementById('screenshotModal').style.display='none'">關閉預覽</button>
+    </div>
+
+    <!-- 圖片預覽彈窗 (保留給舊歷史紀錄圖檔用) -->
     <div id="previewModal" class="preview-modal" onclick="this.style.display='none'">
         <div style="font-size:13px; color:#fbbf24; font-weight:bold;">🖼️ 當時占卜圖面快照（點擊任意處關閉）</div>
         <img id="previewImg" alt="占卜圖面">
@@ -638,7 +348,8 @@
         <div class="history-content" onclick="event.stopPropagation()">
             <div class="history-header" id="historyTitle">📂 個人雲端占卜圖面紀錄</div>
             <div id="historyBody" class="history-body"><div style="text-align:center; color:#94a3b8; padding:20px;">載入中...</div></div>
-            <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; justify-content: center;">
+                <button class="action-btn secondary" style="background:#f43f5e; border-color:#be123c; color:#fff;" onclick="deleteSelectedHistory()">🗑️ 刪除所選</button>
                 <button class="action-btn secondary" onclick="loadCloudHistory()">🔄 重新整理</button>
                 <button class="action-btn" onclick="document.getElementById('historyModal').style.display='none'">關閉視窗</button>
             </div>
@@ -655,19 +366,36 @@
     </div>
 
     <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbw2Wanq5rLmNvJJ3Ok13dAfpLfSFT0aYuAa3QEz-vUiURNH2qTOajW8X6czmuIy_aex/exec";
+        // ⚠️ 請記得替換為您正確的 Google Apps Script 網頁應用程式 URL
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbxrJldzRNDOb1OjKghWmMVBfvgV8wnXqBY4gav39eVN41b3MqaTqC6TUM9P-NmWf0O1Vg/exec";
 
         let customCount = 3;
-        let currentUsername = localStorage.getItem('rune_username') || "";
+        let currentEmail = localStorage.getItem('rune_email') || "";
         let currentPassword = localStorage.getItem('rune_password') || "";
+        let currentUsername = localStorage.getItem('rune_username') || "";
+        
+        // 用來快取雲端歷史資料，以利在前端重建 DOM
+        window.cachedHistoryData = [];
 
         window.onload = function() {
             initCounter();
             updateUserDisplay();
-            if (!currentUsername || !currentPassword) {
-                setTimeout(changeUsername, 500);
-            }
         };
+
+        async function sendGasRequest(payload) {
+            const formData = new URLSearchParams();
+            formData.append("payload", JSON.stringify(payload));
+            try {
+                let res = await fetch(GAS_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: formData.toString()
+                });
+                return await res.json();
+            } catch (err) {
+                return { status: "error", message: "網路連線異常，請稍後再試。" };
+            }
+        }
 
         function promptFreeCount() {
             let input = prompt("請輸入自訂抽牌張數 (1 - 9)：", customCount);
@@ -676,9 +404,7 @@
                 if (!isNaN(val) && val >= 1 && val <= 9) {
                     customCount = val;
                     document.getElementById("freeCountDisplay").textContent = customCount;
-                } else {
-                    alert("請輸入有效的數字 (1 到 9 之間)");
-                }
+                } else { alert("請輸入有效的數字 (1 到 9 之間)"); }
             }
         }
 
@@ -692,140 +418,396 @@
                 let response = await fetch(endpoint);
                 let data = await response.json();
                 document.getElementById('visitorCount').textContent = `🍸 歡迎來到醉酒塔羅，您是第：${data.value} 位深夜酒客`;
-            } catch (e) {
-                console.error("計數器載入失敗", e);
-                document.getElementById('visitorCount').textContent = `🍸 歡迎來到醉酒塔羅`;
-            }
+            } catch (e) { document.getElementById('visitorCount').textContent = `🍸 歡迎來到醉酒塔羅`; }
         }
 
         function updateUserDisplay() {
             let display = document.getElementById("currentUserDisplay");
-            if (currentUsername) {
-                display.textContent = `👤 [ ${currentUsername} ]`;
-            } else {
-                display.textContent = `👤 點此設定身分`;
-            }
+            if (currentEmail) {
+                display.textContent = `👤 [ ${currentUsername ? currentUsername : currentEmail} ] ▼`;
+            } else { display.textContent = `👤 未登入 (點此登入)`; }
         }
 
-        function hashPassword(password) {
-            return CryptoJS.SHA256(password).toString();
+        function hashPassword(password) { return CryptoJS.SHA256(password).toString(); }
+
+        function handleUserClick() {
+            if (currentEmail) {
+                let container = document.getElementById("spreadArea");
+                container.classList.remove("is-wide");
+                container.innerHTML = `
+                    <div class="auth-card">
+                        <div class="auth-header">🔮 用戶選單</div>
+                        <div style="text-align:center; color:#94a3b8; font-size:13px; margin-bottom:10px;">目前登入：${currentEmail}</div>
+                        <button class="action-btn" onclick="loadCloudHistory(); resetToHome();">📂 回顧占卜紀錄</button>
+                        <button class="action-btn secondary" onclick="logout()" style="width:100%;">🚪 登出</button>
+                        <button class="action-btn secondary" onclick="resetToHome()" style="width:100%; margin-top:5px;">返回主頁</button>
+                    </div>
+                `;
+                document.querySelector(".workspace").scrollTop = 0;
+            } else { showLoginPage(); }
         }
 
-        // 身分綁定與註冊、登入、忘記密碼流程
-        async function changeUsername() {
-            let actionChoice = prompt("請選擇動作：\n1. 登入 / 註冊身分\n2. 忘記密碼 (透過信箱重設)", "1");
-            if (actionChoice === "2") {
-                forgotPasswordFlow();
-                return;
-            }
-
-            let newName = prompt("請輸入您的專屬使用者名稱：", currentUsername);
-            if (!newName || !newName.trim()) return;
-            newName = newName.trim();
-
-            let newPass = prompt(`請輸入「${newName}」的專屬密碼：`, "");
-            if (!newPass || !newPass.trim()) return;
-            newPass = newPass.trim();
-
-            let passwordHash = hashPassword(newPass);
-            let userEmail = prompt("請輸入您的電子信箱（用於日後驗證與找回密碼）：", "");
-            if (!userEmail || !userEmail.includes("@")) {
-                alert("請輸入有效的電子信箱！");
-                return;
-            }
-
-            alert("🔍 正在向雲端驗證身分...");
-
-            try {
-                let response = await fetch(GAS_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify({ action: "check", username: newName, passwordHash: passwordHash, email: userEmail })
-                });
-                let result = await response.json();
-
-                if (result.status === "success") {
-                    if (result.exists && !result.passwordMatch) {
-                        alert(`❌ 名稱「${newName}」已被其他人註冊，且密碼錯誤！若您忘記密碼，請使用「忘記密碼」功能重設。`);
-                        return;
-                    } else {
-                        currentUsername = newName;
-                        currentPassword = newPass;
-                        localStorage.setItem('rune_username', currentUsername);
-                        localStorage.setItem('rune_password', currentPassword);
-                        updateUserDisplay();
-                        alert(`✨ 成功！已成功綁定「${currentUsername}」的個人檔案室。`);
-                    }
-                }
-            } catch(e) {
-                console.error(e);
-                alert("連線發生錯誤，請檢查網路或 GAS 網址。");
-            }
+        function logout() {
+            currentEmail = ""; currentPassword = ""; currentUsername = "";
+            localStorage.removeItem('rune_email'); localStorage.removeItem('rune_password'); localStorage.removeItem('rune_username');
+            updateUserDisplay(); resetToHome();
         }
 
-        // 忘記密碼與 6 位數驗證碼重設流程
-        async function forgotPasswordFlow() {
-            let targetName = prompt("請輸入您要找回的使用者名稱：", "");
-            if (!targetName) return;
-            let targetEmail = prompt("請輸入您當時綁定的電子信箱：", "");
-            if (!targetEmail) return;
+        function showLoginPage() {
+            let container = document.getElementById("spreadArea");
+            container.classList.remove("is-wide");
+            container.innerHTML = `
+                <div class="auth-card">
+                    <div class="auth-header">🔮 帳號登入</div>
+                    <div class="auth-field"><label>電子信箱：</label><input type="email" id="loginEmail" placeholder="example@gmail.com" value="${currentEmail}"></div>
+                    <div class="auth-field"><label>密碼：</label><input type="password" id="loginPassword" placeholder="請輸入密碼"></div>
+                    <div class="auth-btn-group"><button class="action-btn" onclick="submitLogin()">登入</button><button class="action-btn secondary" onclick="resetToHome()">取消</button></div>
+                    <div class="auth-switch-text"><span onclick="showRegisterPage()">點此前往註冊</span><span onclick="showForgotPasswordPage()">忘記密碼？</span></div>
+                </div>
+            `;
+        }
 
-            alert("⏳ 正在驗證並寄送 6 位數驗證碼至您的信箱，請稍候...");
+        async function submitLogin() {
+            let emailInput = document.getElementById("loginEmail").value.trim();
+            let passInput = document.getElementById("loginPassword").value.trim();
+            if (!emailInput || !emailInput.includes("@")) { alert("請輸入有效的電子信箱！"); return; }
+            if (!passInput) { alert("請輸入密碼！"); return; }
 
-            try {
-                let response = await fetch(GAS_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify({ action: "request_reset", username: targetName.trim(), email: targetEmail.trim() })
-                });
-                let result = await response.json();
+            let passwordHash = hashPassword(passInput);
+            let result = await sendGasRequest({ action: "check_login", email: emailInput, passwordHash: passwordHash });
 
-                if (result.status === "success") {
-                    let inputCode = prompt("📧 驗證碼已寄出！請檢查您的信箱（包含垃圾郵件匣），並在此輸入收到的 6 位數驗證碼：");
-                    if (!inputCode) return;
+            if (result.status === "success") {
+                currentEmail = emailInput; currentPassword = passInput; currentUsername = result.username || "";
+                localStorage.setItem('rune_email', currentEmail); localStorage.setItem('rune_password', currentPassword); localStorage.setItem('rune_username', currentUsername);
+                updateUserDisplay(); resetToHome();
+            } else { alert("❌ 登入失敗：" + (result.message || "信箱不存在或密碼錯誤！")); }
+        }
 
-                    let brandNewPass = prompt("請輸入您的「新密碼」：", "");
-                    if (!brandNewPass || !brandNewPass.trim()) return;
+        function showRegisterPage() {
+            let container = document.getElementById("spreadArea");
+            container.classList.remove("is-wide");
+            container.innerHTML = `
+                <div class="auth-card">
+                    <div class="auth-header">🔮 帳號註冊</div>
+                    <div class="auth-field"><label>使用者名稱：</label><input type="text" id="regUsername" placeholder="請輸入您的暱稱或名稱"></div>
+                    <div class="auth-field"><label>註冊信箱：</label><input type="email" id="regEmail" placeholder="example@gmail.com"></div>
+                    <div class="auth-field"><label>設定密碼：</label><input type="password" id="regPassword" placeholder="請輸入密碼（顯示為星號）"></div>
+                    <div class="auth-field"><label>確認密碼：</label><input type="password" id="regConfirmPassword" placeholder="請再次輸入密碼"></div>
+                    <div class="auth-btn-group"><button class="action-btn" onclick="submitRegister()">註冊並同步</button><button class="action-btn secondary" onclick="showLoginPage()">返回登入</button></div>
+                    <div class="auth-switch-text"><span onclick="showLoginPage()">已經有帳號？點此登入</span></div>
+                </div>
+            `;
+        }
 
-                    let newPasswordHash = hashPassword(brandNewPass.trim());
+        async function submitRegister() {
+            let nameInput = document.getElementById("regUsername").value.trim();
+            let emailInput = document.getElementById("regEmail").value.trim();
+            let passInput = document.getElementById("regPassword").value.trim();
+            let confirmPassInput = document.getElementById("regConfirmPassword").value.trim();
 
-                    let verifyResponse = await fetch(GAS_URL, {
-                        method: "POST",
-                        headers: { "Content-Type": "text/plain;charset=utf-8" },
-                        body: JSON.stringify({ action: "verify_and_reset", username: targetName.trim(), code: inputCode.trim(), passwordHash: newPasswordHash })
-                    });
-                    let verifyResult = await verifyResponse.json();
+            if (!nameInput || !emailInput || !passInput) { alert("請完整填寫資料！"); return; }
+            if (passInput !== confirmPassInput) { alert("❌ 兩次輸入的密碼不一致！"); return; }
 
-                    if (verifyResult.status === "success") {
-                        alert("✨ 驗證成功！密碼已重設完畢，現在您可以正常使用新密碼登入了。");
-                        currentUsername = targetName.trim();
-                        currentPassword = brandNewPass.trim();
-                        localStorage.setItem('rune_username', currentUsername);
-                        localStorage.setItem('rune_password', currentPassword);
-                        updateUserDisplay();
-                    } else {
-                        alert("❌ 驗證失敗：驗證碼錯誤或已過期。");
-                    }
+            let passwordHash = hashPassword(passInput);
+            let result = await sendGasRequest({ action: "register", username: nameInput, email: emailInput, passwordHash: passwordHash });
+
+            if (result.status === "success") {
+                currentEmail = emailInput; currentPassword = passInput; currentUsername = nameInput;
+                localStorage.setItem('rune_email', currentEmail); localStorage.setItem('rune_password', currentPassword); localStorage.setItem('rune_username', currentUsername);
+                updateUserDisplay();
+                document.getElementById("spreadArea").innerHTML = `<div class="welcome-box"><div class="welcome-title" style="color:#2ecc71;">✨ 註冊完成！ ✨</div></div>`;
+                setTimeout(() => { resetToHome(); }, 2000);
+            } else { alert("❌ 註冊失敗：" + (result.message || "未知錯誤")); }
+        }
+
+        function showForgotPasswordPage() {
+            let container = document.getElementById("spreadArea");
+            container.classList.remove("is-wide");
+            container.innerHTML = `
+                <div class="auth-card">
+                    <div class="auth-header">🔑 找回密碼</div>
+                    <div class="auth-field"><label>使用者名稱：</label><input type="text" id="forgotUsername" placeholder="請輸入名稱"></div>
+                    <div class="auth-field"><label>註冊電子信箱：</label><input type="email" id="forgotEmail" placeholder="example@gmail.com"></div>
+                    <div class="auth-btn-group"><button class="action-btn" onclick="submitRequestReset()">送出驗證碼</button><button class="action-btn secondary" onclick="showLoginPage()">返回登入</button></div>
+                </div>
+            `;
+        }
+
+        async function submitRequestReset() {
+            let nameInput = document.getElementById("forgotUsername").value.trim();
+            let emailInput = document.getElementById("forgotEmail").value.trim();
+            if (!nameInput || !emailInput) { alert("請填寫正確的使用者名稱與信箱！"); return; }
+
+            let result = await sendGasRequest({ action: "request_reset", username: nameInput, email: emailInput });
+            if (result.status === "success") { showResetVerifyPage(nameInput, emailInput); } 
+            else { alert("❌ 找回失敗：" + (result.message || "帳號或信箱不符。")); }
+        }
+
+        function showResetVerifyPage(username, email) {
+            let container = document.getElementById("spreadArea");
+            container.innerHTML = `
+                <div class="auth-card">
+                    <div class="auth-header">✉️ 請檢查電子信箱</div>
+                    <div class="auth-field"><label>6 位數驗證碼：</label><input type="text" id="verifyCode" maxlength="6"></div>
+                    <div class="auth-field"><label>設定新密碼：</label><input type="password" id="newPassword"></div>
+                    <div class="auth-field"><label>確認新密碼：</label><input type="password" id="newConfirmPassword"></div>
+                    <div class="auth-btn-group"><button class="action-btn" onclick="submitVerifyAndReset('${username}', '${email}')">確認重設</button><button class="action-btn secondary" onclick="showLoginPage()">返回登入</button></div>
+                </div>
+            `;
+        }
+
+        async function submitVerifyAndReset(username, email) {
+            let codeInput = document.getElementById("verifyCode").value.trim();
+            let passInput = document.getElementById("newPassword").value.trim();
+            let confirmPassInput = document.getElementById("newConfirmPassword").value.trim();
+
+            if (!codeInput || codeInput.length !== 6) { alert("請輸入有效的 6 位數驗證碼！"); return; }
+            if (!passInput || passInput !== confirmPassInput) { alert("❌ 密碼輸入不一致或為空！"); return; }
+
+            let newPasswordHash = hashPassword(passInput);
+            let result = await sendGasRequest({ action: "verify_and_reset", username: username, email: email, code: codeInput, passwordHash: newPasswordHash });
+
+            if (result.status === "success") { alert("✨ 密碼重設成功！"); showLoginPage(); } 
+            else { alert("❌ 驗證失敗：" + (result.message || "驗證碼錯誤或已過期。")); }
+        }
+
+        function captureSpreadLocally() {
+            let target = document.getElementById("spreadArea");
+            let btnGroup = document.querySelector(".action-btn-group");
+            if(btnGroup) btnGroup.style.display = "none";
+
+            let totalHeight = Math.max(target.scrollHeight, 500);
+            let watermarkContainer = document.createElement("div");
+            watermarkContainer.className = "screenshot-watermark-container";
+            watermarkContainer.style.height = totalHeight + "px";
+
+            let count = Math.ceil(totalHeight / 100) * 3;
+            for(let i = 0; i < count; i++) {
+                let item = document.createElement("div");
+                item.className = "watermark-item";
+                item.textContent = "🍸 醉酒塔羅 - 李特 @tarot.drunk";
+                watermarkContainer.appendChild(item);
+            }
+            target.appendChild(watermarkContainer);
+
+            html2canvas(target, { backgroundColor: "#0d0f14", scale: window.innerWidth < 768 ? 2.5 : 2, useCORS: true, logging: false, windowHeight: totalHeight })
+            .then(canvas => {
+                target.removeChild(watermarkContainer);
+                if(btnGroup) btnGroup.style.display = "flex";
+
+                let dataUrl = canvas.toDataURL("image/png");
+                if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+                    document.getElementById("screenshotResultImg").src = dataUrl;
+                    document.getElementById("screenshotModal").style.display = "flex";
                 } else {
-                    alert("❌ 找回失敗：查無此帳號或填寫的信箱不相符。");
+                    let link = document.createElement("a"); link.download = "醉酒塔羅-盧恩占卜結果.png"; link.href = dataUrl; link.click();
                 }
-            } catch(e) {
-                console.error(e);
-                alert("重設流程發生連線錯誤。");
+            }).catch(err => {
+                if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
+                if(btnGroup) btnGroup.style.display = "flex";
+                console.error("截圖失敗", err);
+            });
+        }
+
+        // ⭐ 核心大升級：DOM 結構直存，徹底解決容量限制與圖片模糊問題 ⭐
+        async function saveSpreadToCloud() {
+            if (!currentEmail || !currentPassword) {
+                let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
+                if (wantLogin) { showLoginPage(); }
+                return;
+            }
+
+            let now = new Date();
+            let defaultTimeStr = `${now.getFullYear()}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            let userQuestion = prompt("📝 請輸入此次占卜的問題（選填）：\n(若不填寫將預設為當下時間)", defaultTimeStr);
+            if (userQuestion === null) return; 
+            let finalQuestion = userQuestion.trim() === "" ? defaultTimeStr : userQuestion.trim();
+
+            let target = document.getElementById("spreadArea");
+            
+            // 將底部按鈕暫時隱藏，因為我們不需要把按鈕也存起來
+            let btnGroup = document.querySelector(".action-btn-group");
+            if(btnGroup) btnGroup.style.display = "none";
+
+            // 直接擷取網頁的純 HTML 結構 (容量極小，完美解決 50000 字元限制)
+            let htmlContent = target.innerHTML;
+
+            // 擷取完畢後馬上恢復顯示按鈕
+            if(btnGroup) btnGroup.style.display = "flex";
+
+            try {
+                let spreadTitle = document.querySelector("#spreadArea h2") ? document.querySelector("#spreadArea h2").textContent.trim() : "盧恩占卜紀錄";
+                
+                // 放棄肥大的 Base64 圖片，改存 HTML，體積縮小99%，而且回顧時 100% 清晰！
+                let rawData = JSON.stringify({ 
+                    spreadName: spreadTitle, 
+                    question: finalQuestion, 
+                    html: htmlContent // 原生網頁結構
+                });
+
+                let encryptedData = CryptoJS.AES.encrypt(rawData, currentPassword).toString();
+                let passwordHash = hashPassword(currentPassword);
+
+                let payload = { action: "save", email: currentEmail, spreadName: spreadTitle, encryptedPayload: encryptedData, passwordHash: passwordHash };
+                
+                let result = await sendGasRequest(payload);
+                if (result.status === "success") { 
+                    alert("💾 雲端存檔成功！"); 
+                } else { 
+                    alert("❌ 雲端存檔失敗：" + (result.message || "發生未知錯誤")); 
+                }
+            } catch (err) {
+                console.error("雲端存檔失敗", err);
+                alert("❌ 存檔發生異常。");
             }
         }
+
+        // 讀取紀錄並快取於前端
+        async function loadCloudHistory() {
+            if (!currentEmail || !currentPassword) {
+                let wantLogin = confirm("💡 檢視雲端紀錄需要先登入您的帳號。\n\n是否立即前往登入頁面？");
+                if (wantLogin) { showLoginPage(); }
+                return;
+            }
+
+            let body = document.getElementById("historyBody");
+            let displayName = currentUsername ? currentUsername : currentEmail;
+            document.getElementById("historyTitle").textContent = `📂 [ ${displayName} ] 的占卜紀錄`;
+            body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">正在載入您的專屬紀錄...</div>';
+            document.getElementById("historyModal").style.display = "flex";
+
+            try {
+                let passwordHash = hashPassword(currentPassword);
+                let response = await fetch(`${GAS_URL}?email=${encodeURIComponent(currentEmail)}&passHash=${encodeURIComponent(passwordHash)}`);
+                let data = await response.json();
+                let html = "";
+                
+                window.cachedHistoryData = []; // 重置快取
+
+                if (data.length === 0) {
+                    body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">尚無您的雲端紀錄</div>';
+                    return;
+                }
+
+                data.reverse().forEach((item, index) => {
+                    try {
+                        let bytes = CryptoJS.AES.decrypt(item.encryptedPayload, currentPassword);
+                        let decrypted = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+                        let questionHtml = decrypted.question ? `<div style="color:#e2e8f0; font-size:12px; margin-top:4px;">❓ 問題：${decrypted.question}</div>` : "";
+                        
+                        let dateStr = new Date(item.date).toLocaleString();
+
+                        // 寫入全域快取陣列
+                        window.cachedHistoryData.push({
+                            dateStr: dateStr,
+                            spreadName: decrypted.spreadName,
+                            question: decrypted.question,
+                            html: decrypted.html || "",
+                            image: decrypted.image || "" // 兼容舊版圖片
+                        });
+
+                        html += `
+                            <div class="history-item">
+                                <input type="checkbox" class="history-checkbox" value="${item.dateStr}" style="margin-right: 10px; transform: scale(1.3); cursor: pointer;">
+                                <div style="flex: 1; padding-right: 10px; cursor: pointer;" onclick="showHistoryItem(${index})">
+                                    <div style="font-weight:bold; color:#fbbf24;">${decrypted.spreadName}</div>
+                                    ${questionHtml}
+                                    <div style="color:#94a3b8; font-size:10px; margin-top:4px;">🕒 ${dateStr}</div>
+                                </div>
+                                <div style="color:#38bdf8; white-space:nowrap; cursor:pointer;" onclick="showHistoryItem(${index})">👁️ 檢視</div>
+                            </div>
+                        `;
+                    } catch(e) { console.error("解密失敗", e); }
+                });
+                body.innerHTML = html;
+            } catch(e) {
+                body.innerHTML = '<div style="text-align:center; color:#f43f5e; padding:20px;">載入失敗</div>';
+            }
+        }
+
+        // 刪除多選紀錄
+        async function deleteSelectedHistory() {
+            let checkboxes = document.querySelectorAll(".history-checkbox:checked");
+            if (checkboxes.length === 0) { alert("請先勾選要刪除的紀錄！"); return; }
+            if (!confirm(`確定要刪除這 ${checkboxes.length} 筆紀錄嗎？`)) return;
+
+            let dateStrs = Array.from(checkboxes).map(cb => cb.value);
+            let payload = { action: "delete_multiple", email: currentEmail, passwordHash: hashPassword(currentPassword), dateStrs: dateStrs };
+
+            let result = await sendGasRequest(payload);
+            if (result.status === "success") {
+                alert(`已成功刪除 ${result.count} 筆紀錄！`);
+                loadCloudHistory();
+            } else { alert("❌ 刪除失敗：" + (result.message || "發生未知錯誤")); }
+        }
+
+        // ⭐ 完美還原：從 DOM 結構直接渲染出最高畫質的占卜結果 ⭐
+        function showHistoryItem(index) {
+            let item = window.cachedHistoryData[index];
+            document.getElementById("historyModal").style.display = "none"; // 關閉歷史清單
+            
+            // 向下相容：如果是以前存的舊版「圖片紀錄」，還是用預覽彈窗顯示
+            if (item.image && !item.html) {
+                document.getElementById("previewImg").src = item.image;
+                document.getElementById("previewModal").style.display = "flex";
+                return;
+            }
+
+            // 新版直接在主畫面重建牌陣 DOM
+            let container = document.getElementById("spreadArea");
+            container.classList.add("is-wide"); // 給予充足寬度排版
+            
+            container.innerHTML = `
+                <div style="width:100%; text-align:center; margin-bottom: 20px; background: rgba(30, 34, 48, 0.8); padding: 15px; border-radius: 8px; border: 1px solid #33394d;">
+                    <div style="color:#94a3b8; font-size:12px; font-weight:bold;">🕒 占卜時間：${item.dateStr}</div>
+                    <div style="color:#fbbf24; font-size:16px; margin-top:8px; font-weight:bold;">❓ 問題：${item.question || "未填寫"}</div>
+                </div>
+                ${item.html}
+                <div class="action-btn-group" style="margin-top: 25px;">
+                    <button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button>
+                    <button class="action-btn secondary" onclick="loadCloudHistory()">📂 回歷史清單</button>
+                    <button class="action-btn secondary" onclick="resetToHome()">🏠 回主畫面</button>
+                </div>
+            `;
+            document.querySelector(".workspace").scrollTop = 0;
+        }
+
+        function closeHistoryModal(e) { document.getElementById("historyModal").style.display = "none"; }
 
         function toggleSpreadConfig() {
             let spreadVal = document.getElementById("spreadSelect").value;
             let freeBox = document.getElementById("freeConfigBox");
-            if (spreadVal === "free") {
-                freeBox.style.display = "flex";
-            } else {
-                freeBox.style.display = "none";
-            }
+            if (spreadVal === "free") { freeBox.style.display = "flex"; } else { freeBox.style.display = "none"; }
         }
 
-        // 完整 25 盧恩符文庫
+        function resetToHome() {
+            let container = document.getElementById("spreadArea");
+            container.classList.remove("is-wide");
+            container.innerHTML = `
+                <div class="welcome-box">
+                    <div class="welcome-title">✨ 歡迎來到 醉酒塔羅 - 盧恩符文系統 ✨</div>
+                    <div class="welcome-subtitle">✨ 請點擊上方選單與按鈕開始進行占卜 ✨</div>
+                    <div class="welcome-instructions">
+                        <div class="welcome-instructions-title">使用方式：</div>
+                        <div>1. 深呼吸三次，讓心靈沉澱</div>
+                        <div>2. 閉上雙眼，在心中默念您的問題</div>
+                        <div>3. 於上方選單挑選占卜法，按下「開始占卜」</div>
+                        <div style="color: #fbbf24; margin-top: 4px;">提醒：若要使用雲端紀錄與載入占卜圖面功能，請點擊右上角進行登入。</div>
+                    </div>
+                </div>
+            `;
+            document.querySelector(".workspace").scrollTop = 0;
+        }
+
+        function executeDraw() {
+            let spreadVal = document.getElementById("spreadSelect").value;
+            if (spreadVal === "single") drawSingle();
+            else if (spreadVal === "triple") drawTriple();
+            else if (spreadVal === "cross5") drawCross5();
+            else if (spreadVal === "norns") drawNorns();
+            else if (spreadVal === "free") drawFreeSpread();
+        }
+
         const RUNE_DECK = [
             {name: "費胡 (Fehu)", symbol: "ᚠ", element: "財富與流動", upright: "物質豐盛、財富獲取、能量流動、新機會", reversed: "財務損失、貪婪、停滯、資源匱乏", hasReversed: true},
             {name: "烏魯茲 (Uruz)", symbol: "ᚢ", element: "力量與健康", upright: "強大體魄、原始生命力、突破困境、勇氣", reversed: "體力透支、錯失良機、軟弱無力、方向錯誤", hasReversed: true},
@@ -885,23 +867,14 @@
         function createRuneBoxHtml(rune, posTitle) {
             let badgeClass = !rune.hasReversed ? "bg-symmetric" : (rune.isReversed ? "bg-rev" : "bg-up");
             let symbolClass = rune.isReversed ? "rune-symbol-box reversed-rune" : "rune-symbol-box";
-            
+
             let html = '<div class="card-box">';
-            if (posTitle) {
-                html += '<div class="banner">' + posTitle + '</div>';
-            }
-            html += '<div class="content">';
-            html += '<div class="rune-frame">';
-            html += '<div class="t-head">【盧恩符文·能量解讀】</div>';
-            html += '<div class="t-body">';
+            if (posTitle) { html += '<div class="banner">' + posTitle + '</div>'; }
+            html += '<div class="content"><div class="rune-frame"><div class="t-head">【盧恩符文·能量解讀】</div><div class="t-body">';
             html += '<div class="' + symbolClass + '">' + rune.symbol + '</div>';
-            html += '<div class="t-info">';
-            html += '<div class="card-name">' + rune.name + '</div>';
-            html += '<div class="card-theme">▸ 核心元素：' + rune.element + '</div>';
-            html += '<div class="interp-box">▸ 意涵：' + rune.interpretation + '</div>';
-            html += '</div></div></div>';
-            html += '<div class="footer-frame"><span class="orientation-badge ' + badgeClass + '">' + rune.orientation + '</span></div>';
-            html += '</div></div>';
+            html += '<div class="t-info"><div class="card-name">' + rune.name + '</div><div class="card-theme">▸ 核心元素：' + rune.element + '</div>';
+            html += '<div class="interp-box">▸ 意涵：' + rune.interpretation + '</div></div></div></div>';
+            html += '<div class="footer-frame"><span class="orientation-badge ' + badgeClass + '">' + rune.orientation + '</span></div></div></div>';
             return html;
         }
 
@@ -916,173 +889,14 @@
             `;
         }
 
-        // 將當前畫面截圖並用密碼加密上傳至雲端
-        async function saveSpreadAsImage(spreadTitle) {
-            if (!currentUsername || !currentPassword) {
-                alert("請先設定您的專屬名稱與密碼！");
-                changeUsername();
-                return;
-            }
-
-            let target = document.getElementById("spreadArea");
-            let btnGroup = document.querySelector(".action-btn-group");
-            if(btnGroup) btnGroup.style.display = "none";
-
-            let totalHeight = Math.max(target.scrollHeight, 500);
-            let watermarkContainer = document.createElement("div");
-            watermarkContainer.className = "screenshot-watermark-container";
-            watermarkContainer.style.height = totalHeight + "px";
-
-            let count = Math.ceil(totalHeight / 100) * 3;
-            for(let i = 0; i < count; i++) {
-                let item = document.createElement("div");
-                item.className = "watermark-item";
-                item.textContent = "🍸 醉酒塔羅 - 李特 @tarot.drunk";
-                watermarkContainer.appendChild(item);
-            }
-            target.appendChild(watermarkContainer);
-
-            try {
-                let canvas = await html2canvas(target, {
-                    backgroundColor: "#0d0f14",
-                    scale: window.innerWidth < 768 ? 2.5 : 2, 
-                    useCORS: true,
-                    logging: false,
-                    windowHeight: totalHeight
-                });
-                target.removeChild(watermarkContainer);
-                if(btnGroup) btnGroup.style.display = "flex";
-
-                let base64Image = canvas.toDataURL("image/jpeg", 0.7);
-                let rawData = JSON.stringify({ spreadName: spreadTitle, image: base64Image });
-                
-                // 使用使用者的明文密碼作為 AES 加密金鑰
-                let encryptedData = CryptoJS.AES.encrypt(rawData, currentPassword).toString();
-                let passwordHash = hashPassword(currentPassword);
-
-                let payload = { 
-                    action: "save", 
-                    username: currentUsername, 
-                    spreadName: spreadTitle, 
-                    encryptedPayload: encryptedData,
-                    passwordHash: passwordHash 
-                };
-
-                alert("⏳ 正在將占卜圖面加密同步至雲端...");
-                await fetch(GAS_URL, {
-                    method: 'POST', 
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
-                    body: JSON.stringify(payload)
-                });
-                alert("💾 占卜圖面已成功加密上傳至您的個人雲端檔案室！");
-            } catch (err) {
-                if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
-                if(btnGroup) btnGroup.style.display = "flex";
-                console.error("雲端存圖失敗", err);
-                alert("雲端存圖失敗，請檢查網路連線或 GAS 網址");
-            }
-        }
-
-        // 載入個人雲端歷史紀錄
-        async function loadCloudHistory() {
-            if (!currentUsername || !currentPassword) {
-                alert("請先設定您的專屬名稱與密碼！");
-                changeUsername();
-                return;
-            }
-
-            let body = document.getElementById("historyBody");
-            document.getElementById("historyTitle").textContent = `📂 [ ${currentUsername} ] 的雲端占卜圖面紀錄`;
-            body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">正在驗證並載入您的專屬紀錄...</div>';
-            document.getElementById("historyModal").style.display = "flex";
-
-            try {
-                let passwordHash = hashPassword(currentPassword);
-                let response = await fetch(`${GAS_URL}?user=${encodeURIComponent(currentUsername)}&passHash=${encodeURIComponent(passwordHash)}`);
-                let data = await response.json();
-                let html = "";
-                
-                if (data.length === 0) {
-                    body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">尚無您的雲端紀錄（或密碼不符）</div>';
-                    return;
-                }
-
-                data.reverse().forEach((item) => {
-                    try {
-                        let bytes = CryptoJS.AES.decrypt(item.encryptedPayload, currentPassword);
-                        let decrypted = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-                        
-                        html += `
-                            <div class="history-item" onclick="showPreviewImage('${decrypted.image}')">
-                                <div>
-                                    <div style="font-weight:bold; color:#fbbf24;">${decrypted.spreadName}</div>
-                                    <div style="color:#94a3b8; font-size:10px;">${new Date(item.date).toLocaleString()}</div>
-                                </div>
-                                <div style="color:#38bdf8;">👁️ 檢視圖面</div>
-                            </div>
-                        `;
-                    } catch(e) { console.error("解密失敗", e); }
-                });
-                body.innerHTML = html;
-            } catch(e) {
-                console.error("載入歷史紀錄失敗", e);
-                body.innerHTML = '<div style="text-align:center; color:#f43f5e; padding:20px;">載入失敗</div>';
-            }
-        }
-
-        function showPreviewImage(base64Img) {
-            document.getElementById("previewImg").src = base64Img;
-            document.getElementById("previewModal").style.display = "flex";
-        }
-
-        function closeHistoryModal(e) { document.getElementById("historyModal").style.display = "none"; }
-
-        function resetToHome() {
-            let container = document.getElementById("spreadArea");
-            container.classList.remove("is-wide");
-            container.innerHTML = `
-                <div class="welcome-box">
-                    <div class="welcome-title">✨ 歡迎來到 醉酒塔羅 - 盧恩符文系統 ✨</div>
-                    <div class="welcome-subtitle">✨ 請點擊上方選單與按鈕開始進行占卜 ✨</div>
-                    <div class="welcome-instructions">
-                        <div class="welcome-instructions-title">使用方式：</div>
-                        <div>1. 深呼吸三次，讓心靈沉澱</div>
-                        <div>2. 閉上雙眼，在心中默念您的問題</div>
-                        <div>3. 於上方選單挑選占卜法，按下「開始占卜」</div>
-                    </div>
-                </div>
-            `;
-            document.querySelector(".workspace").scrollTop = 0;
-        }
-
-        function executeDraw() {
-            if (!currentUsername || !currentPassword) {
-                alert("請先設定您的專屬名稱與密碼！");
-                changeUsername();
-                return;
-            }
-            let spreadVal = document.getElementById("spreadSelect").value;
-            if (spreadVal === "single") drawSingle();
-            else if (spreadVal === "triple") drawTriple();
-            else if (spreadVal === "cross5") drawCross5();
-            else if (spreadVal === "norns") drawNorns();
-            else if (spreadVal === "free") drawFreeSpread();
-        }
-
         function drawSingle() {
             let rune = getRandomRunes(1)[0];
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
 
             let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 🔮 單 符 文 每 日 指 引 】</h2>';
-            html += '<div style="width:100%; max-width:395px;">';
-            html += createRuneBoxHtml(rune, "【今日能量核心】");
-            html += '</div>';
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="saveSpreadAsImage(\'單符文每日指引\')">💾 雲端存圖</button>';
-            html += '<button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重來</button>';
-            html += '</div>';
+            html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(rune, "【今日能量核心】") + '</div>';
+            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadToCloud()">💾 雲端存檔</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
 
             container.innerHTML = html;
         }
@@ -1095,15 +909,8 @@
             let titles = ["【第一符·過去根源】", "【第二符·現在狀態】", "【第三符·未來趨勢】"];
             let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 ⚖️ 三 符 文 時 空 占 卜 】</h2>';
             html += '<div style="display:flex; flex-direction:column; align-items:center; gap:14px; width:100%;">';
-            runes.forEach((r, idx) => {
-                html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>';
-            });
-            html += '</div>';
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="saveSpreadAsImage(\'三符文時空占卜\')">💾 雲端存圖</button>';
-            html += '<button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重來</button>';
-            html += '</div>';
+            runes.forEach((r, idx) => { html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>'; });
+            html += '</div><div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadToCloud()">💾 雲端存檔</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
 
             container.innerHTML = html;
         }
@@ -1113,47 +920,21 @@
             let container = document.getElementById("spreadArea");
             container.classList.add("is-wide");
 
-            let titles = [
-                "【1.中心·當前核心】",
-                "【2.左側·過去影響】",
-                "【3.右側·未來發展】",
-                "【4.上方·精神指引】",
-                "【5.下方·潛在根源】"
-            ];
+            let titles = ["【1.中心·當前核心】", "【2.左側·過去影響】", "【3.右側·未來發展】", "【4.上方·精神指引】", "【5.下方·潛在根源】"];
 
             let html = '<h2 style="color:#f8fafc; margin-bottom:4px; text-align:center; width:100%;">【 ✝️ 五 符 文 十 字 交 叉 法 】</h2>';
             html += '<div style="display:flex; flex-direction:column; gap:16px; width:100%; align-items:center;">';
 
-            /* 手機版縮圖幾何預覽 */
-            html += '<div class="mobile-preview-section">';
-            html += '<div style="font-size:12px; color:#fbbf24; font-weight:bold;">── 符文總覽 ──</div>';
-            html += '<div class="grid-5-mobile">';
-            html += `<div class="c-m-1">${createMiniRuneHtml(runes[3], "4.指引")}</div>`;
-            html += `<div class="c-m-2">${createMiniRuneHtml(runes[1], "2.過去")}</div>`;
-            html += `<div class="c-m-3">${createMiniRuneHtml(runes[0], "1.核心")}</div>`;
-            html += `<div class="c-m-4">${createMiniRuneHtml(runes[2], "3.未來")}</div>`;
-            html += `<div class="c-m-5">${createMiniRuneHtml(runes[4], "5.根源")}</div>`;
+            html += '<div class="mobile-preview-section"><div style="font-size:12px; color:#fbbf24; font-weight:bold;">── 符文總覽 ──</div><div class="grid-5-mobile">';
+            html += `<div class="c-m-1">${createMiniRuneHtml(runes[3], "4.指引")}</div><div class="c-m-2">${createMiniRuneHtml(runes[1], "2.過去")}</div><div class="c-m-3">${createMiniRuneHtml(runes[0], "1.核心")}</div><div class="c-m-4">${createMiniRuneHtml(runes[2], "3.未來")}</div><div class="c-m-5">${createMiniRuneHtml(runes[4], "5.根源")}</div>`;
             html += '</div></div>';
 
             html += '<div style="font-size:13px; color:#fbbf24; font-weight:bold; margin-top:6px;">── 詳細符文解析 ──</div>';
-
-            // 上方指引
             html += '<div style="width:100%; max-width:395px; margin-bottom:4px;">' + createRuneBoxHtml(runes[3], titles[3]) + '</div>';
-            // 中間三欄
-            html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;">';
-            html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[1], titles[1]) + '</div>';
-            html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[0], titles[0]) + '</div>';
-            html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[2], titles[2]) + '</div>';
-            html += '</div>';
-            // 下方根源
+            html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;"><div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[1], titles[1]) + '</div><div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[0], titles[0]) + '</div><div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[2], titles[2]) + '</div></div>';
             html += '<div style="width:100%; max-width:395px; margin-top:4px;">' + createRuneBoxHtml(runes[4], titles[4]) + '</div>';
 
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="saveSpreadAsImage(\'五符文十字交叉法\')">💾 雲端存圖</button>';
-            html += '<button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重來</button>';
-            html += '</div>';
-            html += '</div>';
+            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadToCloud()">💾 雲端存檔</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div></div>';
 
             container.innerHTML = html;
         }
@@ -1166,15 +947,8 @@
             let titles = ["【烏爾德·過去與業力】", "【薇兒丹蒂·現在與當下】", "【詩寇蒂·未來與潛能】"];
             let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 📜 諾 倫 三 女 神 命 運 流 轉 】</h2>';
             html += '<div style="display:flex; flex-direction:column; align-items:center; gap:14px; width:100%;">';
-            runes.forEach((r, idx) => {
-                html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>';
-            });
-            html += '</div>';
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="saveSpreadAsImage(\'諾倫三女神命運流轉\')">💾 雲端存圖</button>';
-            html += '<button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重來</button>';
-            html += '</div>';
+            runes.forEach((r, idx) => { html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>'; });
+            html += '</div><div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadToCloud()">💾 雲端存檔</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
 
             container.innerHTML = html;
         }
@@ -1188,21 +962,12 @@
             let html = `<h2 style="color:#f8fafc; margin-bottom:4px; text-align:center; width:100%;">【 🎲 自 由 符 文 陣（ ${count} 張） 】</h2>`;
             html += '<div style="display:flex; flex-direction:column; gap:16px; width:100%; align-items:center;">';
             html += '<div style="font-size:13px; color:#fbbf24; font-weight:bold; margin-top:6px;">── 詳細符文解析 ──</div>';
-            
+
             html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;">';
-            runes.forEach((r, idx) => {
-                html += '<div class="branch-col" style="min-width: 395px;">';
-                html += createRuneBoxHtml(r, `第 ${idx+1} 符`);
-                html += '</div>';
-            });
+            runes.forEach((r, idx) => { html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(r, `第 ${idx+1} 符`) + '</div>'; });
             html += '</div>';
 
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="saveSpreadAsImage(\'自由符文陣\')">💾 雲端存圖</button>';
-            html += '<button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重來</button>';
-            html += '</div>';
-            html += '</div>';
+            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadToCloud()">💾 雲端存檔</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div></div>';
 
             container.innerHTML = html;
         }
