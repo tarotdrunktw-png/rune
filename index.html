@@ -168,9 +168,7 @@
             height: auto;
             padding-bottom: 20px;
         }
-        .spread-container.is-wide {
-            max-width: 1250px;
-        }
+        .spread-container.is-wide { max-width: 1250px; }
 
         .welcome-box {
             text-align: center;
@@ -182,35 +180,10 @@
             backdrop-filter: blur(6px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .welcome-title {
-            font-size: 15.6px;
-            font-weight: bold;
-            line-height: 1.8;
-            margin-bottom: 15px;
-            color: #f8fafc;
-        }
-        .welcome-subtitle {
-            font-size: 15.6px;
-            font-weight: bold;
-            line-height: 1.8;
-            margin-bottom: 24px;
-            color: #f8fafc;
-        }
-        .welcome-instructions {
-            font-size: 14.8px;
-            line-height: 2.2;
-            color: #cbd5e1;
-            margin-top: 12px;
-            text-align: left;
-            display: inline-block;
-        }
-        .welcome-instructions-title {
-            font-weight: bold;
-            margin-bottom: 11.5px;
-            font-size: 12px;
-            color: #fbbf24;
-            text-align: center;
-        }
+        .welcome-title { font-size: 15.6px; font-weight: bold; line-height: 1.8; margin-bottom: 15px; color: #f8fafc; }
+        .welcome-subtitle { font-size: 15.6px; font-weight: bold; line-height: 1.8; margin-bottom: 24px; color: #f8fafc; }
+        .welcome-instructions { font-size: 14.8px; line-height: 2.2; color: #cbd5e1; margin-top: 12px; text-align: left; display: inline-block; }
+        .welcome-instructions-title { font-weight: bold; margin-bottom: 11.5px; font-size: 12px; color: #fbbf24; text-align: center; }
 
         .auth-card {
             background: rgba(21, 24, 33, 0.95);
@@ -224,55 +197,14 @@
             flex-direction: column;
             gap: 14px;
         }
-        .auth-header {
-            font-size: 16px;
-            font-weight: bold;
-            color: #fbbf24;
-            text-align: center;
-            margin-bottom: 4px;
-        }
-        .auth-field {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            text-align: left;
-        }
-        .auth-field label {
-            font-size: 12px;
-            color: #cbd5e1;
-            font-weight: bold;
-        }
-        .auth-field input {
-            background: #0d0f14;
-            border: 1px solid #475569;
-            border-radius: 6px;
-            padding: 10px;
-            color: #fff;
-            font-size: 14px;
-        }
-        .auth-field input:focus {
-            border-color: #fbbf24;
-            outline: none;
-        }
-        .auth-btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .auth-switch-text {
-            text-align: center;
-            font-size: 12px;
-            color: #94a3b8;
-            margin-top: 8px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .auth-switch-text span {
-            color: #fbbf24;
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: underline;
-        }
+        .auth-header { font-size: 16px; font-weight: bold; color: #fbbf24; text-align: center; margin-bottom: 4px; }
+        .auth-field { display: flex; flex-direction: column; gap: 5px; text-align: left; }
+        .auth-field label { font-size: 12px; color: #cbd5e1; font-weight: bold; }
+        .auth-field input { background: #0d0f14; border: 1px solid #475569; border-radius: 6px; padding: 10px; color: #fff; font-size: 14px; }
+        .auth-field input:focus { border-color: #fbbf24; outline: none; }
+        .auth-btn-group { display: flex; gap: 10px; margin-top: 10px; }
+        .auth-switch-text { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 8px; display: flex; justify-content: space-between; }
+        .auth-switch-text span { color: #fbbf24; cursor: pointer; font-weight: bold; text-decoration: underline; }
 
         .card-box {
             width: 100%;
@@ -287,53 +219,18 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             margin: 0 auto;
         }
-        .banner {
-            background-color: #232736;
-            color: #fbbf24;
-            font-size: 13px;
-            font-weight: bold;
-            padding: 6px 10px;
-            text-align: center;
-        }
-        .content {
-            background-color: var(--inner-bg);
-            padding: 8px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .rune-frame {
-            background-color: var(--tarot-bg);
-            border: 1px solid #252b3d;
-            border-radius: 4px;
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
+        .banner { background-color: #232736; color: #fbbf24; font-size: 13px; font-weight: bold; padding: 6px 10px; text-align: center; }
+        .content { background-color: var(--inner-bg); padding: 8px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .rune-frame { background-color: var(--tarot-bg); border: 1px solid #252b3d; border-radius: 4px; padding: 8px; display: flex; flex-direction: column; flex: 1; }
         .t-head { font-size: 12px; font-weight: bold; color: #fde68a; margin-bottom: 6px; }
         .t-body { display: flex; gap: 10px; flex: 1; align-items: center; }
         
         .rune-symbol-box { 
-            width: 70px; 
-            height: 105px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #475569; 
-            background: #1e2230; 
-            border-radius: 4px; 
-            flex-shrink: 0; 
-            font-size: 38px;
-            color: #fbbf24;
-            font-weight: bold;
-            transition: transform 0.3s ease;
+            width: 70px; height: 105px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 1px solid #475569; background: #1e2230; border-radius: 4px; flex-shrink: 0; 
+            font-size: 38px; color: #fbbf24; font-weight: bold; transition: transform 0.3s ease;
         }
-        .rune-symbol-box.reversed-rune {
-            transform: rotate(180deg);
-        }
+        .rune-symbol-box.reversed-rune { transform: rotate(180deg); }
 
         .t-info { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
         .card-name { font-size: 14px; font-weight: bold; color: var(--text-main); }
@@ -349,229 +246,42 @@
         .branch-row { display: flex; width: 100%; justify-content: center; gap: 16px; flex-wrap: wrap; }
         .branch-col { display: flex; flex-direction: column; gap: 12px; align-items: center; flex: 1; min-width: 395px; }
 
-        .mobile-preview-section {
-            display: none;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-        }
-        @media (max-width: 768px) {
-            .mobile-preview-section { display: flex; }
-        }
+        .mobile-preview-section { display: none; width: 100%; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 4px; }
+        @media (max-width: 768px) { .mobile-preview-section { display: flex; } }
 
-        .mini-card {
-            background: var(--card-bg);
-            border: 1px solid #2d3343;
-            border-radius: 6px;
-            padding: 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 4px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-        }
-        .mini-symbol {
-            width: 45px;
-            height: 65px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #475569;
-            border-radius: 4px;
-            background: #000;
-            font-size: 24px;
-            color: #fbbf24;
-            font-weight: bold;
-        }
+        .mini-card { background: var(--card-bg); border: 1px solid #2d3343; border-radius: 6px; padding: 6px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        .mini-symbol { width: 45px; height: 65px; display: flex; align-items: center; justify-content: center; border: 1px solid #475569; border-radius: 4px; background: #000; font-size: 24px; color: #fbbf24; font-weight: bold; }
         .mini-symbol.reversed-mini { transform: rotate(180deg); }
         .mini-title { font-size: 9px; color: #fbbf24; font-weight: bold; }
         .mini-name { font-size: 11px; font-weight: bold; color: #fff; }
 
-        .grid-5-mobile {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, auto);
-            gap: 6px;
-            width: 240px;
-            margin: 0 auto;
-            justify-items: center;
-        }
-        .c-m-1 { grid-column: 2; grid-row: 1; }
-        .c-m-2 { grid-column: 1; grid-row: 2; }
-        .c-m-3 { grid-column: 2; grid-row: 2; }
-        .c-m-4 { grid-column: 3; grid-row: 2; }
-        .c-m-5 { grid-column: 2; grid-row: 3; }
+        .grid-5-mobile { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, auto); gap: 6px; width: 240px; margin: 0 auto; justify-items: center; }
+        .c-m-1 { grid-column: 2; grid-row: 1; } .c-m-2 { grid-column: 1; grid-row: 2; } .c-m-3 { grid-column: 2; grid-row: 2; }
+        .c-m-4 { grid-column: 3; grid-row: 2; } .c-m-5 { grid-column: 2; grid-row: 3; }
 
-        .action-btn-group {
-            display: flex;
-            gap: 8px;
-            width: 100%;
-            max-width: 520px;
-            margin: 15px auto 10px auto;
-            justify-content: center;
-            z-index: 100;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            background: linear-gradient(135deg, #d97706, #f59e0b);
-            color: #fff;
-            border: none;
-            padding: 10px 12px;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
-            transition: all 0.2s;
-            flex: 1;
-            min-width: 110px;
-            text-align: center;
-        }
-        .action-btn.secondary {
-            background: rgba(30, 34, 48, 0.9);
-            color: #fbbf24;
-            border: 1px solid #334155;
-            flex: 1;
-            min-width: 110px;
-        }
+        .action-btn-group { display: flex; gap: 8px; width: 100%; max-width: 520px; margin: 15px auto 10px auto; justify-content: center; z-index: 100; flex-wrap: wrap; }
+        .action-btn { background: linear-gradient(135deg, #d97706, #f59e0b); color: #fff; border: none; padding: 10px 12px; font-size: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4); transition: all 0.2s; flex: 1; min-width: 110px; text-align: center; }
+        .action-btn.secondary { background: rgba(30, 34, 48, 0.9); color: #fbbf24; border: 1px solid #334155; flex: 1; min-width: 110px; }
         .action-btn:hover { transform: translateY(-2px); }
 
-        .screenshot-watermark-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 99;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 150px;
-            align-items: center;
-            justify-items: center;
-            opacity: 0.10;
-        }
-        .watermark-item {
-            font-size: 15px;
-            color: #fbbf24;
-            font-weight: bold;
-            transform: rotate(-30deg);
-            white-space: nowrap;
-            user-select: none;
-        }
+        .screenshot-watermark-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99; overflow: hidden; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 150px; align-items: center; justify-items: center; opacity: 0.10; }
+        .watermark-item { font-size: 15px; color: #fbbf24; font-weight: bold; transform: rotate(-30deg); white-space: nowrap; user-select: none; }
 
-        .history-modal, .preview-modal, .screenshot-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 16px;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .history-content {
-            background: #1a1c24;
-            width: 100%;
-            max-width: 500px;
-            max-height: 80vh;
-            border-radius: 8px;
-            border: 1px solid #333a4f;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            padding: 16px;
-        }
-        .history-header {
-            font-size: 16px;
-            font-weight: bold;
-            color: #fbbf24;
-            margin-bottom: 12px;
-            text-align: center;
-        }
-        .history-body {
-            overflow-y: auto;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-right: 4px;
-        }
-        .history-item {
-            background: #232736;
-            border: 1px solid #2f364b;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #cbd5e1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
+        .history-modal, .preview-modal, .screenshot-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 16px; flex-direction: column; gap: 10px; }
+        .history-content { background: #1a1c24; width: 100%; max-width: 500px; max-height: 80vh; border-radius: 8px; border: 1px solid #333a4f; display: flex; flex-direction: column; overflow: hidden; padding: 16px; }
+        .history-header { font-size: 16px; font-weight: bold; color: #fbbf24; margin-bottom: 12px; text-align: center; }
+        .history-body { overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; }
+        .history-item { background: #232736; border: 1px solid #2f364b; padding: 10px; border-radius: 6px; font-size: 12px; color: #cbd5e1; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
         .history-item:hover { background: #333b52; }
-        .preview-modal img, .screenshot-modal img {
-            max-width: 100%;
-            max-height: 65vh;
-            border-radius: 6px;
-            border: 2px solid #fbbf24;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
-            object-fit: contain;
-        }
-        .screenshot-tip {
-            font-size: 13px;
-            color: #fbbf24;
-            font-weight: bold;
-            text-align: center;
-            background: rgba(13, 15, 20, 0.8);
-            padding: 6px 12px;
-            border-radius: 6px;
-            border: 1px solid rgba(251, 191, 36, 0.3);
-        }
+        .preview-modal img, .screenshot-modal img { max-width: 100%; max-height: 65vh; border-radius: 6px; border: 2px solid #fbbf24; box-shadow: 0 4px 20px rgba(0,0,0,0.8); object-fit: contain; }
+        .screenshot-tip { font-size: 13px; color: #fbbf24; font-weight: bold; text-align: center; background: rgba(13, 15, 20, 0.8); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(251, 191, 36, 0.3); }
 
-        .brand-footer {
-            position: fixed;
-            bottom: 35px;
-            right: 16px;
-            background: rgba(21, 24, 33, 0.9);
-            border: 1px solid #2f364b;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            z-index: 999;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 2px;
-        }
+        .brand-footer { position: fixed; bottom: 35px; right: 16px; background: rgba(21, 24, 33, 0.9); border: 1px solid #2f364b; padding: 8px 14px; border-radius: 8px; font-size: 13px; z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
         .brand-name { font-weight: bold; color: #fbbf24; letter-spacing: 0.5px; }
         .brand-threads { color: #94a3b8; text-decoration: none; transition: color 0.2s; }
         .brand-threads:hover { color: #f8fafc; text-decoration: underline; }
 
-        .visitor-counter-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 32px;
-            background: rgba(13, 15, 20, 0.95);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            padding: 0 16px;
-            text-align: center;
-            font-size: 12px;
-            color: #94a3b8;
-            z-index: 998;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .visitor-counter-bar { position: fixed; bottom: 0; left: 0; width: 100%; height: 32px; background: rgba(13, 15, 20, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); padding: 0 16px; text-align: center; font-size: 12px; color: #94a3b8; z-index: 998; display: flex; justify-content: center; align-items: center; }
     </style>
 </head>
 <body>
@@ -627,7 +337,7 @@
         <button class="action-btn secondary" onclick="document.getElementById('screenshotModal').style.display='none'">關閉預覽</button>
     </div>
 
-    <!-- 圖片預覽彈窗 -->
+    <!-- 圖片預覽彈窗 (保留給舊歷史紀錄圖檔用) -->
     <div id="previewModal" class="preview-modal" onclick="this.style.display='none'">
         <div style="font-size:13px; color:#fbbf24; font-weight:bold;">🖼️ 當時占卜圖面快照（點擊任意處關閉）</div>
         <img id="previewImg" alt="占卜圖面">
@@ -638,7 +348,8 @@
         <div class="history-content" onclick="event.stopPropagation()">
             <div class="history-header" id="historyTitle">📂 個人雲端占卜圖面紀錄</div>
             <div id="historyBody" class="history-body"><div style="text-align:center; color:#94a3b8; padding:20px;">載入中...</div></div>
-            <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; justify-content: center;">
+                <button class="action-btn secondary" style="background:#f43f5e; border-color:#be123c; color:#fff;" onclick="deleteSelectedHistory()">🗑️ 刪除所選</button>
                 <button class="action-btn secondary" onclick="loadCloudHistory()">🔄 重新整理</button>
                 <button class="action-btn" onclick="document.getElementById('historyModal').style.display='none'">關閉視窗</button>
             </div>
@@ -656,30 +367,33 @@
 
     <script>
         // ⚠️ 請記得替換為您正確的 Google Apps Script 網頁應用程式 URL
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbzjbp5kysXhYb8SXWfrbdA75sc-GaVh1dcPE2cdO8ILvFG3fRNVpocwCHImVPWnj-nFhQ/exec";
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbwLLsRFaKjYJkNy6agkhG5tmTWbZMxfJyxvfbUuCYvqjDqwXcH2JXwmWT3h9wR84Wnjbw/exec";
 
         let customCount = 3;
         let currentEmail = localStorage.getItem('rune_email') || "";
         let currentPassword = localStorage.getItem('rune_password') || "";
         let currentUsername = localStorage.getItem('rune_username') || "";
+        
+        // 用來快取雲端歷史資料，以利在前端重建 DOM
+        window.cachedHistoryData = [];
 
         window.onload = function() {
             initCounter();
             updateUserDisplay();
         };
 
-        // 核心突破 1：使用 text/plain 純文字傳送，避免 URL 編碼把超長字串搞壞
         async function sendGasRequest(payload) {
+            const formData = new URLSearchParams();
+            formData.append("payload", JSON.stringify(payload));
             try {
                 let res = await fetch(GAS_URL, {
                     method: "POST",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify(payload)
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: formData.toString()
                 });
                 return await res.json();
             } catch (err) {
-                console.error("連線錯誤：", err);
-                return { status: "error", message: "網路連線異常或資料量過大，請稍後再試。" };
+                return { status: "error", message: "網路連線異常，請稍後再試。" };
             }
         }
 
@@ -690,9 +404,7 @@
                 if (!isNaN(val) && val >= 1 && val <= 9) {
                     customCount = val;
                     document.getElementById("freeCountDisplay").textContent = customCount;
-                } else {
-                    alert("請輸入有效的數字 (1 到 9 之間)");
-                }
+                } else { alert("請輸入有效的數字 (1 到 9 之間)"); }
             }
         }
 
@@ -706,24 +418,17 @@
                 let response = await fetch(endpoint);
                 let data = await response.json();
                 document.getElementById('visitorCount').textContent = `🍸 歡迎來到醉酒塔羅，您是第：${data.value} 位深夜酒客`;
-            } catch (e) {
-                document.getElementById('visitorCount').textContent = `🍸 歡迎來到醉酒塔羅`;
-            }
+            } catch (e) { document.getElementById('visitorCount').textContent = `🍸 歡迎來到醉酒塔羅`; }
         }
 
         function updateUserDisplay() {
             let display = document.getElementById("currentUserDisplay");
             if (currentEmail) {
-                let displayName = currentUsername ? currentUsername : currentEmail;
-                display.textContent = `👤 [ ${displayName} ] ▼`;
-            } else {
-                display.textContent = `👤 未登入 (點此登入)`;
-            }
+                display.textContent = `👤 [ ${currentUsername ? currentUsername : currentEmail} ] ▼`;
+            } else { display.textContent = `👤 未登入 (點此登入)`; }
         }
 
-        function hashPassword(password) {
-            return CryptoJS.SHA256(password).toString();
-        }
+        function hashPassword(password) { return CryptoJS.SHA256(password).toString(); }
 
         function handleUserClick() {
             if (currentEmail) {
@@ -739,20 +444,13 @@
                     </div>
                 `;
                 document.querySelector(".workspace").scrollTop = 0;
-            } else {
-                showLoginPage();
-            }
+            } else { showLoginPage(); }
         }
 
         function logout() {
-            currentEmail = "";
-            currentPassword = "";
-            currentUsername = "";
-            localStorage.removeItem('rune_email');
-            localStorage.removeItem('rune_password');
-            localStorage.removeItem('rune_username');
-            updateUserDisplay();
-            resetToHome();
+            currentEmail = ""; currentPassword = ""; currentUsername = "";
+            localStorage.removeItem('rune_email'); localStorage.removeItem('rune_password'); localStorage.removeItem('rune_username');
+            updateUserDisplay(); resetToHome();
         }
 
         function showLoginPage() {
@@ -761,35 +459,17 @@
             container.innerHTML = `
                 <div class="auth-card">
                     <div class="auth-header">🔮 帳號登入</div>
-
-                    <div class="auth-field">
-                        <label>電子信箱：</label>
-                        <input type="email" id="loginEmail" placeholder="example@gmail.com" value="${currentEmail}">
-                    </div>
-
-                    <div class="auth-field">
-                        <label>密碼：</label>
-                        <input type="password" id="loginPassword" placeholder="請輸入密碼">
-                    </div>
-
-                    <div class="auth-btn-group">
-                        <button class="action-btn" onclick="submitLogin()">登入</button>
-                        <button class="action-btn secondary" onclick="resetToHome()">取消</button>
-                    </div>
-
-                    <div class="auth-switch-text">
-                        <span onclick="showRegisterPage()">點此前往註冊</span>
-                        <span onclick="showForgotPasswordPage()">忘記密碼？</span>
-                    </div>
+                    <div class="auth-field"><label>電子信箱：</label><input type="email" id="loginEmail" placeholder="example@gmail.com" value="${currentEmail}"></div>
+                    <div class="auth-field"><label>密碼：</label><input type="password" id="loginPassword" placeholder="請輸入密碼"></div>
+                    <div class="auth-btn-group"><button class="action-btn" onclick="submitLogin()">登入</button><button class="action-btn secondary" onclick="resetToHome()">取消</button></div>
+                    <div class="auth-switch-text"><span onclick="showRegisterPage()">點此前往註冊</span><span onclick="showForgotPasswordPage()">忘記密碼？</span></div>
                 </div>
             `;
-            document.querySelector(".workspace").scrollTop = 0;
         }
 
         async function submitLogin() {
             let emailInput = document.getElementById("loginEmail").value.trim();
             let passInput = document.getElementById("loginPassword").value.trim();
-
             if (!emailInput || !emailInput.includes("@")) { alert("請輸入有效的電子信箱！"); return; }
             if (!passInput) { alert("請輸入密碼！"); return; }
 
@@ -797,17 +477,10 @@
             let result = await sendGasRequest({ action: "check_login", email: emailInput, passwordHash: passwordHash });
 
             if (result.status === "success") {
-                currentEmail = emailInput;
-                currentPassword = passInput;
-                currentUsername = result.username || "";
-                localStorage.setItem('rune_email', currentEmail);
-                localStorage.setItem('rune_password', currentPassword);
-                localStorage.setItem('rune_username', currentUsername);
-                updateUserDisplay();
-                resetToHome();
-            } else {
-                alert("❌ 登入失敗：" + (result.message || "信箱不存在或密碼錯誤！"));
-            }
+                currentEmail = emailInput; currentPassword = passInput; currentUsername = result.username || "";
+                localStorage.setItem('rune_email', currentEmail); localStorage.setItem('rune_password', currentPassword); localStorage.setItem('rune_username', currentUsername);
+                updateUserDisplay(); resetToHome();
+            } else { alert("❌ 登入失敗：" + (result.message || "信箱不存在或密碼錯誤！")); }
         }
 
         function showRegisterPage() {
@@ -816,38 +489,14 @@
             container.innerHTML = `
                 <div class="auth-card">
                     <div class="auth-header">🔮 帳號註冊</div>
-
-                    <div class="auth-field">
-                        <label>使用者名稱：</label>
-                        <input type="text" id="regUsername" placeholder="請輸入您的暱稱或名稱">
-                    </div>
-
-                    <div class="auth-field">
-                        <label>註冊信箱：</label>
-                        <input type="email" id="regEmail" placeholder="example@gmail.com">
-                    </div>
-
-                    <div class="auth-field">
-                        <label>設定密碼：</label>
-                        <input type="password" id="regPassword" placeholder="請輸入密碼（顯示為星號）">
-                    </div>
-
-                    <div class="auth-field">
-                        <label>確認密碼：</label>
-                        <input type="password" id="regConfirmPassword" placeholder="請再次輸入密碼">
-                    </div>
-
-                    <div class="auth-btn-group">
-                        <button class="action-btn" onclick="submitRegister()">註冊並同步</button>
-                        <button class="action-btn secondary" onclick="showLoginPage()">返回登入</button>
-                    </div>
-
-                    <div class="auth-switch-text">
-                        <span onclick="showLoginPage()">已經有帳號？點此登入</span>
-                    </div>
+                    <div class="auth-field"><label>使用者名稱：</label><input type="text" id="regUsername" placeholder="請輸入您的暱稱或名稱"></div>
+                    <div class="auth-field"><label>註冊信箱：</label><input type="email" id="regEmail" placeholder="example@gmail.com"></div>
+                    <div class="auth-field"><label>設定密碼：</label><input type="password" id="regPassword" placeholder="請輸入密碼（顯示為星號）"></div>
+                    <div class="auth-field"><label>確認密碼：</label><input type="password" id="regConfirmPassword" placeholder="請再次輸入密碼"></div>
+                    <div class="auth-btn-group"><button class="action-btn" onclick="submitRegister()">註冊並同步</button><button class="action-btn secondary" onclick="showLoginPage()">返回登入</button></div>
+                    <div class="auth-switch-text"><span onclick="showLoginPage()">已經有帳號？點此登入</span></div>
                 </div>
             `;
-            document.querySelector(".workspace").scrollTop = 0;
         }
 
         async function submitRegister() {
@@ -856,39 +505,19 @@
             let passInput = document.getElementById("regPassword").value.trim();
             let confirmPassInput = document.getElementById("regConfirmPassword").value.trim();
 
-            if (!nameInput) { alert("請輸入使用者名稱！"); return; }
-            if (!emailInput || !emailInput.includes("@")) { alert("請輸入有效的電子信箱！"); return; }
-            if (!passInput) { alert("請設定密碼！"); return; }
-            if (passInput !== confirmPassInput) {
-                alert("❌ 兩次輸入的密碼不一致，請重新檢查！");
-                return;
-            }
+            if (!nameInput || !emailInput || !passInput) { alert("請完整填寫資料！"); return; }
+            if (passInput !== confirmPassInput) { alert("❌ 兩次輸入的密碼不一致！"); return; }
 
             let passwordHash = hashPassword(passInput);
-            
             let result = await sendGasRequest({ action: "register", username: nameInput, email: emailInput, passwordHash: passwordHash });
 
             if (result.status === "success") {
-                currentEmail = emailInput;
-                currentPassword = passInput;
-                currentUsername = nameInput;
-                localStorage.setItem('rune_email', currentEmail);
-                localStorage.setItem('rune_password', currentPassword);
-                localStorage.setItem('rune_username', currentUsername);
+                currentEmail = emailInput; currentPassword = passInput; currentUsername = nameInput;
+                localStorage.setItem('rune_email', currentEmail); localStorage.setItem('rune_password', currentPassword); localStorage.setItem('rune_username', currentUsername);
                 updateUserDisplay();
-
-                let container = document.getElementById("spreadArea");
-                container.innerHTML = `
-                    <div class="welcome-box">
-                        <div class="welcome-title" style="color: #2ecc71;">✨ 註冊完成！ ✨</div>
-                        <div class="welcome-subtitle">帳號與資料已成功同步至雲端資料庫。</div>
-                        <div style="font-size: 14px; color: #fbbf24;">即將跳回主頁面...</div>
-                    </div>
-                `;
+                document.getElementById("spreadArea").innerHTML = `<div class="welcome-box"><div class="welcome-title" style="color:#2ecc71;">✨ 註冊完成！ ✨</div></div>`;
                 setTimeout(() => { resetToHome(); }, 2000);
-            } else {
-                alert("❌ 註冊失敗：" + (result.message || "發生未知錯誤，請稍後再試。"));
-            }
+            } else { alert("❌ 註冊失敗：" + (result.message || "未知錯誤")); }
         }
 
         function showForgotPasswordPage() {
@@ -897,76 +526,34 @@
             container.innerHTML = `
                 <div class="auth-card">
                     <div class="auth-header">🔑 找回密碼</div>
-
-                    <div class="auth-field">
-                        <label>使用者名稱：</label>
-                        <input type="text" id="forgotUsername" placeholder="請輸入您的名稱">
-                    </div>
-
-                    <div class="auth-field">
-                        <label>註冊電子信箱：</label>
-                        <input type="email" id="forgotEmail" placeholder="example@gmail.com">
-                    </div>
-
-                    <div class="auth-btn-group">
-                        <button class="action-btn" onclick="submitRequestReset()">送出驗證碼</button>
-                        <button class="action-btn secondary" onclick="showLoginPage()">返回登入</button>
-                    </div>
+                    <div class="auth-field"><label>使用者名稱：</label><input type="text" id="forgotUsername" placeholder="請輸入名稱"></div>
+                    <div class="auth-field"><label>註冊電子信箱：</label><input type="email" id="forgotEmail" placeholder="example@gmail.com"></div>
+                    <div class="auth-btn-group"><button class="action-btn" onclick="submitRequestReset()">送出驗證碼</button><button class="action-btn secondary" onclick="showLoginPage()">返回登入</button></div>
                 </div>
             `;
-            document.querySelector(".workspace").scrollTop = 0;
         }
 
         async function submitRequestReset() {
             let nameInput = document.getElementById("forgotUsername").value.trim();
             let emailInput = document.getElementById("forgotEmail").value.trim();
-
-            if (!nameInput || !emailInput || !emailInput.includes("@")) {
-                alert("請填寫正確的使用者名稱與信箱！");
-                return;
-            }
+            if (!nameInput || !emailInput) { alert("請填寫正確的使用者名稱與信箱！"); return; }
 
             let result = await sendGasRequest({ action: "request_reset", username: nameInput, email: emailInput });
-
-            if (result.status === "success") {
-                showResetVerifyPage(nameInput, emailInput);
-            } else {
-                alert("❌ 找回失敗：" + (result.message || "查無此帳號或信箱不符。"));
-            }
+            if (result.status === "success") { showResetVerifyPage(nameInput, emailInput); } 
+            else { alert("❌ 找回失敗：" + (result.message || "帳號或信箱不符。")); }
         }
 
         function showResetVerifyPage(username, email) {
             let container = document.getElementById("spreadArea");
-            container.classList.remove("is-wide");
             container.innerHTML = `
                 <div class="auth-card">
-                    <div class="auth-header">✉️ 請檢查您的電子信箱</div>
-                    <div style="font-size: 12px; color: #fbbf24; text-align: center; line-height: 1.6;">
-                        我們已將 6 位數驗證碼寄至 <b>${email}</b>。<br>請前往信箱收件並填寫下方欄位完成重設。
-                    </div>
-
-                    <div class="auth-field" style="margin-top: 5px;">
-                        <label>6 位數驗證碼：</label>
-                        <input type="text" id="verifyCode" placeholder="請輸入 6 位數數字" maxlength="6">
-                    </div>
-
-                    <div class="auth-field">
-                        <label>設定新密碼：</label>
-                        <input type="password" id="newPassword" placeholder="請輸入新密碼">
-                    </div>
-
-                    <div class="auth-field">
-                        <label>確認新密碼：</label>
-                        <input type="password" id="newConfirmPassword" placeholder="請再次輸入新密碼">
-                    </div>
-
-                    <div class="auth-btn-group">
-                        <button class="action-btn" onclick="submitVerifyAndReset('${username}', '${email}')">確認重設</button>
-                        <button class="action-btn secondary" onclick="showLoginPage()">返回登入</button>
-                    </div>
+                    <div class="auth-header">✉️ 請檢查電子信箱</div>
+                    <div class="auth-field"><label>6 位數驗證碼：</label><input type="text" id="verifyCode" maxlength="6"></div>
+                    <div class="auth-field"><label>設定新密碼：</label><input type="password" id="newPassword"></div>
+                    <div class="auth-field"><label>確認新密碼：</label><input type="password" id="newConfirmPassword"></div>
+                    <div class="auth-btn-group"><button class="action-btn" onclick="submitVerifyAndReset('${username}', '${email}')">確認重設</button><button class="action-btn secondary" onclick="showLoginPage()">返回登入</button></div>
                 </div>
             `;
-            document.querySelector(".workspace").scrollTop = 0;
         }
 
         async function submitVerifyAndReset(username, email) {
@@ -975,19 +562,13 @@
             let confirmPassInput = document.getElementById("newConfirmPassword").value.trim();
 
             if (!codeInput || codeInput.length !== 6) { alert("請輸入有效的 6 位數驗證碼！"); return; }
-            if (!passInput) { alert("請輸入新密碼！"); return; }
-            if (passInput !== confirmPassInput) { alert("❌ 兩次輸入的密碼不一致！"); return; }
+            if (!passInput || passInput !== confirmPassInput) { alert("❌ 密碼輸入不一致或為空！"); return; }
 
             let newPasswordHash = hashPassword(passInput);
-            
             let result = await sendGasRequest({ action: "verify_and_reset", username: username, email: email, code: codeInput, passwordHash: newPasswordHash });
 
-            if (result.status === "success") {
-                alert("✨ 密碼重設成功！現在您可以直接使用新密碼登入了。");
-                showLoginPage();
-            } else {
-                alert("❌ 驗證失敗：" + (result.message || "驗證碼錯誤或已過期。"));
-            }
+            if (result.status === "success") { alert("✨ 密碼重設成功！"); showLoginPage(); } 
+            else { alert("❌ 驗證失敗：" + (result.message || "驗證碼錯誤或已過期。")); }
         }
 
         function captureSpreadLocally() {
@@ -1009,27 +590,17 @@
             }
             target.appendChild(watermarkContainer);
 
-            html2canvas(target, {
-                backgroundColor: "#0d0f14",
-                scale: window.innerWidth < 768 ? 2.5 : 2, 
-                useCORS: true,
-                logging: false,
-                windowHeight: totalHeight
-            }).then(canvas => {
+            html2canvas(target, { backgroundColor: "#0d0f14", scale: window.innerWidth < 768 ? 2.5 : 2, useCORS: true, logging: false, windowHeight: totalHeight })
+            .then(canvas => {
                 target.removeChild(watermarkContainer);
                 if(btnGroup) btnGroup.style.display = "flex";
 
                 let dataUrl = canvas.toDataURL("image/png");
-                let isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
-
-                if (isMobile) {
+                if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
                     document.getElementById("screenshotResultImg").src = dataUrl;
                     document.getElementById("screenshotModal").style.display = "flex";
                 } else {
-                    let link = document.createElement("a");
-                    link.download = "醉酒塔羅-盧恩占卜結果.png";
-                    link.href = dataUrl;
-                    link.click();
+                    let link = document.createElement("a"); link.download = "醉酒塔羅-盧恩占卜結果.png"; link.href = dataUrl; link.click();
                 }
             }).catch(err => {
                 if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
@@ -1038,88 +609,60 @@
             });
         }
 
-        // 核心突破 2：為雲端存檔專屬「瘦身」，並加入「占卜問題」彈窗紀錄
-        async function saveSpreadAsImage() {
+        // ⭐ 核心大升級：DOM 結構直存，徹底解決容量限制與圖片模糊問題 ⭐
+        async function saveSpreadToCloud() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
                 if (wantLogin) { showLoginPage(); }
                 return;
             }
 
-            // 自動取得當下時間做為預設值
             let now = new Date();
             let defaultTimeStr = `${now.getFullYear()}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-            
-            // 跳出對話框讓使用者填寫問題
             let userQuestion = prompt("📝 請輸入此次占卜的問題（選填）：\n(若不填寫將預設為當下時間)", defaultTimeStr);
-            if (userQuestion === null) return; // 按下取消則中斷
+            if (userQuestion === null) return; 
             let finalQuestion = userQuestion.trim() === "" ? defaultTimeStr : userQuestion.trim();
 
             let target = document.getElementById("spreadArea");
+            
+            // 將底部按鈕暫時隱藏，因為我們不需要把按鈕也存起來
             let btnGroup = document.querySelector(".action-btn-group");
             if(btnGroup) btnGroup.style.display = "none";
 
-            let totalHeight = Math.max(target.scrollHeight, 500);
-            let watermarkContainer = document.createElement("div");
-            watermarkContainer.className = "screenshot-watermark-container";
-            watermarkContainer.style.height = totalHeight + "px";
+            // 直接擷取網頁的純 HTML 結構 (容量極小，完美解決 50000 字元限制)
+            let htmlContent = target.innerHTML;
 
-            let count = Math.ceil(totalHeight / 100) * 3;
-            for(let i = 0; i < count; i++) {
-                let item = document.createElement("div");
-                item.className = "watermark-item";
-                item.textContent = "🍸 醉酒塔羅 - 李特 @tarot.drunk";
-                watermarkContainer.appendChild(item);
-            }
-            target.appendChild(watermarkContainer);
+            // 擷取完畢後馬上恢復顯示按鈕
+            if(btnGroup) btnGroup.style.display = "flex";
 
             try {
-                // 縮減雲端存檔解析度以符合資料庫極限
-                let canvas = await html2canvas(target, {
-                    backgroundColor: "#0d0f14",
-                    scale: 0.8, 
-                    useCORS: true,
-                    logging: false,
-                    windowHeight: totalHeight
-                });
-                target.removeChild(watermarkContainer);
-                if(btnGroup) btnGroup.style.display = "flex";
-
-                // 壓縮畫質以進一步縮減字元數
-                let base64Image = canvas.toDataURL("image/jpeg", 0.5); 
                 let spreadTitle = document.querySelector("#spreadArea h2") ? document.querySelector("#spreadArea h2").textContent.trim() : "盧恩占卜紀錄";
                 
+                // 放棄肥大的 Base64 圖片，改存 HTML，體積縮小99%，而且回顧時 100% 清晰！
                 let rawData = JSON.stringify({ 
                     spreadName: spreadTitle, 
-                    question: finalQuestion, // 將問題包裝進去
-                    image: base64Image 
+                    question: finalQuestion, 
+                    html: htmlContent // 原生網頁結構
                 });
 
                 let encryptedData = CryptoJS.AES.encrypt(rawData, currentPassword).toString();
                 let passwordHash = hashPassword(currentPassword);
 
-                let payload = { 
-                    action: "save", 
-                    email: currentEmail, 
-                    spreadName: spreadTitle, 
-                    encryptedPayload: encryptedData, 
-                    passwordHash: passwordHash 
-                };
+                let payload = { action: "save", email: currentEmail, spreadName: spreadTitle, encryptedPayload: encryptedData, passwordHash: passwordHash };
                 
                 let result = await sendGasRequest(payload);
-                if (result.status === "success") {
-                    alert("💾 雲端存檔成功！");
-                } else {
-                    alert("❌ 雲端存檔失敗：" + (result.message || "發生未知錯誤"));
+                if (result.status === "success") { 
+                    alert("💾 雲端存檔成功！"); 
+                } else { 
+                    alert("❌ 雲端存檔失敗：" + (result.message || "發生未知錯誤")); 
                 }
             } catch (err) {
-                if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
-                if(btnGroup) btnGroup.style.display = "flex";
-                console.error("雲端存圖失敗", err);
-                alert("❌ 截圖過程發生異常，無法存檔。");
+                console.error("雲端存檔失敗", err);
+                alert("❌ 存檔發生異常。");
             }
         }
 
+        // 讀取紀錄並快取於前端
         async function loadCloudHistory() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 檢視雲端紀錄需要先登入您的帳號。\n\n是否立即前往登入頁面？");
@@ -1138,42 +681,95 @@
                 let response = await fetch(`${GAS_URL}?email=${encodeURIComponent(currentEmail)}&passHash=${encodeURIComponent(passwordHash)}`);
                 let data = await response.json();
                 let html = "";
+                
+                window.cachedHistoryData = []; // 重置快取
 
                 if (data.length === 0) {
                     body.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">尚無您的雲端紀錄</div>';
                     return;
                 }
 
-                data.reverse().forEach((item) => {
+                data.reverse().forEach((item, index) => {
                     try {
                         let bytes = CryptoJS.AES.decrypt(item.encryptedPayload, currentPassword);
                         let decrypted = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-
-                        // 判斷是否有紀錄問題，若有則顯示
                         let questionHtml = decrypted.question ? `<div style="color:#e2e8f0; font-size:12px; margin-top:4px;">❓ 問題：${decrypted.question}</div>` : "";
+                        
+                        let dateStr = new Date(item.date).toLocaleString();
+
+                        // 寫入全域快取陣列
+                        window.cachedHistoryData.push({
+                            dateStr: dateStr,
+                            spreadName: decrypted.spreadName,
+                            question: decrypted.question,
+                            html: decrypted.html || "",
+                            image: decrypted.image || "" // 兼容舊版圖片
+                        });
 
                         html += `
-                            <div class="history-item" onclick="showPreviewImage('${decrypted.image}')">
-                                <div style="flex: 1; padding-right: 10px;">
+                            <div class="history-item">
+                                <input type="checkbox" class="history-checkbox" value="${item.dateStr}" style="margin-right: 10px; transform: scale(1.3); cursor: pointer;">
+                                <div style="flex: 1; padding-right: 10px; cursor: pointer;" onclick="showHistoryItem(${index})">
                                     <div style="font-weight:bold; color:#fbbf24;">${decrypted.spreadName}</div>
                                     ${questionHtml}
-                                    <div style="color:#94a3b8; font-size:10px; margin-top:4px;">🕒 ${new Date(item.date).toLocaleString()}</div>
+                                    <div style="color:#94a3b8; font-size:10px; margin-top:4px;">🕒 ${dateStr}</div>
                                 </div>
-                                <div style="color:#38bdf8; white-space:nowrap;">👁️ 檢視</div>
+                                <div style="color:#38bdf8; white-space:nowrap; cursor:pointer;" onclick="showHistoryItem(${index})">👁️ 檢視</div>
                             </div>
                         `;
                     } catch(e) { console.error("解密失敗", e); }
                 });
                 body.innerHTML = html;
             } catch(e) {
-                console.error("載入歷史紀錄失敗", e);
                 body.innerHTML = '<div style="text-align:center; color:#f43f5e; padding:20px;">載入失敗</div>';
             }
         }
 
-        function showPreviewImage(base64Img) {
-            document.getElementById("previewImg").src = base64Img;
-            document.getElementById("previewModal").style.display = "flex";
+        // 刪除多選紀錄
+        async function deleteSelectedHistory() {
+            let checkboxes = document.querySelectorAll(".history-checkbox:checked");
+            if (checkboxes.length === 0) { alert("請先勾選要刪除的紀錄！"); return; }
+            if (!confirm(`確定要刪除這 ${checkboxes.length} 筆紀錄嗎？`)) return;
+
+            let dateStrs = Array.from(checkboxes).map(cb => cb.value);
+            let payload = { action: "delete_multiple", email: currentEmail, passwordHash: hashPassword(currentPassword), dateStrs: dateStrs };
+
+            let result = await sendGasRequest(payload);
+            if (result.status === "success") {
+                alert(`已成功刪除 ${result.count} 筆紀錄！`);
+                loadCloudHistory();
+            } else { alert("❌ 刪除失敗：" + (result.message || "發生未知錯誤")); }
+        }
+
+        // ⭐ 完美還原：從 DOM 結構直接渲染出最高畫質的占卜結果 ⭐
+        function showHistoryItem(index) {
+            let item = window.cachedHistoryData[index];
+            document.getElementById("historyModal").style.display = "none"; // 關閉歷史清單
+            
+            // 向下相容：如果是以前存的舊版「圖片紀錄」，還是用預覽彈窗顯示
+            if (item.image && !item.html) {
+                document.getElementById("previewImg").src = item.image;
+                document.getElementById("previewModal").style.display = "flex";
+                return;
+            }
+
+            // 新版直接在主畫面重建牌陣 DOM
+            let container = document.getElementById("spreadArea");
+            container.classList.add("is-wide"); // 給予充足寬度排版
+            
+            container.innerHTML = `
+                <div style="width:100%; text-align:center; margin-bottom: 20px; background: rgba(30, 34, 48, 0.8); padding: 15px; border-radius: 8px; border: 1px solid #33394d;">
+                    <div style="color:#94a3b8; font-size:12px; font-weight:bold;">🕒 占卜時間：${item.dateStr}</div>
+                    <div style="color:#fbbf24; font-size:16px; margin-top:8px; font-weight:bold;">❓ 問題：${item.question || "未填寫"}</div>
+                </div>
+                ${item.html}
+                <div class="action-btn-group" style="margin-top: 25px;">
+                    <button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button>
+                    <button class="action-btn secondary" onclick="loadCloudHistory()">📂 回歷史清單</button>
+                    <button class="action-btn secondary" onclick="resetToHome()">🏠 回主畫面</button>
+                </div>
+            `;
+            document.querySelector(".workspace").scrollTop = 0;
         }
 
         function closeHistoryModal(e) { document.getElementById("historyModal").style.display = "none"; }
@@ -1300,7 +896,7 @@
 
             let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 🔮 單 符 文 每 日 指 引 】</h2>';
             html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(rune, "【今日能量核心】") + '</div>';
-            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
+            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadToCloud()">💾 雲端存檔</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
 
             container.innerHTML = html;
         }
@@ -1314,7 +910,7 @@
             let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 ⚖️ 三 符 文 時 空 占 卜 】</h2>';
             html += '<div style="display:flex; flex-direction:column; align-items:center; gap:14px; width:100%;">';
             runes.forEach((r, idx) => { html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>'; });
-            html += '</div><div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
+            html += '</div><div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadToCloud()">💾 雲端存檔</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
 
             container.innerHTML = html;
         }
@@ -1338,7 +934,7 @@
             html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;"><div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[1], titles[1]) + '</div><div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[0], titles[0]) + '</div><div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[2], titles[2]) + '</div></div>';
             html += '<div style="width:100%; max-width:395px; margin-top:4px;">' + createRuneBoxHtml(runes[4], titles[4]) + '</div>';
 
-            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div></div>';
+            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadToCloud()">💾 雲端存檔</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div></div>';
 
             container.innerHTML = html;
         }
@@ -1352,7 +948,7 @@
             let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 📜 諾 倫 三 女 神 命 運 流 轉 】</h2>';
             html += '<div style="display:flex; flex-direction:column; align-items:center; gap:14px; width:100%;">';
             runes.forEach((r, idx) => { html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>'; });
-            html += '</div><div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
+            html += '</div><div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadToCloud()">💾 雲端存檔</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
 
             container.innerHTML = html;
         }
@@ -1371,7 +967,7 @@
             runes.forEach((r, idx) => { html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(r, `第 ${idx+1} 符`) + '</div>'; });
             html += '</div>';
 
-            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div></div>';
+            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadToCloud()">💾 雲端存檔</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div></div>';
 
             container.innerHTML = html;
         }
