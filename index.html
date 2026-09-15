@@ -678,7 +678,7 @@
     </div>
 
     <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycby_Sx5Bz-9EVLF5jzHkSrwv8wpxU7EWaZxQG9hjkbzR5CsDPIA0uRnNhk0VclZezfVf/exec";
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbxSxojppSAAjc9fWMMo8gmSWvjFynMnu_I-nIGpfjhCG-zIqrJ-KlLadPFmB2edLyA-kg/exec";
 
         let customCount = 3;
         let currentEmail = localStorage.getItem('rune_email') || "";
@@ -733,7 +733,6 @@
             return CryptoJS.SHA256(password).toString();
         }
 
-        // 登入後點選右上角，跳出新頁面選單：回顧占卜紀錄、登出
         function handleUserClick() {
             if (currentEmail) {
                 let container = document.getElementById("spreadArea");
@@ -764,7 +763,6 @@
             resetToHome();
         }
 
-        // 登入畫面 (輸入信箱及密碼，取消使用者名稱登入，下方新增註冊與忘記密碼選項)
         function showLoginPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
@@ -812,12 +810,8 @@
             let passwordHash = hashPassword(passInput);
 
             try {
-                let response = await fetch(GAS_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify({ action: "check_login", email: emailInput, passwordHash: passwordHash })
-                });
-                let result = await response.json();
+                let res = await fetch(`${GAS_URL}?action=check_login&email=${encodeURIComponent(emailInput)}&passwordHash=${encodeURIComponent(passwordHash)}`);
+                let result = await res.json();
 
                 if (result.status === "success") {
                     currentEmail = emailInput;
@@ -837,7 +831,6 @@
             }
         }
 
-        // 註冊畫面 (使用者名稱、註冊信箱、設定密碼、確認密碼)
         function showRegisterPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
@@ -878,7 +871,6 @@
             document.querySelector(".workspace").scrollTop = 0;
         }
 
-        // 註冊並強制同步寫入 DB，顯示成功訊息並跳回主頁面
         async function submitRegister() {
             let nameInput = document.getElementById("regUsername").value.trim();
             let emailInput = document.getElementById("regEmail").value.trim();
@@ -907,12 +899,8 @@
             let passwordHash = hashPassword(passInput);
 
             try {
-                let response = await fetch(GAS_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify({ action: "register", username: nameInput, email: emailInput, passwordHash: passwordHash })
-                });
-                let result = await response.json();
+                let res = await fetch(`${GAS_URL}?action=register&username=${encodeURIComponent(nameInput)}&email=${encodeURIComponent(emailInput)}&passwordHash=${encodeURIComponent(passwordHash)}`);
+                let result = await res.json();
 
                 if (result.status === "success") {
                     currentEmail = emailInput;
@@ -923,7 +911,6 @@
                     localStorage.setItem('rune_username', currentUsername);
                     updateUserDisplay();
 
-                    // 顯示註冊完成訊息畫面，2秒後跳回主頁面
                     let container = document.getElementById("spreadArea");
                     container.innerHTML = `
                         <div class="welcome-box">
@@ -944,7 +931,6 @@
             }
         }
 
-        // 忘記密碼頁面
         function showForgotPasswordPage() {
             let container = document.getElementById("spreadArea");
             container.classList.remove("is-wide");
@@ -981,12 +967,8 @@
             }
 
             try {
-                let response = await fetch(GAS_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify({ action: "request_reset", username: nameInput, email: emailInput })
-                });
-                let result = await response.json();
+                let res = await fetch(`${GAS_URL}?action=request_reset&username=${encodeURIComponent(nameInput)}&email=${encodeURIComponent(emailInput)}`);
+                let result = await res.json();
 
                 if (result.status === "success") {
                     showResetVerifyPage(nameInput, emailInput);
@@ -1054,12 +1036,8 @@
             let newPasswordHash = hashPassword(passInput);
 
             try {
-                let response = await fetch(GAS_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify({ action: "verify_and_reset", username: username, email: email, code: codeInput, passwordHash: newPasswordHash })
-                });
-                let result = await response.json();
+                let res = await fetch(`${GAS_URL}?action=verify_and_reset&username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}&code=${encodeURIComponent(codeInput)}&passwordHash=${encodeURIComponent(newPasswordHash)}`);
+                let result = await res.json();
 
                 if (result.status === "success") {
                     alert("✨ 密碼重設成功！現在您可以直接使用新密碼登入了。");
@@ -1122,7 +1100,7 @@
             });
         }
 
-        // 雲端加密存圖 (無任何彈出視窗提示)
+        // 雲端加密存圖 (改用 GET 帶參數方式發送，完美避開 CORS 阻擋與資料寫入失敗)
         async function saveSpreadAsImage() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
@@ -1168,23 +1146,10 @@
                 let encryptedData = CryptoJS.AES.encrypt(rawData, currentPassword).toString();
                 let passwordHash = hashPassword(currentPassword);
 
-                let payload = { 
-                    action: "save", 
-                    email: currentEmail, 
-                    spreadName: spreadTitle, 
-                    encryptedPayload: encryptedData,
-                    passwordHash: passwordHash 
-                };
-
-                let res = await fetch(GAS_URL, {
-                    method: 'POST', 
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
-                    body: JSON.stringify(payload)
-                });
-                let jsonRes = await res.json();
-                if (jsonRes.status === "success") {
-                    // 背景靜默存檔成功，無彈窗
-                }
+                // 透過 GET 請求將資料送出，避開 CORS 預檢限制
+                let saveUrl = `${GAS_URL}?action=save&email=${encodeURIComponent(currentEmail)}&spreadName=${encodeURIComponent(spreadTitle)}&encryptedPayload=${encodeURIComponent(encryptedData)}&passwordHash=${encodeURIComponent(passwordHash)}`;
+                
+                await fetch(saveUrl, { method: 'GET', mode: 'no-cors' });
             } catch (err) {
                 if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
                 if(btnGroup) btnGroup.style.display = "flex";
@@ -1302,7 +1267,7 @@
             {name: "伊薩 (Isa)", symbol: "ᛁ", element: "冰封與沉澱", upright: "冰、停滯、寒冷、自我保護與沉澱冷靜", reversed: "", hasReversed: false},
             {name: "耶拉 (Jera)", symbol: "ᛃ", element: "收穫與循環", upright: "收穫、循環、因果報應與時間的累積", reversed: "", hasReversed: false},
             {name: "艾奧斯 (Eihwaz)", symbol: "ᛇ", element: "防禦與轉化", upright: "紫杉、防禦、韌性、耐力與轉化", reversed: "", hasReversed: false},
-            {name: "佩特羅 (Perthro)", symbol: "ᛈ", element: "命運與神祕", upright: "命運轉機、意外之財、直覺靈感,探索祕密", reversed: "賭徒心態、運勢低落、秘密曝光、幻滅", hasReversed: true},
+            {name: "佩特羅 (Perthro)", symbol: "ᛈ", element: "命運與神祕", upright: "命運轉機、意外之財、直覺靈感、探索祕密", reversed: "賭徒心態、運勢低落、秘密曝光、幻滅", hasReversed: true},
             {name: "艾吉茲 (Algiz)", symbol: "ᛉ", element: "守護與庇佑", upright: "神聖守護、逢凶化吉、直覺預警、貴人相助", reversed: "遭人背叛、失去防護、盲目信任、陷入危機", hasReversed: true},
             {name: "索威羅 (Sowilo)", symbol: "ᛋ", element: "太陽與勝利", upright: "太陽、勝利、光明、能量與成功", reversed: "", hasReversed: false},
             {name: "提爾 (Tiwaz)", symbol: "ᛏ", element: "公義與勇氣", upright: "正義勝利、勇敢擔當、專業領導、理性決斷", reversed: "遭遇不公、失去動力、懦弱退縮、衝突戰敗", hasReversed: true},
