@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>醉酒塔羅 - 盧恩符文占卜系統</title>
-    <!-- 網頁分頁圖標 (Favicon) 設定 -->
     <link rel="icon" type="image/jpeg" href="tarot_drunk.jpg">
-
-    <!-- 社群分享預覽標籤 -->
     <meta property="og:title" content="醉酒塔羅 - 盧恩符文占卜系統">
     <meta property="og:description" content="古北歐盧恩符文 25 符智慧系統，解析命運軌跡與心靈指引。">
     <meta property="og:image" content="https://tarotdrunktw-png.github.io/tarot_app/tarot_drunk.jpg">
     <meta property="og:url" content="https://tarotdrunktw-png.github.io/tarot_app/">
     <meta property="og:type" content="website">
 
-    <!-- 引入 html2canvas 截圖函式庫與 CryptoJS 加密函式庫 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
@@ -216,7 +212,6 @@
             text-align: center;
         }
 
-        /* 認證表單卡片樣式 */
         .auth-card {
             background: rgba(21, 24, 33, 0.95);
             border: 1px solid #333a4f;
@@ -279,7 +274,6 @@
             text-decoration: underline;
         }
 
-        /* 盧恩詳細卡片樣式：寬度 395px */
         .card-box {
             width: 100%;
             max-width: 395px;
@@ -355,7 +349,6 @@
         .branch-row { display: flex; width: 100%; justify-content: center; gap: 16px; flex-wrap: wrap; }
         .branch-col { display: flex; flex-direction: column; gap: 12px; align-items: center; flex: 1; min-width: 395px; }
 
-        /* 手機版牌陣縮圖專屬排版樣式 */
         .mobile-preview-section {
             display: none;
             width: 100%;
@@ -365,9 +358,7 @@
             margin-bottom: 4px;
         }
         @media (max-width: 768px) {
-            .mobile-preview-section {
-                display: flex;
-            }
+            .mobile-preview-section { display: flex; }
         }
 
         .mini-card {
@@ -395,19 +386,9 @@
             color: #fbbf24;
             font-weight: bold;
         }
-        .mini-symbol.reversed-mini {
-            transform: rotate(180deg);
-        }
-        .mini-title {
-            font-size: 9px;
-            color: #fbbf24;
-            font-weight: bold;
-        }
-        .mini-name {
-            font-size: 11px;
-            font-weight: bold;
-            color: #fff;
-        }
+        .mini-symbol.reversed-mini { transform: rotate(180deg); }
+        .mini-title { font-size: 9px; color: #fbbf24; font-weight: bold; }
+        .mini-name { font-size: 11px; font-weight: bold; color: #fff; }
 
         .grid-5-mobile {
             display: grid;
@@ -457,11 +438,8 @@
             flex: 1;
             min-width: 110px;
         }
-        .action-btn:hover {
-            transform: translateY(-2px);
-        }
+        .action-btn:hover { transform: translateY(-2px); }
 
-        /* 密集交錯斜向浮水印網格層 */
         .screenshot-watermark-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -484,7 +462,6 @@
             user-select: none;
         }
 
-        /* 彈窗樣式 */
         .history-modal, .preview-modal, .screenshot-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -678,7 +655,8 @@
     </div>
 
     <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbzeFG7dXzW4n7qT2x2C3-B5AEXYprH27iMa3sm5I18rzWNgJKJz3h229f_57ijL2tdQSw/exec";
+        // ⚠️ 請記得替換為您剛剛複製出來結尾為 /exec 的新網址！
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbzjbp5kysXhYb8SXWfrbdA75sc-GaVh1dcPE2cdO8ILvFG3fRNVpocwCHImVPWnj-nFhQ/exec";
 
         let customCount = 3;
         let currentEmail = localStorage.getItem('rune_email') || "";
@@ -689,6 +667,24 @@
             initCounter();
             updateUserDisplay();
         };
+
+        // 核心突破：完美繞過 GAS 302 跳轉丟失資料的通訊幫手函式
+        async function sendGasRequest(payload) {
+            const formData = new URLSearchParams();
+            formData.append("payload", JSON.stringify(payload));
+            
+            try {
+                let res = await fetch(GAS_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: formData.toString()
+                });
+                return await res.json();
+            } catch (err) {
+                console.error("連線錯誤：", err);
+                return { status: "error", message: "網路連線異常，請稍後再試。" };
+            }
+        }
 
         function promptFreeCount() {
             let input = prompt("請輸入自訂抽牌張數 (1 - 9)：", customCount);
@@ -714,7 +710,6 @@
                 let data = await response.json();
                 document.getElementById('visitorCount').textContent = `🍸 歡迎來到醉酒塔羅，您是第：${data.value} 位深夜酒客`;
             } catch (e) {
-                console.error("計數器載入失敗", e);
                 document.getElementById('visitorCount').textContent = `🍸 歡迎來到醉酒塔羅`;
             }
         }
@@ -798,36 +793,23 @@
             let emailInput = document.getElementById("loginEmail").value.trim();
             let passInput = document.getElementById("loginPassword").value.trim();
 
-            if (!emailInput || !emailInput.includes("@")) {
-                alert("請輸入有效的電子信箱！");
-                return;
-            }
-            if (!passInput) {
-                alert("請輸入密碼！");
-                return;
-            }
+            if (!emailInput || !emailInput.includes("@")) { alert("請輸入有效的電子信箱！"); return; }
+            if (!passInput) { alert("請輸入密碼！"); return; }
 
             let passwordHash = hashPassword(passInput);
+            let result = await sendGasRequest({ action: "check_login", email: emailInput, passwordHash: passwordHash });
 
-            try {
-                let res = await fetch(`${GAS_URL}?action=check_login&email=${encodeURIComponent(emailInput)}&passwordHash=${encodeURIComponent(passwordHash)}`);
-                let result = await res.json();
-
-                if (result.status === "success") {
-                    currentEmail = emailInput;
-                    currentPassword = passInput;
-                    currentUsername = result.username || "";
-                    localStorage.setItem('rune_email', currentEmail);
-                    localStorage.setItem('rune_password', currentPassword);
-                    localStorage.setItem('rune_username', currentUsername);
-                    updateUserDisplay();
-                    resetToHome();
-                } else {
-                    alert("❌ 登入失敗：信箱不存在或密碼錯誤！");
-                }
-            } catch(e) {
-                console.error(e);
-                alert("連線發生錯誤，請檢查網路或 GAS 網址。");
+            if (result.status === "success") {
+                currentEmail = emailInput;
+                currentPassword = passInput;
+                currentUsername = result.username || "";
+                localStorage.setItem('rune_email', currentEmail);
+                localStorage.setItem('rune_password', currentPassword);
+                localStorage.setItem('rune_username', currentUsername);
+                updateUserDisplay();
+                resetToHome();
+            } else {
+                alert("❌ 登入失敗：" + (result.message || "信箱不存在或密碼錯誤！"));
             }
         }
 
@@ -877,57 +859,38 @@
             let passInput = document.getElementById("regPassword").value.trim();
             let confirmPassInput = document.getElementById("regConfirmPassword").value.trim();
 
-            if (!nameInput) {
-                alert("請輸入使用者名稱！");
-                return;
-            }
-            if (!emailInput || !emailInput.includes("@")) {
-                alert("請輸入有效的電子信箱！");
-                return;
-            }
-            if (!passInput) {
-                alert("請設定密碼！");
-                return;
-            }
+            if (!nameInput) { alert("請輸入使用者名稱！"); return; }
+            if (!emailInput || !emailInput.includes("@")) { alert("請輸入有效的電子信箱！"); return; }
+            if (!passInput) { alert("請設定密碼！"); return; }
             if (passInput !== confirmPassInput) {
                 alert("❌ 兩次輸入的密碼不一致，請重新檢查！");
-                document.getElementById("regPassword").value = "";
-                document.getElementById("regConfirmPassword").value = "";
                 return;
             }
 
             let passwordHash = hashPassword(passInput);
+            
+            let result = await sendGasRequest({ action: "register", username: nameInput, email: emailInput, passwordHash: passwordHash });
 
-            try {
-                let res = await fetch(`${GAS_URL}?action=register&username=${encodeURIComponent(nameInput)}&email=${encodeURIComponent(emailInput)}&passwordHash=${encodeURIComponent(passwordHash)}`);
-                let result = await res.json();
+            if (result.status === "success") {
+                currentEmail = emailInput;
+                currentPassword = passInput;
+                currentUsername = nameInput;
+                localStorage.setItem('rune_email', currentEmail);
+                localStorage.setItem('rune_password', currentPassword);
+                localStorage.setItem('rune_username', currentUsername);
+                updateUserDisplay();
 
-                if (result.status === "success") {
-                    currentEmail = emailInput;
-                    currentPassword = passInput;
-                    currentUsername = nameInput;
-                    localStorage.setItem('rune_email', currentEmail);
-                    localStorage.setItem('rune_password', currentPassword);
-                    localStorage.setItem('rune_username', currentUsername);
-                    updateUserDisplay();
-
-                    let container = document.getElementById("spreadArea");
-                    container.innerHTML = `
-                        <div class="welcome-box">
-                            <div class="welcome-title" style="color: #2ecc71;">✨ 註冊完成！ ✨</div>
-                            <div class="welcome-subtitle">帳號與資料已成功同步至雲端資料庫。</div>
-                            <div style="font-size: 14px; color: #fbbf24;">即將跳回主頁面...</div>
-                        </div>
-                    `;
-                    setTimeout(() => {
-                        resetToHome();
-                    }, 2000);
-                } else {
-                    alert("❌ 註冊失敗：" + (result.message || "該信箱可能已被註冊！"));
-                }
-            } catch(e) {
-                console.error(e);
-                alert("連線發生錯誤，請檢查網路或 GAS 網址。");
+                let container = document.getElementById("spreadArea");
+                container.innerHTML = `
+                    <div class="welcome-box">
+                        <div class="welcome-title" style="color: #2ecc71;">✨ 註冊完成！ ✨</div>
+                        <div class="welcome-subtitle">帳號與資料已成功同步至雲端資料庫。</div>
+                        <div style="font-size: 14px; color: #fbbf24;">即將跳回主頁面...</div>
+                    </div>
+                `;
+                setTimeout(() => { resetToHome(); }, 2000);
+            } else {
+                alert("❌ 註冊失敗：" + (result.message || "發生未知錯誤，請稍後再試。"));
             }
         }
 
@@ -966,18 +929,12 @@
                 return;
             }
 
-            try {
-                let res = await fetch(`${GAS_URL}?action=request_reset&username=${encodeURIComponent(nameInput)}&email=${encodeURIComponent(emailInput)}`);
-                let result = await res.json();
+            let result = await sendGasRequest({ action: "request_reset", username: nameInput, email: emailInput });
 
-                if (result.status === "success") {
-                    showResetVerifyPage(nameInput, emailInput);
-                } else {
-                    alert("❌ 找回失敗：" + (result.message || "查無此帳號或信箱不符。"));
-                }
-            } catch(e) {
-                console.error(e);
-                alert("連線發生錯誤。");
+            if (result.status === "success") {
+                showResetVerifyPage(nameInput, emailInput);
+            } else {
+                alert("❌ 找回失敗：" + (result.message || "查無此帳號或信箱不符。"));
             }
         }
 
@@ -1020,34 +977,19 @@
             let passInput = document.getElementById("newPassword").value.trim();
             let confirmPassInput = document.getElementById("newConfirmPassword").value.trim();
 
-            if (!codeInput || codeInput.length !== 6) {
-                alert("請輸入有效的 6 位數驗證碼！");
-                return;
-            }
-            if (!passInput) {
-                alert("請輸入新密碼！");
-                return;
-            }
-            if (passInput !== confirmPassInput) {
-                alert("❌ 兩次輸入的密碼不一致！");
-                return;
-            }
+            if (!codeInput || codeInput.length !== 6) { alert("請輸入有效的 6 位數驗證碼！"); return; }
+            if (!passInput) { alert("請輸入新密碼！"); return; }
+            if (passInput !== confirmPassInput) { alert("❌ 兩次輸入的密碼不一致！"); return; }
 
             let newPasswordHash = hashPassword(passInput);
+            
+            let result = await sendGasRequest({ action: "verify_and_reset", username: username, email: email, code: codeInput, passwordHash: newPasswordHash });
 
-            try {
-                let res = await fetch(`${GAS_URL}?action=verify_and_reset&username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}&code=${encodeURIComponent(codeInput)}&passwordHash=${encodeURIComponent(newPasswordHash)}`);
-                let result = await res.json();
-
-                if (result.status === "success") {
-                    alert("✨ 密碼重設成功！現在您可以直接使用新密碼登入了。");
-                    showLoginPage();
-                } else {
-                    alert("❌ 驗證失敗：驗證碼錯誤或已過期。");
-                }
-            } catch(e) {
-                console.error(e);
-                alert("連線發生錯誤。");
+            if (result.status === "success") {
+                alert("✨ 密碼重設成功！現在您可以直接使用新密碼登入了。");
+                showLoginPage();
+            } else {
+                alert("❌ 驗證失敗：" + (result.message || "驗證碼錯誤或已過期。"));
             }
         }
 
@@ -1099,13 +1041,11 @@
             });
         }
 
-        // 雲端存圖 (透過 GET 帶參數方式發送，完美避開 CORS 預檢限制)
+        // 背景雲端存圖 (無彈窗，成功寫入)
         async function saveSpreadAsImage() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 您的目前狀態為「未登入」，需要先登入才能將占卜圖面同步到雲端檔案室。\n\n是否立即前往登入頁面？");
-                if (wantLogin) {
-                    showLoginPage();
-                }
+                if (wantLogin) { showLoginPage(); }
                 return;
             }
 
@@ -1145,9 +1085,10 @@
                 let encryptedData = CryptoJS.AES.encrypt(rawData, currentPassword).toString();
                 let passwordHash = hashPassword(currentPassword);
 
-                let saveUrl = `${GAS_URL}?action=save&email=${encodeURIComponent(currentEmail)}&spreadName=${encodeURIComponent(spreadTitle)}&encryptedPayload=${encodeURIComponent(encryptedData)}&passwordHash=${encodeURIComponent(passwordHash)}`;
+                let payload = { action: "save", email: currentEmail, spreadName: spreadTitle, encryptedPayload: encryptedData, passwordHash: passwordHash };
                 
-                await fetch(saveUrl, { method: 'GET', mode: 'no-cors' });
+                await sendGasRequest(payload);
+                // 成功寫入不跳彈窗，保持流暢體驗
             } catch (err) {
                 if(watermarkContainer.parentNode) target.removeChild(watermarkContainer);
                 if(btnGroup) btnGroup.style.display = "flex";
@@ -1158,9 +1099,7 @@
         async function loadCloudHistory() {
             if (!currentEmail || !currentPassword) {
                 let wantLogin = confirm("💡 檢視雲端紀錄需要先登入您的帳號。\n\n是否立即前往登入頁面？");
-                if (wantLogin) {
-                    showLoginPage();
-                }
+                if (wantLogin) { showLoginPage(); }
                 return;
             }
 
@@ -1214,11 +1153,7 @@
         function toggleSpreadConfig() {
             let spreadVal = document.getElementById("spreadSelect").value;
             let freeBox = document.getElementById("freeConfigBox");
-            if (spreadVal === "free") {
-                freeBox.style.display = "flex";
-            } else {
-                freeBox.style.display = "none";
-            }
+            if (spreadVal === "free") { freeBox.style.display = "flex"; } else { freeBox.style.display = "none"; }
         }
 
         function resetToHome() {
@@ -1249,7 +1184,6 @@
             else if (spreadVal === "free") drawFreeSpread();
         }
 
-        // 完整 25 盧恩符文庫
         const RUNE_DECK = [
             {name: "費胡 (Fehu)", symbol: "ᚠ", element: "財富與流動", upright: "物質豐盛、財富獲取、能量流動、新機會", reversed: "財務損失、貪婪、停滯、資源匱乏", hasReversed: true},
             {name: "烏魯茲 (Uruz)", symbol: "ᚢ", element: "力量與健康", upright: "強大體魄、原始生命力、突破困境、勇氣", reversed: "體力透支、錯失良機、軟弱無力、方向錯誤", hasReversed: true},
@@ -1311,21 +1245,12 @@
             let symbolClass = rune.isReversed ? "rune-symbol-box reversed-rune" : "rune-symbol-box";
 
             let html = '<div class="card-box">';
-            if (posTitle) {
-                html += '<div class="banner">' + posTitle + '</div>';
-            }
-            html += '<div class="content">';
-            html += '<div class="rune-frame">';
-            html += '<div class="t-head">【盧恩符文·能量解讀】</div>';
-            html += '<div class="t-body">';
+            if (posTitle) { html += '<div class="banner">' + posTitle + '</div>'; }
+            html += '<div class="content"><div class="rune-frame"><div class="t-head">【盧恩符文·能量解讀】</div><div class="t-body">';
             html += '<div class="' + symbolClass + '">' + rune.symbol + '</div>';
-            html += '<div class="t-info">';
-            html += '<div class="card-name">' + rune.name + '</div>';
-            html += '<div class="card-theme">▸ 核心元素：' + rune.element + '</div>';
-            html += '<div class="interp-box">▸ 意涵：' + rune.interpretation + '</div>';
-            html += '</div></div></div>';
-            html += '<div class="footer-frame"><span class="orientation-badge ' + badgeClass + '">' + rune.orientation + '</span></div>';
-            html += '</div></div>';
+            html += '<div class="t-info"><div class="card-name">' + rune.name + '</div><div class="card-theme">▸ 核心元素：' + rune.element + '</div>';
+            html += '<div class="interp-box">▸ 意涵：' + rune.interpretation + '</div></div></div></div>';
+            html += '<div class="footer-frame"><span class="orientation-badge ' + badgeClass + '">' + rune.orientation + '</span></div></div></div>';
             return html;
         }
 
@@ -1346,15 +1271,8 @@
             container.classList.remove("is-wide");
 
             let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 🔮 單 符 文 每 日 指 引 】</h2>';
-            html += '<div style="width:100%; max-width:395px;">';
-            html += createRuneBoxHtml(rune, "【今日能量核心】");
-            html += '</div>';
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button>';
-            html += '<button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button>';
-            html += '<button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button>';
-            html += '</div>';
+            html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(rune, "【今日能量核心】") + '</div>';
+            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
 
             container.innerHTML = html;
         }
@@ -1367,16 +1285,8 @@
             let titles = ["【第一符·過去根源】", "【第二符·現在狀態】", "【第三符·未來趨勢】"];
             let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 ⚖️ 三 符 文 時 空 占 卜 】</h2>';
             html += '<div style="display:flex; flex-direction:column; align-items:center; gap:14px; width:100%;">';
-            runes.forEach((r, idx) => {
-                html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>';
-            });
-            html += '</div>';
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button>';
-            html += '<button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button>';
-            html += '<button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button>';
-            html += '</div>';
+            runes.forEach((r, idx) => { html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>'; });
+            html += '</div><div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
 
             container.innerHTML = html;
         }
@@ -1386,44 +1296,21 @@
             let container = document.getElementById("spreadArea");
             container.classList.add("is-wide");
 
-            let titles = [
-                "【1.中心·當前核心】",
-                "【2.左側·過去影響】",
-                "【3.右側·未來發展】",
-                "【4.上方·精神指引】",
-                "【5.下方·潛在根源】"
-            ];
+            let titles = ["【1.中心·當前核心】", "【2.左側·過去影響】", "【3.右側·未來發展】", "【4.上方·精神指引】", "【5.下方·潛在根源】"];
 
             let html = '<h2 style="color:#f8fafc; margin-bottom:4px; text-align:center; width:100%;">【 ✝️ 五 符 文 十 字 交 叉 法 】</h2>';
             html += '<div style="display:flex; flex-direction:column; gap:16px; width:100%; align-items:center;">';
 
-            html += '<div class="mobile-preview-section">';
-            html += '<div style="font-size:12px; color:#fbbf24; font-weight:bold;">── 符文總覽 ──</div>';
-            html += '<div class="grid-5-mobile">';
-            html += `<div class="c-m-1">${createMiniRuneHtml(runes[3], "4.指引")}</div>`;
-            html += `<div class="c-m-2">${createMiniRuneHtml(runes[1], "2.過去")}</div>`;
-            html += `<div class="c-m-3">${createMiniRuneHtml(runes[0], "1.核心")}</div>`;
-            html += `<div class="c-m-4">${createMiniRuneHtml(runes[2], "3.未來")}</div>`;
-            html += `<div class="c-m-5">${createMiniRuneHtml(runes[4], "5.根源")}</div>`;
+            html += '<div class="mobile-preview-section"><div style="font-size:12px; color:#fbbf24; font-weight:bold;">── 符文總覽 ──</div><div class="grid-5-mobile">';
+            html += `<div class="c-m-1">${createMiniRuneHtml(runes[3], "4.指引")}</div><div class="c-m-2">${createMiniRuneHtml(runes[1], "2.過去")}</div><div class="c-m-3">${createMiniRuneHtml(runes[0], "1.核心")}</div><div class="c-m-4">${createMiniRuneHtml(runes[2], "3.未來")}</div><div class="c-m-5">${createMiniRuneHtml(runes[4], "5.根源")}</div>`;
             html += '</div></div>';
 
             html += '<div style="font-size:13px; color:#fbbf24; font-weight:bold; margin-top:6px;">── 詳細符文解析 ──</div>';
-
             html += '<div style="width:100%; max-width:395px; margin-bottom:4px;">' + createRuneBoxHtml(runes[3], titles[3]) + '</div>';
-            html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;">';
-            html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[1], titles[1]) + '</div>';
-            html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[0], titles[0]) + '</div>';
-            html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[2], titles[2]) + '</div>';
-            html += '</div>';
+            html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;"><div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[1], titles[1]) + '</div><div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[0], titles[0]) + '</div><div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(runes[2], titles[2]) + '</div></div>';
             html += '<div style="width:100%; max-width:395px; margin-top:4px;">' + createRuneBoxHtml(runes[4], titles[4]) + '</div>';
 
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button>';
-            html += '<button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button>';
-            html += '<button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button>';
-            html += '</div>';
-            html += '</div>';
+            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div></div>';
 
             container.innerHTML = html;
         }
@@ -1436,16 +1323,8 @@
             let titles = ["【烏爾德·過去與業力】", "【薇兒丹蒂·現在與當下】", "【詩寇蒂·未來與潛能】"];
             let html = '<h2 style="color:#f8fafc; margin-bottom:8px; text-align:center;">【 📜 諾 倫 三 女 神 命 運 流 轉 】</h2>';
             html += '<div style="display:flex; flex-direction:column; align-items:center; gap:14px; width:100%;">';
-            runes.forEach((r, idx) => {
-                html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>';
-            });
-            html += '</div>';
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button>';
-            html += '<button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button>';
-            html += '<button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button>';
-            html += '</div>';
+            runes.forEach((r, idx) => { html += '<div style="width:100%; max-width:395px;">' + createRuneBoxHtml(r, titles[idx]) + '</div>'; });
+            html += '</div><div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div>';
 
             container.innerHTML = html;
         }
@@ -1461,20 +1340,10 @@
             html += '<div style="font-size:13px; color:#fbbf24; font-weight:bold; margin-top:6px;">── 詳細符文解析 ──</div>';
 
             html += '<div class="branch-row" style="width:100%; max-width:1250px; gap: 16px;">';
-            runes.forEach((r, idx) => {
-                html += '<div class="branch-col" style="min-width: 395px;">';
-                html += createRuneBoxHtml(r, `第 ${idx+1} 符`);
-                html += '</div>';
-            });
+            runes.forEach((r, idx) => { html += '<div class="branch-col" style="min-width: 395px;">' + createRuneBoxHtml(r, `第 ${idx+1} 符`) + '</div>'; });
             html += '</div>';
 
-            html += '<div class="action-btn-group">';
-            html += '<button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button>';
-            html += '<button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button>';
-            html += '<button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button>';
-            html += '<button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button>';
-            html += '</div>';
-            html += '</div>';
+            html += '<div class="action-btn-group"><button class="action-btn" onclick="captureSpreadLocally()">📸 儲存截圖</button><button class="action-btn" onclick="saveSpreadAsImage()">💾 雲端存圖</button><button class="action-btn secondary" onclick="loadCloudHistory()">📂 雲端紀錄</button><button class="action-btn secondary" onclick="resetToHome()">🔄 重新抽牌</button></div></div>';
 
             container.innerHTML = html;
         }
